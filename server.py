@@ -32,9 +32,10 @@ def get_artists():
 
     return jsonify({ 'artists': artists })
 
+
 @app.route('/api/v1.0/artists/<artist_code>')
 def get_artist_json(artist_code):
-    return jsonify(get_artist(artist_code))
+    return jsonify({ 'artist': get_artist(artist_code) })
 
 def get_artist_code(artist_name):
     return encode(artist_name)
