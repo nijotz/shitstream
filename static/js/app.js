@@ -13,7 +13,9 @@ App.Router.map(function() {
             this.resource('artist', {path: ':artist_id'});
         });
     });
-    this.resource('queue');
+    this.resource('playlists', function() {
+        this.resource('playlist', {path: ':playlist_id'});
+    });
 });
 
 App.Artist = DS.Model.extend({
@@ -35,10 +37,10 @@ App.Song = DS.Model.extend({
     length: DS.attr('string'),
     file: DS.attr('string'),
     playing: DS.attr('boolean'),
-    queue: DS.belongsTo('queue')
+    playlists: DS.hasMany('playlist', {async:true})
 });
 
-App.Queue = DS.Model.extend({
+App.Playlist = DS.Model.extend({
     songs: DS.hasMany('song', {async:true})
 })
 
@@ -60,18 +62,10 @@ App.AlbumRoute = Ember.Route.extend({
     }
 });
 
-App.QueueRoute = Ember.Route.extend({
+App.PlaylistRoute = Ember.Route.extend({
     model: function(params) {
-        return this.store.find('queue');
-    },
-    setupController: function(controller, queue) {
-        controller.set('model', queue.get('songs'));
+        return this.store.find('playlist', params.playlist_id);
     }
 });
 
-App.QueueController = Ember.ArrayController.extend();
-
-App.SongsController = Ember.ArrayController.extend({
-    sortProperties : ['uri'],
-    sortAscending : true
-});
+App.QueueController = Ember.ObjectController.extend();

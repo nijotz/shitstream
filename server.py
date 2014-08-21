@@ -95,22 +95,26 @@ def get_song(song_code):
 def get_album_code(album_name, artist_name):
     encode(str(artist_name) + '/-/' + str(album_name))  #FIXME
 
-@app.route('/api/v1.0/queue/<junk>')
-@app.route('/api/v1.0/queue')
-def get_queue(junk=None):
-    queue = mpd.playlistinfo()
+@app.route('/api/v1.0/playlists/<playlist_code>')
+def get_playlist_json(playlist_code):
+    return jsonify({ 'playlist': get_playlist(playlist_code) })
 
-    current = mpd.currentsong().get('pos')
-    for song in queue:
-        if song.get('pos') == current:
-            song['playing'] = True
-        else:
-            song['playing'] = False
+def get_playlist(playlist_code):
+    if playlist_code == 'current':
+        playlist = mpd.playlistinfo()
+    else:
+        return {}
 
-        song['length'] = str(datetime.timedelta(
-            seconds=int(song['time'] or 0)))
+    songs = [
+        get_song_code(song.get('file'))
+        for song in playlist
+    ]
 
-    return jsonify({ 'queue': queue })
+    return {
+        'id': playlist_code,
+        'songs': songs
+    }
+
 
 if __name__ == '__main__':
     app.run(debug = True)

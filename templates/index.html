@@ -32,7 +32,7 @@
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
                 <li>{{#link-to 'artists'}}Browse{{/link-to}}</li>
-                <li>{{#link-to 'queue'}}Queue{{/link-to}}</li>
+                <li>{{#link-to 'playlist' 'current'}}Queue{{/link-to}}</li>
               </ul>
             </div>
           </div>
@@ -57,6 +57,16 @@
 
           <div class="col-md-8">
             {{outlet}}
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/x-handlebars" id="playlist">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            {{render "songs" songs}}
           </div>
         </div>
       </div>
