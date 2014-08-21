@@ -22,7 +22,7 @@ def index():
     return send_file('templates/index.html')
 
 @app.route('/api/v1.0/artists')
-def artists():
+def get_artists():
     artist_names = mpd.list("artist")
     artists = [
         {
@@ -35,7 +35,10 @@ def artists():
     return jsonify({ 'artists': artists })
 
 @app.route('/api/v1.0/artists/<artist_code>')
-def artist(artist_code):
+def get_artist_json(artist_code):
+    return jsonify(get_artist(artist_code))
+
+def get_artist(artist_code):
 
     artist_name = decode(artist_code)
     album_names = Set()
@@ -66,7 +69,7 @@ def artist(artist_code):
 
 @app.route('/api/v1.0/queue/<junk>')
 @app.route('/api/v1.0/queue')
-def queue(junk=None):
+def get_queue(junk=None):
     queue = mpd.playlistinfo()
 
     current = mpd.currentsong().get('pos')
