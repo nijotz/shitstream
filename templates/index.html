@@ -65,9 +65,11 @@
     <script type="text/x-handlebars" id="artist">
       <h1>{{name}}</h1>
       <h2>Albums</h2>
+      <h2>Non-Album Songs</h2>
+      {{render "songs" artist.non_album_songs}}
     </script>
 
-    <script type="text/x-handlebars" id="queue">
+    <script type="text/x-handlebars" id="songs">
       <div class="container">
         <div class="row">
           <table class="table">
