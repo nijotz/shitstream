@@ -55,7 +55,7 @@
             </div>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-8">
             {{outlet}}
           </div>
         </div>
@@ -66,36 +66,30 @@
       <h1>{{name}}</h1>
       <h2>Albums</h2>
       <h2>Non-Album Songs</h2>
-      {{render "songs" artist.non_album_songs}}
+      {{render "songs" non_album_songs}}
     </script>
 
     <script type="text/x-handlebars" id="songs">
-      <div class="container">
-        <div class="row">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Artist</th>
-                <th>Album</th>
-                <th>Title</th>
-                <th>Length</th>
-                <th>Filename</th>
-              </tr>
-            </thead>
-            {{#each}}
-              <tr {{bind-attr class="playing:success"}}>
-                <td>{{_view.contentIndex}}</td>
-                <td>{{artist}}</td>
-                <td>{{album}}</td>
-                <td>{{title}}</td>
-                <td>{{length}}</td>
-                <td>{{file}}</td>
-              </tr>
-            {{/each}}
-          </table>
-        </div>
-      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Title</th>
+            <th>Length</th>
+            <th>Filename</th>
+          </tr>
+        </thead>
+        {{#each}}
+          <tr {{bind-attr class="playing:success"}}>
+            <td>{{artist.name}}</td>
+            <td>{{album}}</td>
+            <td>{{title}}</td>
+            <td>{{length}}</td>
+            <td>{{file}}</td>
+          </tr>
+        {{/each}}
+      </table>
     </script>
 
     <script src="static/js/lib/jquery-1.10.2.js"></script>
