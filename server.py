@@ -12,7 +12,9 @@ mpd.connect("localhost", 6600)
 
 
 def encode(string):
-    return base64.b32encode(string).replace('=', '-')
+    if string:
+        return base64.b32encode(string).replace('=', '-')
+    return ''
 
 def decode(string):
     return base64.b32decode(string.replace('-', '='))
