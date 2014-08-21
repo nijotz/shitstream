@@ -17,11 +17,14 @@ App.Router.map(function() {
 });
 
 App.Artist = DS.Model.extend({
-    name: DS.attr('string')
+    name: DS.attr('string'),
+    albums: DS.hasMany('album'),
+    non_album_songs: DS.hasMany('song')
 });
 
-App.Albums = DS.Model.extend({
-    name: DS.attr('string')
+App.Album = DS.Model.extend({
+    name: DS.attr('string'),
+    artist: DS.belongsTo('artist')
 });
 
 App.Song = DS.Model.extend({
@@ -31,7 +34,9 @@ App.Song = DS.Model.extend({
     title: DS.attr('string'),
     length: DS.attr('string'),
     playing: DS.attr('boolean'),
-    queue: DS.belongsTo('post')
+    artist: DS.belongsTo('artist'),
+    album: DS.belongsTo('album'),
+    queue: DS.belongsTo('queue')
 });
 
 App.Queue = DS.Model.extend({
