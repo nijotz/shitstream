@@ -25,13 +25,11 @@ def index():
 def get_artists():
     artist_names = mpd.list("artist")
     artists = [
-        {
-            'id': encode(name),
-            'name': name
-        }
-        for name in artist_names
-        if name
+        get_artist(encode(artist_name))
+        for artist_name in artist_names
+        if artist_name
     ]
+
     return jsonify({ 'artists': artists })
 
 @app.route('/api/v1.0/artists/<artist_code>')
@@ -50,22 +48,22 @@ def get_artist(artist_code):
         if album:
             album_names.add(album)
         else:
-            non_album_songs.append(song)
-        song['uri'] = song.get('file')
+            song_id = encode(song.get('file'))
+            if song_id:
+                non_album_songs.append(song_id)
 
     albums = [
-        {
-            'id': encode(name),
-            'name': name
-        }
+        encode(artist_name + '/-/' + name)  #FIXME
         for name in album_names
         if name
     ]
 
-    return jsonify({
+    return {
+        'id': artist_code,
+        'name': artist_name,
         'albums': albums,
         'non_album_songs': non_album_songs
-    })
+    }
 
 @app.route('/api/v1.0/queue/<junk>')
 @app.route('/api/v1.0/queue')
