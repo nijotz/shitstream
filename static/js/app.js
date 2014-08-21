@@ -10,7 +10,7 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 App.Router.map(function() {
     this.resource('music', function() {
         this.resource('artists', function() {
-            this.resource('artist', { path: ':artist_code'});
+            this.resource('artist', { path: ':artist_id'});
         });
     });
     this.resource('queue');
