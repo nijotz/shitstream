@@ -69,6 +69,27 @@ def get_artist(artist_code):
         'non_album_songs': non_album_songs
     }
 
+@app.route('/api/v1.0/songs/<song_code>')
+def get_song_json(song_code):
+    return jsonify({ 'song': get_song(song_code) })
+
+def get_song_code(song_uri):
+    return encode(song_uri)
+
+def get_song(song_code):
+    song_uri = decode(song_code)
+    result = mpd.lsinfo(song_uri)
+    if result:
+        song = result[0]
+        song['id'] = get_song_code(song.get('file'))
+        song['artist'] = get_artist_code(song.get('artist'))
+        song['album'] = get_album_code(song.get('album'), song.get('artist'))
+        song['length'] = str(datetime.timedelta(
+            seconds=int(song['time'] or 0)))
+        return song
+    else:
+        return {}
+
 def get_album_code(album_name, artist_name):
     encode(str(artist_name) + '/-/' + str(album_name))  #FIXME
 
