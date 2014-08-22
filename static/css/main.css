@@ -6,3 +6,13 @@ body {
 .navbar {
   margin-bottom: 20px;
 }
+
+#alert-placeholder {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  margin-top: -1em;
+  margin-left: -30em;
+  width: 60em;
+  z-index: 5;
+}

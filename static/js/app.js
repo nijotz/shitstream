@@ -53,12 +53,43 @@ App.ArtistsRoute = Ember.Route.extend({
 App.ArtistRoute = Ember.Route.extend({
     model: function(params) {
         return this.store.find('artist', params.artist_id);
+    },
+    actions: {
+        queue: function(song) {
+            $.getJSON(
+                "/api/v1.0/playlists/current/queue/" + song.get('id'), //FIXME
+                function(data) {
+                    $('#alert-placeholder').append(
+                        '<div class="alert alert-success alert-dismissible" role="alert">' +
+                            '<button type="button" class="close" data-dismiss="alert">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                                '<span class="sr-only">Close</span>' +
+                            '</button>' +
+                            'Song added to queue' +
+                        '</div>'
+                    )
+
+                    var alertdiv = $('#alert-placeholder').children('.alert:last-child')
+                    window.setTimeout(function() {
+                        $(alertdiv).fadeTo(500, 0).slideUp(500, function(){
+                            alertdiv.remove();
+                        });
+                    }, 3000);
+                }
+            );
+        }
     }
 });
 
 App.AlbumRoute = Ember.Route.extend({
     model: function(params) {
         return this.store.find('album');
+    }
+});
+
+App.SongRoute = Ember.Route.extend({
+    model: function(params) {
+        return this.store.find('song', params.song_id);
     }
 });
 

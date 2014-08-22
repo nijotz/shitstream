@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="static/img/favicon.ico">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>shitstream</title>
 
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="static/css/main.css" rel="stylesheet">
@@ -39,6 +39,8 @@
         </div>
       </div>
 
+      <div id="alert-placeholder">
+      </div>
       {{outlet}}
     </script>
 
@@ -97,6 +99,11 @@
             <td>{{title}}</td>
             <td>{{length}}</td>
             <td>{{file}}</td>
+            <td>
+              <button {{action "queue" this}}>
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </td>
           </tr>
         {{/each}}
       </table>
