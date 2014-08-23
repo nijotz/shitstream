@@ -57,7 +57,10 @@ App.ArtistsRoute = Ember.Route.extend({
 App.ArtistRoute = Ember.Route.extend({
     model: function(params) {
         return this.store.find('artist', params.artist_id);
-    },
+    }
+})
+
+App.MusicRoute = Ember.Route.extend({
     actions: {
         queue: function(song) {
             $.getJSON(
