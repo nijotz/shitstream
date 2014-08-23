@@ -77,8 +77,23 @@
     <script type="text/x-handlebars" id="artist">
       <h1>{{name}}</h1>
       <h2>Albums</h2>
+      {{#each albums}}
+      {{#link-to 'album' this}}{{name}}{{/link-to}}
+      {{/each}}
       <h2>Non-Album Songs</h2>
       {{render "songs" non_album_songs}}
+    </script>
+
+    <script type="text/x-handlebars" id="album">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h1>{{name}}</h1>
+            <h2>Songs</h2>
+            {{render "songs" songs}}
+          </div>
+        </div>
+      </div>
     </script>
 
     <script type="text/x-handlebars" id="songs">
@@ -95,7 +110,7 @@
         {{#each}}
           <tr {{bind-attr class="playing:success"}}>
             <td>{{artist.name}}</td>
-            <td>{{album}}</td>
+            <td>{{album.name}}</td>
             <td>{{title}}</td>
             <td>{{length}}</td>
             <td>{{file}}</td>
