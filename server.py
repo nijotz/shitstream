@@ -125,7 +125,27 @@ def get_song(song_code):
         return {}
 
 def get_album_code(album_name, artist_name):
-    encode(str(artist_name) + '/-/' + str(album_name))  #FIXME
+    return encode(str(artist_name) + '/-/' + str(album_name))  #FIXME
+
+@app.route('/api/v1.0/albums/<album_code>')
+def get_album_json(album_code):
+    artist_name, album_name = decode(album_code).split('/-/')
+    songs = mpd.search('album', album_name)
+    song_codes = []
+    for song in songs:
+        for tag in ['albumartistsort', 'albumartist', 'artist']:
+            if song.get(tag) == artist_name:
+                song_codes.append(encode(song.get('file')))
+                break
+
+    return jsonify({
+        'album': {
+            'id': album_code,
+            'name': album_name,
+            'artist': encode(artist_name),
+            'songs': song_codes
+        }
+    })
 
 @app.route('/api/v1.0/playlists/<playlist_code>')
 def get_playlist_json(playlist_code):
