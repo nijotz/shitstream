@@ -25,11 +25,43 @@ def index():
 
 @app.route('/api/v1.0/artists')
 def get_artists():
-    artist_names = mpd.list('albumartist')
+
+    songs = mpd.listallinfo()
+    artists = {}
+
+    for song in songs:
+        for tag in ['albumartistsort', 'albumartist', 'artist']:
+            artist = song.get(tag)
+            if artist:
+                break
+        if not artist:
+            continue  #TODO
+
+        artist_code = get_artist_code(artist)
+        if not artists.get(artist_code):
+            artists[artist_code] = {
+                'name': artist,
+                'albums': Set(),
+                'non_album_songs': Set()
+            }
+
+        album = song.get('album')
+        if album:
+            album_code = get_album_code(album, artist)
+            artists[artist_code]['albums'].add(album_code)
+        else:
+            artists[artist_code]['non_album_songs'].add(
+                get_song_code(song.get('title'))
+            )
+
     artists = [
-        get_artist(get_artist_code(artist_name))
-        for artist_name in artist_names
-        if artist_name
+        {
+            'id': key,
+            'name': value['name'],
+            'albums': list(value['albums']),
+            'non_album_songs': list(value['non_album_songs'])
+        }
+        for key, value in artists.iteritems()
     ]
 
     return jsonify({ 'artists': artists })
