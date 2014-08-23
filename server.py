@@ -130,7 +130,7 @@ def get_album_code(album_name, artist_name):
 @app.route('/api/v1.0/albums/<album_code>')
 def get_album_json(album_code):
     artist_name, album_name = decode(album_code).split('/-/')
-    songs = mpd.search('album', album_name)
+    songs = mpd.search('album', album_name, 'artist', artist_name)
     song_codes = []
     for song in songs:
         for tag in ['albumartistsort', 'albumartist', 'artist']:
