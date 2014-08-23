@@ -25,7 +25,7 @@ def index():
 
 @app.route('/api/v1.0/artists')
 def get_artists():
-    artist_names = mpd.list("artist")
+    artist_names = mpd.list('albumartist')
     artists = [
         get_artist(get_artist_code(artist_name))
         for artist_name in artist_names
