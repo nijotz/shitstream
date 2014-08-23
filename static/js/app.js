@@ -99,4 +99,7 @@ App.PlaylistRoute = Ember.Route.extend({
     }
 });
 
-App.QueueController = Ember.ObjectController.extend();
+App.ArtistsController = Ember.ArrayController.extend({
+    sortProperties: ['name'],
+    sortAscending: true,
+});
