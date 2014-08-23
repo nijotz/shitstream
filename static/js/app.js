@@ -62,9 +62,9 @@ App.ArtistRoute = Ember.Route.extend({
 
 App.MusicRoute = Ember.Route.extend({
     actions: {
-        queue: function(song) {
+        queue_song: function(song) {
             $.getJSON(
-                "/api/v1.0/playlists/current/queue/" + song.get('id'), //FIXME
+                "/api/v1.0/playlists/current/queue_song/" + song.get('id'), //FIXME
                 function(data) {
                     $('#alert-placeholder').append(
                         '<div class="alert alert-success alert-dismissible" role="alert">' +
@@ -73,6 +73,29 @@ App.MusicRoute = Ember.Route.extend({
                                 '<span class="sr-only">Close</span>' +
                             '</button>' +
                             'Song added to queue' +
+                        '</div>'
+                    )
+
+                    var alertdiv = $('#alert-placeholder').children('.alert:last-child')
+                    window.setTimeout(function() {
+                        $(alertdiv).fadeTo(500, 0).slideUp(500, function(){
+                            alertdiv.remove();
+                        });
+                    }, 3000);
+                }
+            );
+        },
+        queue_album: function(album) {
+            $.getJSON(
+                "/api/v1.0/playlists/current/queue_album/" + album.get('id'), //FIXME
+                function(data) {
+                    $('#alert-placeholder').append(
+                        '<div class="alert alert-success alert-dismissible" role="alert">' +
+                            '<button type="button" class="close" data-dismiss="alert">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                                '<span class="sr-only">Close</span>' +
+                            '</button>' +
+                            'Album added to queue' +
                         '</div>'
                     )
 

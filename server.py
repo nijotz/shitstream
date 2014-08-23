@@ -167,13 +167,25 @@ def get_playlist(playlist_code):
         'songs': songs
     }
 
-@app.route('/api/v1.0/playlists/<playlist_code>/queue/<song_code>')
-def add_to_playlist(playlist_code, song_code):
+@app.route('/api/v1.0/playlists/<playlist_code>/queue_song/<song_code>')
+def add_song_to_playlist(playlist_code, song_code):
     if playlist_code == 'current':
         mpd.addid(decode(song_code))
         mpd.play()
     else:
         mpd.playlistadd(decode(playlist_code), decode(song_code))
+
+    return jsonify({'status': 'OK'})
+
+@app.route('/api/v1.0/playlists/<playlist_code>/queue_album/<album_code>')
+def add_album_to_playlist(playlist_code, album_code):
+    artist_name, album_name = decode(album_code).split('/-/')
+    if playlist_code == 'current':
+        songs = mpd.search('album', album_name, 'artist', artist_name)
+        for song in songs:
+            mpd.addid(song.get('file'))
+    else:
+        raise Exception
 
     return jsonify({'status': 'OK'})
 
