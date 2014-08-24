@@ -7,9 +7,30 @@ from mpd import MPDClient
 
 app = Flask(__name__)
 
-mpd = MPDClient()
-mpd.connect("localhost", 6600)
+def mpd(func):
+    def fn_wrap(*args, **kwargs):
+        mpdc = MPDClient()
+        mpdc.connect("store.local", 6600)
 
+        # Set 'mpdc' in the global context, making sure not to overwrite an
+        # existing global
+        glob = func.func_globals
+        sentinel = object()  # a unique default to see if existing variable
+            # space was taken (can't test against None)
+        oldvalue = glob.get('mpdc', sentinel)
+        glob['mpdc'] = mpdc
+
+        try:
+            return func(*args, **kwargs)
+        finally:
+            if oldvalue is sentinel:
+                # old variable space was not taken, just clear it
+                del glob['mpdc']
+            else:
+                glob['mpdc'] = oldvalue
+
+    fn_wrap.func_name = func.func_name
+    return fn_wrap
 
 def encode(string):
     if string:
@@ -24,9 +45,10 @@ def index():
     return send_file('templates/index.html')
 
 @app.route('/api/v1.0/artists')
+@mpd
 def get_artists():
 
-    songs = mpd.listallinfo()
+    songs = mpdc.listallinfo()
     artists = {}
 
     for song in songs:
@@ -74,12 +96,13 @@ def get_artist_json(artist_code):
 def get_artist_code(artist_name):
     return encode(artist_name)
 
+@mpd
 def get_artist(artist_code):
 
     artist_name = decode(artist_code)
     album_names = Set()
     non_album_songs = []
-    artist_songs = mpd.search('artist', artist_name)
+    artist_songs = mpdc.search('artist', artist_name)
 
     for song in artist_songs:
         album = song.get('album')
@@ -110,9 +133,10 @@ def get_song_json(song_code):
 def get_song_code(song_uri):
     return encode(song_uri)
 
+@mpd
 def get_song(song_code):
     song_uri = decode(song_code)
-    result = mpd.lsinfo(song_uri)
+    result = mpdc.lsinfo(song_uri)
     if result:
         song = result[0]
         song['id'] = get_song_code(song.get('file'))
@@ -128,9 +152,10 @@ def get_album_code(album_name, artist_name):
     return encode(str(artist_name) + '/-/' + str(album_name))  #FIXME
 
 @app.route('/api/v1.0/albums/<album_code>')
+@mpd
 def get_album_json(album_code):
     artist_name, album_name = decode(album_code).split('/-/')
-    songs = mpd.search('album', album_name, 'artist', artist_name)
+    songs = mpdc.search('album', album_name, 'artist', artist_name)
     song_codes = []
     for song in songs:
         for tag in ['albumartistsort', 'albumartist', 'artist']:
@@ -151,9 +176,10 @@ def get_album_json(album_code):
 def get_playlist_json(playlist_code):
     return jsonify({ 'playlist': get_playlist(playlist_code) })
 
+@mpd
 def get_playlist(playlist_code):
     if playlist_code == 'current':
-        playlist = mpd.playlistinfo()
+        playlist = mpdc.playlistinfo()
     else:
         return {}
 
@@ -168,22 +194,24 @@ def get_playlist(playlist_code):
     }
 
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_song/<song_code>')
+@mpd
 def add_song_to_playlist(playlist_code, song_code):
     if playlist_code == 'current':
-        mpd.addid(decode(song_code))
-        mpd.play()
+        mpdc.addid(decode(song_code))
+        mpdc.play()
     else:
-        mpd.playlistadd(decode(playlist_code), decode(song_code))
+        mpdc.playlistadd(decode(playlist_code), decode(song_code))
 
     return jsonify({'status': 'OK'})
 
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_album/<album_code>')
+@mpd
 def add_album_to_playlist(playlist_code, album_code):
     artist_name, album_name = decode(album_code).split('/-/')
     if playlist_code == 'current':
-        songs = mpd.search('album', album_name, 'artist', artist_name)
+        songs = mpdc.search('album', album_name, 'artist', artist_name)
         for song in songs:
-            mpd.addid(song.get('file'))
+            mpdc.addid(song.get('file'))
     else:
         raise Exception
 
