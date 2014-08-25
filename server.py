@@ -2,6 +2,7 @@
 
 import base64
 import datetime
+import socket
 import time
 from sets import Set
 from flask import Flask, jsonify, send_file
@@ -21,7 +22,18 @@ socketio = SocketIO(app)
 def mpd(func):
     def fn_wrap(*args, **kwargs):
         mpdc = MPDClient()
-        mpdc.connect("store.local", 6600)
+
+        # Try connecting a few times, sometimes MPD can get flooded
+        attempts = 0
+        connected = False
+        while connected == False and attempts < 4:
+            try:
+                mpdc.connect("store.local", 6600)  #FIXME: make configurable
+                connected = True
+            except socket.error:
+                connected = False
+            attempts += 1
+            time.sleep(0.25)
 
         # Set 'mpdc' in the global context, making sure not to overwrite an
         # existing global
