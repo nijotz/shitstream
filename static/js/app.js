@@ -157,6 +157,34 @@ App.SongRoute = Ember.Route.extend({
 App.PlaylistRoute = Ember.Route.extend({
     model: function(params) {
         return this.store.find('playlist', params.playlist_id);
+    },
+    actions: {
+        'dequeue_song': function(playlist_song) {
+            playlist_song.destroyRecord();
+            /*
+            $.getJSON(
+                "/api/v1.0/playlists/current/dequeue_song/" + pos, //FIXME
+                function(data) {
+                    $('#alert-placeholder').append(
+                        '<div class="alert alert-success alert-dismissible" role="alert">' +
+                            '<button type="button" class="close" data-dismiss="alert">' +
+                                '<span aria-hidden="true">&times;</span>' +
+                                '<span class="sr-only">Close</span>' +
+                            '</button>' +
+                            'Song removed from queue' +
+                        '</div>'
+                    )
+
+                    var alertdiv = $('#alert-placeholder').children('.alert:last-child')
+                    window.setTimeout(function() {
+                        $(alertdiv).fadeTo(500, 0).slideUp(500, function(){
+                            alertdiv.remove();
+                        });
+                    }, 3000);
+                }
+            );
+            */
+        }
     }
 });
 

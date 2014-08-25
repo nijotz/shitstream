@@ -181,10 +181,13 @@ def get_song(song_code):
 def get_album_code(album_name, artist_name):
     return encode(str(artist_name) + '/-/' + str(album_name))  #FIXME
 
+def decode_album_code(code):
+    return  decode(code).split('/-/')
+
 @app.route('/api/v1.0/albums/<album_code>')
 @mpd
 def get_album_json(album_code):
-    artist_name, album_name = decode(album_code).split('/-/')
+    artist_name, album_name = decode_album_code(album_code)
     songs = mpdc.search('album', album_name, 'artist', artist_name)
     song_codes = []
     for song in songs:
@@ -212,8 +215,7 @@ def get_playlist_json(playlist_code):
 
     songs = [
         {
-            'id': encode('{}/-/{}/-/{}'.format(
-                playlist_code, song.get('file'), song.get('pos'))),
+            'id': get_playlist_song_code(playlist_code, song.get('id')),
             'pos': song.get('pos'),
             'song': get_song_code(song.get('file')),
             'playlist': playlist_code
@@ -231,6 +233,23 @@ def get_playlist_json(playlist_code):
 
         'playlist_songs': songs
     })
+
+def get_playlist_song_code(playlist_code, song_id):
+    return encode('{}/-/{}'.format(playlist_code, song_id))
+
+def decode_playlist_song_code(code):
+    return decode(code).split('/-/')
+
+@app.route('/api/v1.0/playlistSongs/<playlist_song_code>', methods=['DELETE'])
+@mpd
+def del_song_from_playlist(playlist_song_code):
+    playlist_code, song_id = decode_playlist_song_code(playlist_song_code)
+    if playlist_code == 'current':
+        mpdc.deleteid(song_id)
+    else:
+        mpdc.playlistdelete(decode(playlist_code), song_id)
+
+    return jsonify({'playlist_song_code': playlist_song_code})  #FIXME: Not sure what to return from DELETEs
 
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_song/<song_code>')
 @mpd
