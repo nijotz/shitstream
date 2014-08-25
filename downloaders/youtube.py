@@ -7,10 +7,10 @@ regex = re.compile('https?://(www\.)?youtube.com/.*')
 
 version_map = {
     '2014.06.19': {
-        'downloading': '(^.*\r\n)*.*Destination:',
+        'downloading': '(^.*\r\n)*\[download\] Destination:',
         'skipping': '(.*\r\n)*.*Post-process file (?P<file>.*) exists, skipping',
         'percent': '(.*\r\n)*.*\[download\] *(?P<perc>[0-9.]+% of .* at .* ETA [0-9:]*)',
-        'downloaded': '(.*\r\n)*\[ffmpeg\] Destination: (?P<file>.*)\r\n'
+        'downloaded': '(.*\r\n)*\[(ffmpeg|avconv)\] Destination: (?P<file>.*)\r\n'
     }
 }
 
