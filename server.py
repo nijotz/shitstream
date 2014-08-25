@@ -16,6 +16,10 @@ socketio = SocketIO(app)
 
 youtube_regex = re.compile('https?://(www\.)?youtube.com/.*')  #FIXME
 
+
+# Quick and dirty way to get a new mpd client connection on every request.  It
+# times out if I make a global one.  The mpdc variable will be available to any
+# function that is wrapped by @mpd and will be fresh instance of MPDClient.
 def mpd(func):
     def fn_wrap(*args, **kwargs):
         mpdc = MPDClient()
@@ -41,6 +45,12 @@ def mpd(func):
     fn_wrap.func_name = func.func_name
     return fn_wrap
 
+# I don't want to deal with replicating the MPD database and dealing with sync
+# issues, and MPD doesn't expose any kind of unique IDs for
+# songs/albums/artists, so I just say fuckit and base32 encode names and make
+# that the slug.  Albums are identified by 'artist/-/album'.  Songs are the
+# URI, which is something MPD keeps unique, it's the songs file location.
+# Artists are just identified by their name.
 def encode(string):
     if string:
         return base64.b32encode(string).replace('=', '-')
@@ -277,6 +287,7 @@ def add_url(msg):
         filename = download_youtube_url(url, emit)
     except Exception as exception:
         emit('response', {'msg': str(exception)})
+        emit('disconnect')
         return
 
     uri = filename.replace('music/', '')  #FIXME (music/in)
@@ -287,7 +298,7 @@ def add_url(msg):
     added = False
     while not added:
         cur_job = mpdc.status().get('updating_db')
-        if cur_job and cur_job != job_id:
+        if cur_job and cur_job <= jobid:
             time.sleep(1)
             emit('response', {'msg': 'Music database still updating'})
         else:
@@ -297,7 +308,6 @@ def add_url(msg):
     # Add song to Queue
     emit('response', {'msg': 'Adding song to queue'})
     mpdc.add(uri)
-
     emit('response', {'msg': 'Song queued'})
 
     emit('disconnect')
