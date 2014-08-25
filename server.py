@@ -12,6 +12,7 @@ from downloaders.youtube import regex as youtube_regex,\
     download as download_youtube_url
 
 app = Flask(__name__)
+app.debug = True
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
