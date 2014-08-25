@@ -181,5 +181,6 @@
         <mount-name>/mpd.mp3</mount-name>
         <fallback-mount>/trumpet.mp3</fallback-mount>
         <fallback-override>1</fallback-override>
+        <queue-size>140675</queue-size>
     </mount>
 </icecast>
