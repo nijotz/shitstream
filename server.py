@@ -252,15 +252,28 @@ def download_youtube_url(url, emit):
         pexpect.EOF
     ])
 
+    # youtube-dl is downloading
     if i == 0:
         emit('response', {'msg': 'Downloading song'})
-        child.expect('(.*\r\n)*\[ffmpeg\] Destination: (?P<file>.*)\r\n')
-        emit('response', {'msg': 'Download and conversion finished'})
+        downloading = True
+        while downloading:
+
+            # Look for percent complete updates or transcoding message
+            j = child.expect([
+                re.compile('(.*\r\n)*.*\[download\] *(?P<perc>[0-9.]+% of .* at .* ETA [0-9:]*)'),
+                re.compile('(.*\r\n)*\[ffmpeg\] Destination: (?P<file>.*)\r\n')
+            ])
+            if j == 0:
+                emit('response', {'msg': child.match.group('perc')})
+            elif j == 1:
+                emit('response', {'msg': 'Download and conversion finished'})
+                downloading = False
+
     elif i == 1:
         emit('response', {'msg': 'Song already exists, skipping download'})
+
     else:
         emit('response', {'msg': 'Error processing URL'})
-        import ipdb; ipdb.set_trace()
         return
 
     filename = child.match.group('file')
@@ -297,9 +310,9 @@ def add_url(msg):
     jobid = mpdc.update(uri)
     added = False
     while not added:
+        time.sleep(1)
         cur_job = mpdc.status().get('updating_db')
         if cur_job and cur_job <= jobid:
-            time.sleep(1)
             emit('response', {'msg': 'Music database still updating'})
         else:
             added = True
