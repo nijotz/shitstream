@@ -42,11 +42,17 @@ App.Song = DS.Model.extend({
     length: DS.attr('string'),
     file: DS.attr('string'),
     playing: DS.attr('boolean'),
-    playlists: DS.hasMany('playlist', {async:true})
+    playlists: DS.hasMany('playlist_songs', {async:true})
 });
 
 App.Playlist = DS.Model.extend({
-    songs: DS.hasMany('song', {async:true})
+    songs: DS.hasMany('playlist_songs', {async:true})
+})
+
+App.PlaylistSong = DS.Model.extend({
+    playlist: DS.belongsTo('playlist', {async:true}),
+    pos: DS.attr('number'),
+    song: DS.belongsTo('song', {async:true})
 })
 
 App.ArtistsRoute = Ember.Route.extend({

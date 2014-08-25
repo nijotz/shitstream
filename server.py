@@ -203,25 +203,34 @@ def get_album_json(album_code):
     })
 
 @app.route('/api/v1.0/playlists/<playlist_code>')
-def get_playlist_json(playlist_code):
-    return jsonify({ 'playlist': get_playlist(playlist_code) })
-
 @mpd
-def get_playlist(playlist_code):
+def get_playlist_json(playlist_code):
     if playlist_code == 'current':
         playlist = mpdc.playlistinfo()
     else:
         return {}
 
     songs = [
-        get_song_code(song.get('file'))
+        {
+            'id': encode('{}/-/{}/-/{}'.format(
+                playlist_code, song.get('file'), song.get('pos'))),
+            'pos': song.get('pos'),
+            'song': get_song_code(song.get('file')),
+            'playlist': playlist_code
+        }
         for song in playlist
     ]
 
-    return {
-        'id': playlist_code,
-        'songs': songs
-    }
+    song_ids = [ song.get('id') for song in songs ]
+
+    return jsonify({
+        'playlist': {
+            'id': playlist_code,
+            'songs': song_ids
+        },
+
+        'playlist_songs': songs
+    })
 
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_song/<song_code>')
 @mpd
