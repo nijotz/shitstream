@@ -321,6 +321,7 @@ def add_url(msg):
     # Add song to Queue
     emit('response', {'msg': 'Adding song to queue'})
     mpdc.add(uri)
+    mpdc.play()
     emit('response', {'msg': 'Song queued'})
 
     emit('disconnect')
