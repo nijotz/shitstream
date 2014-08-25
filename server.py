@@ -1,11 +1,20 @@
 #!flask/bin/python
 import base64
 import datetime
+import re
+import sys
+import time
 from sets import Set
 from flask import Flask, jsonify, send_file
+from flask.ext.socketio import SocketIO, emit
 from mpd import MPDClient
+import pexpect
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
+
+youtube_regex = re.compile('https?://(www\.)?youtube.com/.*')  #FIXME
 
 def mpd(func):
     def fn_wrap(*args, **kwargs):
@@ -217,5 +226,81 @@ def add_album_to_playlist(playlist_code, album_code):
 
     return jsonify({'status': 'OK'})
 
+@socketio.on('connect', namespace='/api/v1.0/add_url/')
+def add_url():
+    emit('response', {'msg': 'Connected'});
+
+def download_youtube_url(url, emit):
+    child = pexpect.spawn("youtube-dl -v --keep --extract-audio --audio-format mp3 \
+        --no-post-overwrites -o 'music/in/%(title)s-%(id)s.%(ext)s' " + url)  #FIXME (music/in)
+    child.logfile = sys.stdout
+
+    # Either song exists or it is downloaded
+    i = child.expect([
+        re.compile('(^.*\r\n)*.*Destination:'),
+        re.compile('(.*\r\n)*.*Post-process file (?P<file>.*) exists, skipping'),
+        pexpect.EOF
+    ])
+
+    if i == 0:
+        emit('response', {'msg': 'Downloading song'})
+        child.expect('(.*\r\n)*\[ffmpeg\] Destination: (?P<file>.*)\r\n')
+        emit('response', {'msg': 'Download and conversion finished'})
+    elif i == 1:
+        emit('response', {'msg': 'Song already exists, skipping download'})
+    else:
+        emit('response', {'msg': 'Error processing URL'})
+        import ipdb; ipdb.set_trace()
+        return
+
+    filename = child.match.group('file')
+    return filename
+
+@socketio.on('add_url', namespace='/api/v1.0/add_url/')
+@mpd
+def add_url(msg):
+    url = msg.get('url', None)
+    if not url:
+        emit('response', {'msg': 'No URL received'})
+        return
+
+    emit('response', {'msg': 'Received URL'})
+
+    if not youtube_regex.match(url):
+        emit('response', {'msg': 'URL does not appear to be valid'})
+        return
+
+    emit('response', {'msg': 'URL appears to be valid'})
+    emit('response', {'msg': 'Starting youtube-dl'})
+
+    try:
+        filename = download_youtube_url(url, emit)
+    except Exception as exception:
+        emit('response', {'msg': str(exception)})
+        return
+
+    uri = filename.replace('music/', '')  #FIXME (music/in)
+
+    # Add song to MPD
+    emit('response', {'msg': 'Adding song to music database'})
+    jobid = mpdc.update(uri)
+    added = False
+    while not added:
+        cur_job = mpdc.status().get('updating_db')
+        if cur_job and cur_job != job_id:
+            time.sleep(1)
+            emit('response', {'msg': 'Music database still updating'})
+        else:
+            added = True
+    emit('response', {'msg': 'Song added to music database'})
+
+    # Add song to Queue
+    emit('response', {'msg': 'Adding song to queue'})
+    mpdc.add(uri)
+
+    emit('response', {'msg': 'Song queued'})
+
+    emit('disconnect')
+
 if __name__ == '__main__':
-    app.run(debug = True)
+    socketio.run(app)

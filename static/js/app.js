@@ -17,6 +17,7 @@ App.Router.map(function() {
             this.resource('album', {path: ':album_id'});
         });
     });
+    this.route('add_url');
     this.resource('playlists', function() {
         this.resource('playlist', {path: ':playlist_id'});
     });
@@ -59,6 +60,30 @@ App.ArtistRoute = Ember.Route.extend({
         return this.store.find('artist', params.artist_id);
     }
 })
+
+App.AddUrlRoute = Ember.Route.extend({
+    actions: {
+        queue_url: function(url) {
+
+            $('#queue-btn').prop('disabled', true);
+            var socket = io.connect('/api/v1.0/add_url/');
+
+            socket.on('connect', function() {
+                console.log('Sending URL: ' + url);
+                socket.emit('add_url', {url: url});
+            });
+
+            socket.on('response', function(msg) {
+                $('#messages').append(msg.msg + '\n');
+                console.log('Received msg: ' + msg.msg);
+            });
+
+            socket.on('disconnect', function() {
+                $('#queue-btn').prop('disabled', false);
+            });
+        }
+    }
+});
 
 App.MusicRoute = Ember.Route.extend({
     actions: {
