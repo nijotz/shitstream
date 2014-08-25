@@ -1,4 +1,5 @@
 #!flask/bin/python
+
 import base64
 import datetime
 import re
@@ -233,6 +234,7 @@ def add_album_to_playlist(playlist_code, album_code):
             mpdc.addid(song.get('file'))
     else:
         raise Exception
+    mpdc.play()
 
     return jsonify({'status': 'OK'})
 
