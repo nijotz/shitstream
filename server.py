@@ -2,20 +2,17 @@
 
 import base64
 import datetime
-import re
-import sys
 import time
 from sets import Set
 from flask import Flask, jsonify, send_file
 from flask.ext.socketio import SocketIO, emit
 from mpd import MPDClient
-import pexpect
+from downloaders.youtube import regex as youtube_regex,\
+    download as download_youtube_url
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
-
-youtube_regex = re.compile('https?://(www\.)?youtube.com/.*')  #FIXME
 
 
 # Quick and dirty way to get a new mpd client connection on every request.  It
@@ -242,44 +239,6 @@ def add_album_to_playlist(playlist_code, album_code):
 def add_url():
     emit('response', {'msg': 'Connected'});
 
-def download_youtube_url(url, emit):
-    child = pexpect.spawn("youtube-dl -v --keep --extract-audio --audio-format mp3 \
-        --no-post-overwrites -o 'music/in/%(title)s-%(id)s.%(ext)s' " + url)  #FIXME (music/in)
-    child.logfile = sys.stdout
-
-    # Either song exists or it is downloaded
-    i = child.expect([
-        re.compile('(^.*\r\n)*.*Destination:'),
-        re.compile('(.*\r\n)*.*Post-process file (?P<file>.*) exists, skipping'),
-        pexpect.EOF
-    ])
-
-    # youtube-dl is downloading
-    if i == 0:
-        emit('response', {'msg': 'Downloading song'})
-        downloading = True
-        while downloading:
-
-            # Look for percent complete updates or transcoding message
-            j = child.expect([
-                re.compile('(.*\r\n)*.*\[download\] *(?P<perc>[0-9.]+% of .* at .* ETA [0-9:]*)'),
-                re.compile('(.*\r\n)*\[ffmpeg\] Destination: (?P<file>.*)\r\n')
-            ])
-            if j == 0:
-                emit('response', {'msg': child.match.group('perc')})
-            elif j == 1:
-                emit('response', {'msg': 'Download and conversion finished'})
-                downloading = False
-
-    elif i == 1:
-        emit('response', {'msg': 'Song already exists, skipping download'})
-
-    else:
-        emit('response', {'msg': 'Error processing URL'})
-        return
-
-    filename = child.match.group('file')
-    return filename
 
 @socketio.on('add_url', namespace='/api/v1.0/add_url/')
 @mpd
@@ -299,7 +258,7 @@ def add_url(msg):
     emit('response', {'msg': 'Starting youtube-dl'})
 
     try:
-        filename = download_youtube_url(url, emit)
+        filename = download_youtube_url(url, 'music/in', emit)
     except Exception as exception:
         emit('response', {'msg': str(exception)})
         emit('disconnect')
