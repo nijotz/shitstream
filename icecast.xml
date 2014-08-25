@@ -177,4 +177,9 @@
         </changeowner>
         -->
     </security>
+    <mount>
+        <mount-name>/mpd.mp3</mount-name>
+        <fallback-mount>/trumpet.mp3</fallback-mount>
+        <fallback-override>1</fallback-override>
+    </mount>
 </icecast>
