@@ -249,7 +249,7 @@ def del_song_from_playlist(playlist_song_code):
     else:
         mpdc.playlistdelete(decode(playlist_code), song_id)
 
-    return jsonify({'playlist_song_code': playlist_song_code})  #FIXME: Not sure what to return from DELETEs
+    return jsonify({'status': 'OK'})  #FIXME: Not sure what to return from DELETEs
 
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_song/<song_code>')
 @mpd
@@ -260,7 +260,7 @@ def add_song_to_playlist(playlist_code, song_code):
     else:
         mpdc.playlistadd(decode(playlist_code), decode(song_code))
 
-    return jsonify({'status': 'OK'})
+    return jsonify({'status': 'OK'}) #FIXME: Not sure what to return from DELETEs
 
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_album/<album_code>')
 @mpd
