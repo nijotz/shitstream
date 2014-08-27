@@ -101,14 +101,14 @@ App.ArtistRoute = Ember.Route.extend({
     }
 });
 
-App.ApplicationRoute = Ember.Route.extend({
-    model: function() {
-        return Ember.$.getJSON('/api/v1.0/listeners').
-        then(function(data) {
-            return data['listeners']
-        })
-    }
-});
+//App.ApplicationRoute = Ember.Route.extend({
+//    model: function() {
+//        return Ember.$.getJSON('/api/v1.0/listeners').
+//        then(function(data) {
+//            return data['listeners']
+//        })
+//    }
+//});
 
 App.IndexRoute = Ember.Route.extend({
     model: function() {
