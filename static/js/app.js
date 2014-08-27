@@ -157,9 +157,8 @@ App.SongRoute = Ember.Route.extend({
 
 App.PlaylistController = Ember.ObjectController.extend({
     filter_songs: function(future) {
-        // Don't bother if the qu
         current_song_pos = this.get('model.current_song_pos');
-        if (! current_song_pos) { return }
+
         // Preserve 'this' through the Land of Promise Hell
         var self = this;
 
@@ -169,11 +168,11 @@ App.PlaylistController = Ember.ObjectController.extend({
         return DS.PromiseArray.create({
             promise: self.get('model.songs').then(function(songs) {
                 songs = songs.filter(function(song) {
+                    // If not playing, everything is part of the past queue
+                    if (current_song_pos === null) { return !future; }
+
                     // FIXME: Holy shit, I'm soo tired and this logic can be
                     // simplified, I'm sure.
-
-                    // If not playing, everything is part of the past queue
-                    if (!(current_song_pos >=0) && !future) { return true; }
                     return ((song.get('pos') >= current_song_pos) && future) ||
                         ((song.get('pos') < current_song_pos) && !future);
                 });
