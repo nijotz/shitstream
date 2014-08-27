@@ -16,3 +16,16 @@ body {
   width: 60em;
   z-index: 5;
 }
+
+#artist-list {
+  overflow: auto;
+  height: 333px;
+  border-top: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+}
+
+#artist-list.affix {
+  position: fixed;
+  top: 20px;
+  height: 90%;
+}

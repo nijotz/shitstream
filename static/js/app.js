@@ -56,6 +56,26 @@ App.PlaylistSong = DS.Model.extend({
     song: DS.belongsTo('song', {async:true})
 })
 
+App.ArtistsView = Ember.View.extend({
+    jquery: function() {
+        $('#artist-list').
+            affix({
+                offset: {
+                    top: $('#header').height()
+                }
+            }).
+            height(
+                $(window).height() - $('#header').height() - 50
+            );
+        $(window).resize(function() {
+            $('#artist-list').height(
+                //FIXME: copypasta from 2 lines up
+                $(window).height() - $('#header').height() - 50
+            );
+        })
+    }.on('didInsertElement')
+})
+
 App.ArtistsRoute = Ember.Route.extend({
     model: function(params) {
         return this.store.find('artist');

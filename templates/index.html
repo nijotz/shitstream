@@ -17,7 +17,7 @@
   <body>
 
     <script type="text/x-handlebars">
-      <div class="container">
+      <div id="header" class="container">
         <div class="navbar navbar-default" role="navigation">
           <div class="container-fluid">
             <div class="navbar-header">
@@ -77,11 +77,11 @@
     <script type="text/x-handlebars" id="artists">
       <div class="row">
         <div class="col-md-4">
-          <div class="list-group">
+          <div id="artist-list" class="list-group">
             {{#each}}
-            {{#link-to 'artist' this class="list-group-item"}}
-            {{name}}
-            {{/link-to}}
+              {{#link-to 'artist' this class="list-group-item"}}
+              {{name}}
+              {{/link-to}}
             {{/each}}
           </div>
         </div>
@@ -94,14 +94,14 @@
 
     <script type="text/x-handlebars" id="playlist">
       <div class="row">
-        <h3>Current queue</h3>
+        <h3>Current queue <small>Ordered from current song to last song </small></h3>
         <div class="col-md-12">
           {{render "songlist" future_songs}}
         </div>
       </div>
 
       <div class="row">
-        <h3>Past songs</h3>
+        <h3>Past songs <small>Ordered from last played song to oldest song</small></h3>
         <div class="col-md-12">
           {{render "songlist" past_songs}}
         </div>
@@ -142,8 +142,8 @@
     </script>
 
     <script type="text/x-handlebars" id="artist">
-      <h1>{{name}}</h1>
-      <h2>Albums</h2>
+      <h2>{{name}}</h2>
+      <h3>Albums</h3>
       <table class="table">
         <thead>
           <tr>
@@ -164,7 +164,7 @@
         </tr>
         {{/each}}
       </table>
-      <h2>Non-Album Songs</h2>
+      <h3>Non-Album Songs</h3>
       {{render "songs" non_album_songs}}
     </script>
 
