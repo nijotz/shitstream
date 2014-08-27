@@ -228,7 +228,8 @@ def get_playlist_json(playlist_code):
     return jsonify({
         'playlist': {
             'id': playlist_code,
-            'songs': song_ids
+            'songs': song_ids,
+            'current_song_pos': mpdc.currentsong().get('pos')
         },
 
         'playlist_songs': songs

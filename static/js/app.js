@@ -46,7 +46,8 @@ App.Song = DS.Model.extend({
 });
 
 App.Playlist = DS.Model.extend({
-    songs: DS.hasMany('playlist_songs', {async:true})
+    songs: DS.hasMany('playlist_songs', {async:true}),
+    current_song_pos: DS.attr('number')
 })
 
 App.PlaylistSong = DS.Model.extend({
@@ -153,6 +154,47 @@ App.SongRoute = Ember.Route.extend({
         return this.store.find('song', params.song_id);
     }
 });
+
+App.PlaylistController = Ember.ObjectController.extend({
+    filter_songs: function(future) {
+        // Don't bother if the qu
+        current_song_pos = this.get('model.current_song_pos');
+        if (! current_song_pos) { return }
+        // Preserve 'this' through the Land of Promise Hell
+        var self = this;
+
+        // All this data is loaded async, so we need to return a new
+        // PromiseArray to the template that will eventually contain the future
+        // songs in the queue
+        return DS.PromiseArray.create({
+            promise: self.get('model.songs').then(function(songs) {
+                songs = songs.filter(function(song) {
+                    // FIXME: Holy shit, I'm soo tired and this logic can be
+                    // simplified, I'm sure.
+
+                    // If not playing, everything is part of the past queue
+                    if (!(current_song_pos >=0) && !future) { return true; }
+                    return ((song.get('pos') >= current_song_pos) && future) ||
+                        ((song.get('pos') < current_song_pos) && !future);
+                });
+
+                if (!future) {
+                    songs = songs.toArray().reverse();
+                }
+
+                return songs
+            })
+        });
+    },
+
+    future_songs: function() {
+        return this.filter_songs(true);
+    }.property('current_song_pos', 'songs'),
+
+    past_songs: function() {
+        return this.filter_songs(false);
+    }.property('current_song_pos', 'songs')
+})
 
 App.PlaylistRoute = Ember.Route.extend({
     model: function(params) {
