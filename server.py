@@ -7,7 +7,9 @@ import time
 from sets import Set
 from flask import Flask, jsonify, send_file
 from flask.ext.socketio import SocketIO, emit
+from lxml import html
 from mpd import MPDClient
+import requests
 from downloaders.youtube import regex as youtube_regex,\
     download as download_youtube_url
 
@@ -334,6 +336,13 @@ def add_url(msg):
     emit('response', {'msg': 'Song queued'})
 
     emit('disconnect')
+
+@app.route('/api/v1.0/listeners')
+def get_listeners():
+    page = requests.get('http://store.local:9000/status.xsl')
+    tree = html.fromstring(page.text)
+    elem = tree.xpath('//td[text()="Current Listeners:"]/following-sibling::td')
+    return jsonify({'listeners':elem[0].text})
 
 if __name__ == '__main__':
     socketio.run(app)
