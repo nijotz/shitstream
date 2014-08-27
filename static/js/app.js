@@ -7,18 +7,6 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
     namespace: 'api/v1.0'
 });
 
-App.LoadingView = Ember.View.extend({
-    jquery: function() {
-        function more_poop(poop) {
-          poop.innerHTML += " 💩";
-          setTimeout(function() { more_poop(poop); }, 100);
-        }
-        poop = document.getElementById('poop');
-        more_poop(poop);
-    }.on('didInsertElement')
-});
-App.LoadingRoute = Ember.Route.extend({});
-
 App.Router.map(function() {
     this.resource('music', function() {
         this.resource('artists', function() {
@@ -34,6 +22,19 @@ App.Router.map(function() {
         this.resource('playlist', {path: ':playlist_id'});
     });
 });
+
+App.LoadingView = Ember.View.extend({
+    jquery: function() {
+        function more_poop(poop) {
+          poop.innerHTML += " 💩";
+          setTimeout(function() { more_poop(poop); }, 100);
+        }
+        poop = document.getElementById('poop');
+        more_poop(poop);
+    }.on('didInsertElement')
+});
+
+App.LoadingRoute = Ember.Route.extend({});
 
 App.Artist = DS.Model.extend({
     name: DS.attr('string'),
@@ -86,7 +87,7 @@ App.ArtistsView = Ember.View.extend({
             );
         })
     }.on('didInsertElement')
-})
+});
 
 App.ArtistsRoute = Ember.Route.extend({
     model: function(params) {
@@ -98,7 +99,17 @@ App.ArtistRoute = Ember.Route.extend({
     model: function(params) {
         return this.store.find('artist', params.artist_id);
     }
-})
+});
+
+App.IndexRoute = Ember.Route.extend({
+    model: function() {
+        return Ember.$.getJSON(
+            'https://api.github.com/repos/nijotz/shitstream/commits'
+        ).then(function(data) {
+            return data.splice(0, 5);
+        })
+    }
+});
 
 App.AddUrlRoute = Ember.Route.extend({
     actions: {
