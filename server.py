@@ -34,7 +34,7 @@ def mpd(func):
             except socket.error:
                 connected = False
             attempts += 1
-            time.sleep(0.25)
+            time.sleep(0.5)
 
         # Set 'mpdc' in the global context, making sure not to overwrite an
         # existing global
@@ -256,8 +256,9 @@ def del_song_from_playlist(playlist_song_code):
 @mpd
 def add_song_to_playlist(playlist_code, song_code):
     if playlist_code == 'current':
-        mpdc.addid(decode(song_code))
-        mpdc.play()
+        songid = mpdc.addid(decode(song_code))
+        if not mpdc.currentsong():
+            mpdc.playid(songid)
     else:
         mpdc.playlistadd(decode(playlist_code), decode(song_code))
 
@@ -269,11 +270,15 @@ def add_album_to_playlist(playlist_code, album_code):
     artist_name, album_name = decode(album_code).split('/-/')
     if playlist_code == 'current':
         songs = mpdc.search('album', album_name, 'artist', artist_name)
+        firstsongid = None
         for song in songs:
-            mpdc.addid(song.get('file'))
+            songid = mpdc.addid(song.get('file'))
+            if not firstsongid:
+                firstsongid = songid
+        if not mpdc.currentsong():
+            mpdc.playid(firstsongid)
     else:
         raise Exception
-    mpdc.play()
 
     return jsonify({'status': 'OK'})
 
@@ -323,8 +328,9 @@ def add_url(msg):
 
     # Add song to Queue
     emit('response', {'msg': 'Adding song to queue'})
-    mpdc.add(uri)
-    mpdc.play()
+    songid = mpdc.addid(uri)
+    if not mpdc.currentsong():
+        mpdc.playid(songid)
     emit('response', {'msg': 'Song queued'})
 
     emit('disconnect')
