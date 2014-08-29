@@ -3,6 +3,14 @@ body {
   padding-bottom: 20px;
 }
 
+.active {
+  font-weight: bold;
+}
+
+.navbar-default a:focus {
+  outline: none;
+}
+
 .navbar {
   margin-bottom: 20px;
 }
