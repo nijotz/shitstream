@@ -317,12 +317,14 @@ def add_url(msg):
 
     # Add song to MPD
     emit('response', {'msg': 'Adding song to music database'})
-    jobid = mpdc.update(uri)
+    prev_update = mpdc.stats().get('db_update')
+    job = mpdc.update(uri)
     added = False
     while not added:
         time.sleep(1)
         cur_job = mpdc.status().get('updating_db')
-        if cur_job and cur_job <= jobid:
+        last_update = mpdc.stats().get('db_update')
+        if (cur_job and cur_job <= job) or (not cur_job and prev_update == last_update):
             emit('response', {'msg': 'Music database still updating'})
         else:
             added = True
