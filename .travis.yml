@@ -10,7 +10,7 @@ before_script:
     - sudo service mpd stop
     - mkdir ~/.mpd/
     - touch ~/.mpd/database
-    - sed -i "s%^music_directory.*%music_directory \"$(pwd)/tests/fixtures/mp3/\"%" mpd.conf
+    - sed -i "s%^music_directory.*%music_directory \"$(pwd)/music/\"%" mpd.conf
     - mpd mpd.conf
 
 script: python tests/main.py
