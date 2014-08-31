@@ -4,7 +4,6 @@ import base64
 import datetime
 import socket
 import time
-from sets import Set
 from flask import Flask, jsonify, send_file
 from flask.ext.socketio import SocketIO, emit
 from lxml import html
@@ -96,8 +95,8 @@ def get_artists():
         if not artists.get(artist_code):
             artists[artist_code] = {
                 'name': artist,
-                'albums': Set(),
-                'non_album_songs': Set()
+                'albums': set(),
+                'non_album_songs': set()
             }
 
         album = song.get('album')
