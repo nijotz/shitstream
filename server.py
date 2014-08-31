@@ -12,6 +12,7 @@ from mpd import MPDClient
 import requests
 from downloaders.youtube import regex as youtube_regex,\
     download as download_youtube_url
+import settings
 
 app = Flask(__name__)
 app.debug = True
@@ -31,7 +32,7 @@ def mpd(func):
         connected = False
         while connected == False and attempts < 4:
             try:
-                mpdc.connect("store.local", 6600)  #FIXME: make configurable
+                mpdc.connect(settings.mpd_server, settings.mpd_port)  #FIXME: make configurable
                 connected = True
             except socket.error:
                 connected = False
