@@ -1,0 +1,33 @@
+{
+    "title": "shitstream Artists Schema",
+    "type": "object",
+    "properties": {
+        "artists": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "string"},
+                    "name": {"type": "string"},
+                    "albums": {
+                        "type": "array",
+                        "items": {"type": "string"}
+                    },
+                    "non_album_songs": {
+                        "type": "array",
+                        "items": {"type": "string"}
+                    }
+                },
+                "required": [
+                    "id",
+                    "name",
+                    "albums",
+                    "non_album_songs"
+                ]
+            }
+        }
+    },
+    "required": [
+        "artists"
+    ]
+}
