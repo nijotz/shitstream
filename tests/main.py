@@ -90,6 +90,8 @@ class AddURLTestCase(unittest.TestCase):
             msg = self.process_event()
             if msg['args'][0]['msg'] == 'Song added to music database':
                 added = True
+            else:
+                print msg
 
         msg = self.process_event()
         assert msg['args'][0]['msg'] == 'Adding song to queue'
