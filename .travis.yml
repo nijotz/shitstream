@@ -8,6 +8,8 @@ install: "pip install -r requirements/project.txt -r requirements/tests.txt"
 before_script:
     - sudo apt-get install -y mpd
     - sudo service mpd stop
+    - mkdir ~/.mpd/
+    - touch ~/.mpd/database
     - sed -i "s%^music_directory.*%music_directory \"$(pwd)/tests/fixtures/mp3/\"%" mpd.conf
     - mpd mpd.conf
 
