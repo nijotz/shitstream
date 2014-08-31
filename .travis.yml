@@ -13,4 +13,8 @@ before_script:
     - sed -i "s%^music_directory.*%music_directory \"$(pwd)/music/\"%" mpd.conf
     - mpd mpd.conf
 
-script: python tests/main.py
+script:
+    coverage run --source . tests/main.py
+
+after_success:
+    coveralls
