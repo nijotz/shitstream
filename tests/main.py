@@ -28,14 +28,47 @@ class MainTestCase(unittest.TestCase):
 
     def setUp(self):
         server.app.config['TESTING'] = True
-        self.app = server.app.test_client()
+        self.client = server.app.test_client()
 
     def tearDown(self):
         pass
 
     @json_schema_test('tests/fixtures/artists.schema.json')
     def test_artists_list(self):
-        return self.app.get('/api/v1.0/artists')
+        return self.client.get('/api/v1.0/artists')
+
+
+class AddURLTestCase(unittest.TestCase):
+
+    def setUp(self):
+        server.app.config['TESTING'] = True
+        self.client = server.socketio.test_client(server.app, namespace='/api/v1.0/add_url/')
+
+    def tearDown(self):
+        pass
+
+    def test_no_url(self):
+        self.client.get_received('/api/v1.0/add_url/')
+        self.client.emit('add_url', {'url':''}, namespace='/api/v1.0/add_url/')
+        received = self.client.get_received('/api/v1.0/add_url/')
+        assert received[0]['args'][0]['msg'] == 'No URL received'
+
+    def test_bad_url(self):
+        self.client.get_received('/api/v1.0/add_url/')
+        url = 'http://www.shitmusicforshitpeople.com/'
+        self.client.emit('add_url', {'url':url}, namespace='/api/v1.0/add_url/')
+
+        received = self.client.get_received('/api/v1.0/add_url/')
+        msg = received.pop(0)
+
+        assert msg['args'][0]['msg'] == 'Received URL'
+
+        if not len(received):
+            received = self.client.get_received('/api/v1.0/add_url/')
+        msg = received.pop(0)
+
+        assert msg['args'][0]['msg'] == 'URL does not appear to be valid'
+
 
 if __name__ == '__main__':
     unittest.main()
