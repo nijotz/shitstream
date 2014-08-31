@@ -2,6 +2,7 @@
 
 import base64
 import datetime
+import os
 import socket
 import time
 from flask import Flask, jsonify, send_file
@@ -292,6 +293,13 @@ def add_url():
 @socketio.on('add_url', namespace='/api/v1.0/add_url/')
 @mpd
 def add_url(msg):
+    in_dir = settings.download_dir
+    music_dir = settings.mpd_dir
+
+    if not msg:
+        emit('response', {'msg': 'No URL received'})
+        return
+
     url = msg.get('url', None)
     if not url:
         emit('response', {'msg': 'No URL received'})
@@ -307,13 +315,14 @@ def add_url(msg):
     emit('response', {'msg': 'Starting youtube-dl'})
 
     try:
-        filename = download_youtube_url(url, 'music/in', emit)
+        filename = download_youtube_url(url, in_dir, emit)
     except Exception as exception:
         emit('response', {'msg': str(exception)})
         emit('disconnect')
         return
 
-    uri = filename.replace('music/', '')  #FIXME (music/in)
+    common = os.path.commonprefix(in_dir, music_dir)
+    uri = filename.replace(common, '')
 
     # Add song to MPD
     emit('response', {'msg': 'Adding song to music database'})
