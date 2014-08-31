@@ -321,20 +321,20 @@ def add_url(msg):
         emit('disconnect')
         return
 
-    common = os.path.commonprefix(in_dir, music_dir)
+    common = os.path.commonprefix([in_dir, music_dir])
     uri = filename.replace(common, '')
+    if uri[0] == '/':
+        uri = uri[1:]
 
     # Add song to MPD
     emit('response', {'msg': 'Adding song to music database'})
-    prev_update = mpdc.stats().get('db_update')
     job = mpdc.update(uri)
     added = False
     while not added:
-        time.sleep(1)
         cur_job = mpdc.status().get('updating_db')
-        last_update = mpdc.stats().get('db_update')
-        if (cur_job and cur_job <= job) or (not cur_job and prev_update == last_update):
+        if (cur_job and cur_job <= job):
             emit('response', {'msg': 'Music database still updating'})
+            time.sleep(1)
         else:
             added = True
     emit('response', {'msg': 'Song added to music database'})
