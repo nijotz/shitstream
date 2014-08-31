@@ -5,4 +5,5 @@ ipython==2.1.0
 lxml==3.3.5
 pexpect==3.3
 python-mpd2==0.5.3
+requests==2.3.0
 youtube-dl==2014.08.24.6
