@@ -41,6 +41,10 @@ class MainTestCase(unittest.TestCase):
     def test_artist(self):
         return self.client.get('/api/v1.0/artists/JVSXE6TCN5XGK4Q-')
 
+    @json_schema_test('tests/fixtures/album.schema.json')
+    def test_album(self):
+        return self.client.get('/api/v1.0/albums/JVSXE6TCN5XGK4RPFUXWIYLUEBXG62LTMUQHI2DP')
+
 
 class AddURLTestCase(unittest.TestCase):
 

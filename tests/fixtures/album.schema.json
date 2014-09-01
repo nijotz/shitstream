@@ -1,0 +1,27 @@
+{
+    "title": "shitstream Album Schema",
+    "type": "object",
+    "properties": {
+        "album": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string"},
+                "name": {"type": "string"},
+                "artist": {"type": "string"},
+                "songs": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "artist",
+                "songs"
+            ]
+        }
+    },
+    "required": [
+        "album"
+    ]
+}
