@@ -34,8 +34,12 @@ class MainTestCase(unittest.TestCase):
         pass
 
     @json_schema_test('tests/fixtures/artists.schema.json')
-    def test_artists_list(self):
+    def test_artists(self):
         return self.client.get('/api/v1.0/artists')
+
+    @json_schema_test('tests/fixtures/artist.schema.json')
+    def test_artist(self):
+        return self.client.get('/api/v1.0/artists/JVSXE6TCN5XGK4Q-')
 
 
 class AddURLTestCase(unittest.TestCase):

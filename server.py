@@ -133,7 +133,7 @@ def get_artist_code(artist_name):
 def get_artist(artist_code):
 
     artist_name = decode(artist_code)
-    album_names = Set()
+    album_names = set()
     non_album_songs = []
     artist_songs = mpdc.search('artist', artist_name)
 
