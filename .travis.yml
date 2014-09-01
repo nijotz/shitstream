@@ -14,6 +14,7 @@ before_script:
     - sed -i "s%^music_directory.*%music_directory \"$(pwd)/music/\"%" mpd.conf
     - mpd mpd.conf
     - npm install karma
+    - export PATH=node_modules/.bin:${PATH}
 
 script:
     - coverage run --source . tests/main.py
