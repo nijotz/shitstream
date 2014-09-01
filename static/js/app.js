@@ -105,7 +105,9 @@ App.ApplicationRoute = Ember.Route.extend({
     setupController: function(controller) {
         Ember.$.getJSON('/api/v1.0/listeners').
         then(function(data) {
-            controller.set('listeners', data['listeners']);
+            Ember.run(function() {
+                controller.set('listeners', data['listeners']);
+            });
         })
     }
 });
@@ -115,7 +117,9 @@ App.IndexRoute = Ember.Route.extend({
         return Ember.$.getJSON(
             'https://api.github.com/repos/nijotz/shitstream/commits'
         ).then(function(data) {
-            return data.splice(0, 5);
+            return Ember.run(function() {
+                return data.splice(0, 5);
+            });
         })
     }
 });
