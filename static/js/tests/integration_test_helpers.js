@@ -1,5 +1,13 @@
-document.write('<div id="ember-testing-container"><div id="ember-testing"></div></div>');
-
-App.rootElement = '#ember-testing';
 App.setupForTesting();
 App.injectTestHelpers();
+
+function stubEndpoint(url, json) {
+    $.mockjax({
+        url: url,
+        dataType: 'json',
+        responseText: json
+    });
+}
+
+$.mockjaxSettings.logging = false;
+$.mockjaxSettings.responseTime = 0;
