@@ -1,0 +1,2102 @@
+[
+  {
+    "sha": "c6df0cb6da844916f1870782eb3790a09d09f6f8",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T03:34:52Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T03:34:52Z"
+      },
+      "message": "Added a second song to fixtures",
+      "tree": {
+        "sha": "f9f6c543fad9757036e2cfc4252faaee557659bf",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/f9f6c543fad9757036e2cfc4252faaee557659bf"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/c6df0cb6da844916f1870782eb3790a09d09f6f8",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/c6df0cb6da844916f1870782eb3790a09d09f6f8",
+    "html_url": "https://github.com/nijotz/shitstream/commit/c6df0cb6da844916f1870782eb3790a09d09f6f8",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/c6df0cb6da844916f1870782eb3790a09d09f6f8/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "c91e0f5a82d6d9da329d1686a5a7431243e29726",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/c91e0f5a82d6d9da329d1686a5a7431243e29726",
+        "html_url": "https://github.com/nijotz/shitstream/commit/c91e0f5a82d6d9da329d1686a5a7431243e29726"
+      }
+    ]
+  },
+  {
+    "sha": "c91e0f5a82d6d9da329d1686a5a7431243e29726",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T02:35:19Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T02:35:19Z"
+      },
+      "message": "Fixed queue screen erroring when nothing is playing",
+      "tree": {
+        "sha": "00c6a7c982fb103abfac7e7d5cfe6e40a4724cc6",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/00c6a7c982fb103abfac7e7d5cfe6e40a4724cc6"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/c91e0f5a82d6d9da329d1686a5a7431243e29726",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/c91e0f5a82d6d9da329d1686a5a7431243e29726",
+    "html_url": "https://github.com/nijotz/shitstream/commit/c91e0f5a82d6d9da329d1686a5a7431243e29726",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/c91e0f5a82d6d9da329d1686a5a7431243e29726/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9c3c0adcdce9e1ffc25ea70a34e9395aae2ffa63",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/9c3c0adcdce9e1ffc25ea70a34e9395aae2ffa63",
+        "html_url": "https://github.com/nijotz/shitstream/commit/9c3c0adcdce9e1ffc25ea70a34e9395aae2ffa63"
+      }
+    ]
+  },
+  {
+    "sha": "9c3c0adcdce9e1ffc25ea70a34e9395aae2ffa63",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T02:04:17Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T02:04:17Z"
+      },
+      "message": "Return integer for song pos",
+      "tree": {
+        "sha": "d82cfe9c5bd79cc5efeb16ea660c3f9a57da8d96",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/d82cfe9c5bd79cc5efeb16ea660c3f9a57da8d96"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/9c3c0adcdce9e1ffc25ea70a34e9395aae2ffa63",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/9c3c0adcdce9e1ffc25ea70a34e9395aae2ffa63",
+    "html_url": "https://github.com/nijotz/shitstream/commit/9c3c0adcdce9e1ffc25ea70a34e9395aae2ffa63",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/9c3c0adcdce9e1ffc25ea70a34e9395aae2ffa63/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "7a6c9fa6a9eeef73e7f448050ac447274c5cfefc",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/7a6c9fa6a9eeef73e7f448050ac447274c5cfefc",
+        "html_url": "https://github.com/nijotz/shitstream/commit/7a6c9fa6a9eeef73e7f448050ac447274c5cfefc"
+      }
+    ]
+  },
+  {
+    "sha": "7a6c9fa6a9eeef73e7f448050ac447274c5cfefc",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T01:48:27Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T01:54:29Z"
+      },
+      "message": "Added Queue test",
+      "tree": {
+        "sha": "d880dad64974bad2b29624e14e43c0929aa64aa9",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/d880dad64974bad2b29624e14e43c0929aa64aa9"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/7a6c9fa6a9eeef73e7f448050ac447274c5cfefc",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/7a6c9fa6a9eeef73e7f448050ac447274c5cfefc",
+    "html_url": "https://github.com/nijotz/shitstream/commit/7a6c9fa6a9eeef73e7f448050ac447274c5cfefc",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/7a6c9fa6a9eeef73e7f448050ac447274c5cfefc/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "905d2c74878b7ad7ff08adce11aa0c2d08cd5ac7",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/905d2c74878b7ad7ff08adce11aa0c2d08cd5ac7",
+        "html_url": "https://github.com/nijotz/shitstream/commit/905d2c74878b7ad7ff08adce11aa0c2d08cd5ac7"
+      }
+    ]
+  },
+  {
+    "sha": "905d2c74878b7ad7ff08adce11aa0c2d08cd5ac7",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T01:40:18Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T01:40:18Z"
+      },
+      "message": "Added Album test",
+      "tree": {
+        "sha": "e554884dc9aa9e2e9dc78770e035d5b355a54b69",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/e554884dc9aa9e2e9dc78770e035d5b355a54b69"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/905d2c74878b7ad7ff08adce11aa0c2d08cd5ac7",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/905d2c74878b7ad7ff08adce11aa0c2d08cd5ac7",
+    "html_url": "https://github.com/nijotz/shitstream/commit/905d2c74878b7ad7ff08adce11aa0c2d08cd5ac7",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/905d2c74878b7ad7ff08adce11aa0c2d08cd5ac7/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "cb2e8092ebcac6d08d46630604b3c59249a93297",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/cb2e8092ebcac6d08d46630604b3c59249a93297",
+        "html_url": "https://github.com/nijotz/shitstream/commit/cb2e8092ebcac6d08d46630604b3c59249a93297"
+      }
+    ]
+  },
+  {
+    "sha": "cb2e8092ebcac6d08d46630604b3c59249a93297",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T01:18:55Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T01:25:00Z"
+      },
+      "message": "Added Artist test",
+      "tree": {
+        "sha": "c2d56364deed0de987216dbae7318b60f6cdc454",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/c2d56364deed0de987216dbae7318b60f6cdc454"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/cb2e8092ebcac6d08d46630604b3c59249a93297",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/cb2e8092ebcac6d08d46630604b3c59249a93297",
+    "html_url": "https://github.com/nijotz/shitstream/commit/cb2e8092ebcac6d08d46630604b3c59249a93297",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/cb2e8092ebcac6d08d46630604b3c59249a93297/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e59dd11abeaa7d219aaddb76428bb9baa5044bea",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/e59dd11abeaa7d219aaddb76428bb9baa5044bea",
+        "html_url": "https://github.com/nijotz/shitstream/commit/e59dd11abeaa7d219aaddb76428bb9baa5044bea"
+      }
+    ]
+  },
+  {
+    "sha": "e59dd11abeaa7d219aaddb76428bb9baa5044bea",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T01:01:49Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T01:06:44Z"
+      },
+      "message": "Increase coverage by actually having artists to list",
+      "tree": {
+        "sha": "ff3a42de52d543ab77283a708202e9873076f13b",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/ff3a42de52d543ab77283a708202e9873076f13b"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/e59dd11abeaa7d219aaddb76428bb9baa5044bea",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/e59dd11abeaa7d219aaddb76428bb9baa5044bea",
+    "html_url": "https://github.com/nijotz/shitstream/commit/e59dd11abeaa7d219aaddb76428bb9baa5044bea",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/e59dd11abeaa7d219aaddb76428bb9baa5044bea/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "27ae55d2a6c9518e4026ff5ca348fc7a9d0d95c4",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/27ae55d2a6c9518e4026ff5ca348fc7a9d0d95c4",
+        "html_url": "https://github.com/nijotz/shitstream/commit/27ae55d2a6c9518e4026ff5ca348fc7a9d0d95c4"
+      }
+    ]
+  },
+  {
+    "sha": "27ae55d2a6c9518e4026ff5ca348fc7a9d0d95c4",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T00:53:46Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T00:53:46Z"
+      },
+      "message": "2.6 is broken on travis-ci, but working locally..",
+      "tree": {
+        "sha": "8d6a4632a65f355270f2e1edcb5038c5e7ddf313",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/8d6a4632a65f355270f2e1edcb5038c5e7ddf313"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/27ae55d2a6c9518e4026ff5ca348fc7a9d0d95c4",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/27ae55d2a6c9518e4026ff5ca348fc7a9d0d95c4",
+    "html_url": "https://github.com/nijotz/shitstream/commit/27ae55d2a6c9518e4026ff5ca348fc7a9d0d95c4",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/27ae55d2a6c9518e4026ff5ca348fc7a9d0d95c4/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "980524de34fe9ba509eddd5e261a7a0b6b88593b",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/980524de34fe9ba509eddd5e261a7a0b6b88593b",
+        "html_url": "https://github.com/nijotz/shitstream/commit/980524de34fe9ba509eddd5e261a7a0b6b88593b"
+      }
+    ]
+  },
+  {
+    "sha": "980524de34fe9ba509eddd5e261a7a0b6b88593b",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T00:15:40Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-09-01T00:52:16Z"
+      },
+      "message": "Need mp3 codecs",
+      "tree": {
+        "sha": "98208a5778bc87bc2a9aa34a6c8549a45715ab48",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/98208a5778bc87bc2a9aa34a6c8549a45715ab48"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/980524de34fe9ba509eddd5e261a7a0b6b88593b",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/980524de34fe9ba509eddd5e261a7a0b6b88593b",
+    "html_url": "https://github.com/nijotz/shitstream/commit/980524de34fe9ba509eddd5e261a7a0b6b88593b",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/980524de34fe9ba509eddd5e261a7a0b6b88593b/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "80612015669a182139fbb4a1be0d9936fa45da2b",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/80612015669a182139fbb4a1be0d9936fa45da2b",
+        "html_url": "https://github.com/nijotz/shitstream/commit/80612015669a182139fbb4a1be0d9936fa45da2b"
+      }
+    ]
+  },
+  {
+    "sha": "80612015669a182139fbb4a1be0d9936fa45da2b",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T22:25:30Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T22:25:30Z"
+      },
+      "message": "Ignore coverage file",
+      "tree": {
+        "sha": "daa21c4df32abb19d7594b945f5d6b4e4be788d0",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/daa21c4df32abb19d7594b945f5d6b4e4be788d0"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/80612015669a182139fbb4a1be0d9936fa45da2b",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/80612015669a182139fbb4a1be0d9936fa45da2b",
+    "html_url": "https://github.com/nijotz/shitstream/commit/80612015669a182139fbb4a1be0d9936fa45da2b",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/80612015669a182139fbb4a1be0d9936fa45da2b/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "392aa7ffd4ef2dcf24148fe49bd2a5db8ed25dc8",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/392aa7ffd4ef2dcf24148fe49bd2a5db8ed25dc8",
+        "html_url": "https://github.com/nijotz/shitstream/commit/392aa7ffd4ef2dcf24148fe49bd2a5db8ed25dc8"
+      }
+    ]
+  },
+  {
+    "sha": "392aa7ffd4ef2dcf24148fe49bd2a5db8ed25dc8",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T22:07:07Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T22:07:19Z"
+      },
+      "message": "libav-tools is needed for youtube-dl tests",
+      "tree": {
+        "sha": "cb92d21f1988653f10e85cbd06de5c0127f3889a",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/cb92d21f1988653f10e85cbd06de5c0127f3889a"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/392aa7ffd4ef2dcf24148fe49bd2a5db8ed25dc8",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/392aa7ffd4ef2dcf24148fe49bd2a5db8ed25dc8",
+    "html_url": "https://github.com/nijotz/shitstream/commit/392aa7ffd4ef2dcf24148fe49bd2a5db8ed25dc8",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/392aa7ffd4ef2dcf24148fe49bd2a5db8ed25dc8/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "98d79c5c19a7a64125416bfefd2a2593bcc467e8",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/98d79c5c19a7a64125416bfefd2a2593bcc467e8",
+        "html_url": "https://github.com/nijotz/shitstream/commit/98d79c5c19a7a64125416bfefd2a2593bcc467e8"
+      }
+    ]
+  },
+  {
+    "sha": "98d79c5c19a7a64125416bfefd2a2593bcc467e8",
+    "commit": {
+      "author": {
+        "name": "nijotz",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T10:42:43Z"
+      },
+      "committer": {
+        "name": "nijotz",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T10:42:43Z"
+      },
+      "message": "Update README.md",
+      "tree": {
+        "sha": "3015b7ab3b96a6ca9d33043543d8c609be9db456",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/3015b7ab3b96a6ca9d33043543d8c609be9db456"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/98d79c5c19a7a64125416bfefd2a2593bcc467e8",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/98d79c5c19a7a64125416bfefd2a2593bcc467e8",
+    "html_url": "https://github.com/nijotz/shitstream/commit/98d79c5c19a7a64125416bfefd2a2593bcc467e8",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/98d79c5c19a7a64125416bfefd2a2593bcc467e8/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "631edcde099e4f8c8920240ef1d5a79d56007f82",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/631edcde099e4f8c8920240ef1d5a79d56007f82",
+        "html_url": "https://github.com/nijotz/shitstream/commit/631edcde099e4f8c8920240ef1d5a79d56007f82"
+      }
+    ]
+  },
+  {
+    "sha": "631edcde099e4f8c8920240ef1d5a79d56007f82",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T10:38:37Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T10:38:37Z"
+      },
+      "message": "Try and debug travis-ci failures",
+      "tree": {
+        "sha": "4d93780a3fb2c1c61fadb4cd8e56cd88ce558ab5",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/4d93780a3fb2c1c61fadb4cd8e56cd88ce558ab5"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/631edcde099e4f8c8920240ef1d5a79d56007f82",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/631edcde099e4f8c8920240ef1d5a79d56007f82",
+    "html_url": "https://github.com/nijotz/shitstream/commit/631edcde099e4f8c8920240ef1d5a79d56007f82",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/631edcde099e4f8c8920240ef1d5a79d56007f82/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "226e7635f10aaab6c21dbcadf2771c19d6ac3ff4",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/226e7635f10aaab6c21dbcadf2771c19d6ac3ff4",
+        "html_url": "https://github.com/nijotz/shitstream/commit/226e7635f10aaab6c21dbcadf2771c19d6ac3ff4"
+      }
+    ]
+  },
+  {
+    "sha": "226e7635f10aaab6c21dbcadf2771c19d6ac3ff4",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T10:16:12Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T10:16:12Z"
+      },
+      "message": "Added coveralls support",
+      "tree": {
+        "sha": "35f853a247777953d30d9b07cd801df954a8bc92",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/35f853a247777953d30d9b07cd801df954a8bc92"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/226e7635f10aaab6c21dbcadf2771c19d6ac3ff4",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/226e7635f10aaab6c21dbcadf2771c19d6ac3ff4",
+    "html_url": "https://github.com/nijotz/shitstream/commit/226e7635f10aaab6c21dbcadf2771c19d6ac3ff4",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/226e7635f10aaab6c21dbcadf2771c19d6ac3ff4/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "003b78867bc163434beea1c447b213cf8b46846e",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/003b78867bc163434beea1c447b213cf8b46846e",
+        "html_url": "https://github.com/nijotz/shitstream/commit/003b78867bc163434beea1c447b213cf8b46846e"
+      }
+    ]
+  },
+  {
+    "sha": "003b78867bc163434beea1c447b213cf8b46846e",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T09:58:43Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T09:58:46Z"
+      },
+      "message": "Fixed music directory for tests",
+      "tree": {
+        "sha": "6d41a0765a5a9ac592ad6121fc1910b458aa770a",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/6d41a0765a5a9ac592ad6121fc1910b458aa770a"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/003b78867bc163434beea1c447b213cf8b46846e",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/003b78867bc163434beea1c447b213cf8b46846e",
+    "html_url": "https://github.com/nijotz/shitstream/commit/003b78867bc163434beea1c447b213cf8b46846e",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/003b78867bc163434beea1c447b213cf8b46846e/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "ee4d3b07544d6affa3a59aa81016e333e4390c83",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/ee4d3b07544d6affa3a59aa81016e333e4390c83",
+        "html_url": "https://github.com/nijotz/shitstream/commit/ee4d3b07544d6affa3a59aa81016e333e4390c83"
+      }
+    ]
+  },
+  {
+    "sha": "ee4d3b07544d6affa3a59aa81016e333e4390c83",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T09:36:55Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T09:36:55Z"
+      },
+      "message": "Test successful Add URL",
+      "tree": {
+        "sha": "73233c2d786e714eab692f49387e9a7f96b95ecb",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/73233c2d786e714eab692f49387e9a7f96b95ecb"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/ee4d3b07544d6affa3a59aa81016e333e4390c83",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/ee4d3b07544d6affa3a59aa81016e333e4390c83",
+    "html_url": "https://github.com/nijotz/shitstream/commit/ee4d3b07544d6affa3a59aa81016e333e4390c83",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/ee4d3b07544d6affa3a59aa81016e333e4390c83/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9a7ea5cfbb21ade8a5ada5abf29396d9277056ca",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/9a7ea5cfbb21ade8a5ada5abf29396d9277056ca",
+        "html_url": "https://github.com/nijotz/shitstream/commit/9a7ea5cfbb21ade8a5ada5abf29396d9277056ca"
+      }
+    ]
+  },
+  {
+    "sha": "9a7ea5cfbb21ade8a5ada5abf29396d9277056ca",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T08:27:45Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T08:27:45Z"
+      },
+      "message": "Added README",
+      "tree": {
+        "sha": "47771d3a2c431c7c7e04877184bfac837924f1e1",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/47771d3a2c431c7c7e04877184bfac837924f1e1"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/9a7ea5cfbb21ade8a5ada5abf29396d9277056ca",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/9a7ea5cfbb21ade8a5ada5abf29396d9277056ca",
+    "html_url": "https://github.com/nijotz/shitstream/commit/9a7ea5cfbb21ade8a5ada5abf29396d9277056ca",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/9a7ea5cfbb21ade8a5ada5abf29396d9277056ca/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "3a112ce0b70cd24b9aa01c62a15e1f3a733abb50",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/3a112ce0b70cd24b9aa01c62a15e1f3a733abb50",
+        "html_url": "https://github.com/nijotz/shitstream/commit/3a112ce0b70cd24b9aa01c62a15e1f3a733abb50"
+      }
+    ]
+  },
+  {
+    "sha": "3a112ce0b70cd24b9aa01c62a15e1f3a733abb50",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T08:20:46Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T08:21:02Z"
+      },
+      "message": "Added tests for Add URL",
+      "tree": {
+        "sha": "93f2aacffd34026991b8c1418e427a04e251ac4c",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/93f2aacffd34026991b8c1418e427a04e251ac4c"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/3a112ce0b70cd24b9aa01c62a15e1f3a733abb50",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/3a112ce0b70cd24b9aa01c62a15e1f3a733abb50",
+    "html_url": "https://github.com/nijotz/shitstream/commit/3a112ce0b70cd24b9aa01c62a15e1f3a733abb50",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/3a112ce0b70cd24b9aa01c62a15e1f3a733abb50/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "df85a9af079695afb21cd8e8fb8391675152ef08",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/df85a9af079695afb21cd8e8fb8391675152ef08",
+        "html_url": "https://github.com/nijotz/shitstream/commit/df85a9af079695afb21cd8e8fb8391675152ef08"
+      }
+    ]
+  },
+  {
+    "sha": "df85a9af079695afb21cd8e8fb8391675152ef08",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T08:20:25Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T08:20:25Z"
+      },
+      "message": "Made MPD/download directories configurable",
+      "tree": {
+        "sha": "706da11a34d4350af8b01ea25974b238523e43e7",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/706da11a34d4350af8b01ea25974b238523e43e7"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/df85a9af079695afb21cd8e8fb8391675152ef08",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/df85a9af079695afb21cd8e8fb8391675152ef08",
+    "html_url": "https://github.com/nijotz/shitstream/commit/df85a9af079695afb21cd8e8fb8391675152ef08",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/df85a9af079695afb21cd8e8fb8391675152ef08/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "7ffa85afd5b1009794d30c57a5b96500288a1d98",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/7ffa85afd5b1009794d30c57a5b96500288a1d98",
+        "html_url": "https://github.com/nijotz/shitstream/commit/7ffa85afd5b1009794d30c57a5b96500288a1d98"
+      }
+    ]
+  },
+  {
+    "sha": "7ffa85afd5b1009794d30c57a5b96500288a1d98",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T08:17:12Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T08:17:12Z"
+      },
+      "message": "I have a bad habit of using the deprecated sets",
+      "tree": {
+        "sha": "6f85bd6491c7317e15ff5f34d3c57d8bbe7fde12",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/6f85bd6491c7317e15ff5f34d3c57d8bbe7fde12"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/7ffa85afd5b1009794d30c57a5b96500288a1d98",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/7ffa85afd5b1009794d30c57a5b96500288a1d98",
+    "html_url": "https://github.com/nijotz/shitstream/commit/7ffa85afd5b1009794d30c57a5b96500288a1d98",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/7ffa85afd5b1009794d30c57a5b96500288a1d98/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "31fa240eee0103f2a2651bed282ad465cc8235db",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/31fa240eee0103f2a2651bed282ad465cc8235db",
+        "html_url": "https://github.com/nijotz/shitstream/commit/31fa240eee0103f2a2651bed282ad465cc8235db"
+      }
+    ]
+  },
+  {
+    "sha": "31fa240eee0103f2a2651bed282ad465cc8235db",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:50:07Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:50:07Z"
+      },
+      "message": "Added requests to requirements",
+      "tree": {
+        "sha": "21378a813044939a7a73a26725ac3eac94a37ed9",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/21378a813044939a7a73a26725ac3eac94a37ed9"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/31fa240eee0103f2a2651bed282ad465cc8235db",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/31fa240eee0103f2a2651bed282ad465cc8235db",
+    "html_url": "https://github.com/nijotz/shitstream/commit/31fa240eee0103f2a2651bed282ad465cc8235db",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/31fa240eee0103f2a2651bed282ad465cc8235db/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "4962d8a8869d81140c96a156229ce86f03a1f0ca",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/4962d8a8869d81140c96a156229ce86f03a1f0ca",
+        "html_url": "https://github.com/nijotz/shitstream/commit/4962d8a8869d81140c96a156229ce86f03a1f0ca"
+      }
+    ]
+  },
+  {
+    "sha": "4962d8a8869d81140c96a156229ce86f03a1f0ca",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:43:50Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:43:50Z"
+      },
+      "message": "Make mpd database for tests",
+      "tree": {
+        "sha": "36efca7379a4bb52d0993fec2bd86d3e2bfd2c27",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/36efca7379a4bb52d0993fec2bd86d3e2bfd2c27"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/4962d8a8869d81140c96a156229ce86f03a1f0ca",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/4962d8a8869d81140c96a156229ce86f03a1f0ca",
+    "html_url": "https://github.com/nijotz/shitstream/commit/4962d8a8869d81140c96a156229ce86f03a1f0ca",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/4962d8a8869d81140c96a156229ce86f03a1f0ca/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0650eebacbf044b4dd5b88903da8b4c2a46aeecc",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/0650eebacbf044b4dd5b88903da8b4c2a46aeecc",
+        "html_url": "https://github.com/nijotz/shitstream/commit/0650eebacbf044b4dd5b88903da8b4c2a46aeecc"
+      }
+    ]
+  },
+  {
+    "sha": "0650eebacbf044b4dd5b88903da8b4c2a46aeecc",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:38:33Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:38:33Z"
+      },
+      "message": "Stop mpd service during tests",
+      "tree": {
+        "sha": "3004c43d320a4f37cd604195d3b0fd08fc4d8380",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/3004c43d320a4f37cd604195d3b0fd08fc4d8380"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/0650eebacbf044b4dd5b88903da8b4c2a46aeecc",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/0650eebacbf044b4dd5b88903da8b4c2a46aeecc",
+    "html_url": "https://github.com/nijotz/shitstream/commit/0650eebacbf044b4dd5b88903da8b4c2a46aeecc",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/0650eebacbf044b4dd5b88903da8b4c2a46aeecc/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "423e8d3bc13efcf78af27561fba3c467497d800f",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/423e8d3bc13efcf78af27561fba3c467497d800f",
+        "html_url": "https://github.com/nijotz/shitstream/commit/423e8d3bc13efcf78af27561fba3c467497d800f"
+      }
+    ]
+  },
+  {
+    "sha": "423e8d3bc13efcf78af27561fba3c467497d800f",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:33:14Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:33:14Z"
+      },
+      "message": "Fixed quoting in sed command",
+      "tree": {
+        "sha": "d2ea12a00e1031238a8b6bfe6a6b4a567912e4ed",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/d2ea12a00e1031238a8b6bfe6a6b4a567912e4ed"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/423e8d3bc13efcf78af27561fba3c467497d800f",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/423e8d3bc13efcf78af27561fba3c467497d800f",
+    "html_url": "https://github.com/nijotz/shitstream/commit/423e8d3bc13efcf78af27561fba3c467497d800f",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/423e8d3bc13efcf78af27561fba3c467497d800f/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0c28e87e64f1e49d71fef3df66a3e3d47a824ee9",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/0c28e87e64f1e49d71fef3df66a3e3d47a824ee9",
+        "html_url": "https://github.com/nijotz/shitstream/commit/0c28e87e64f1e49d71fef3df66a3e3d47a824ee9"
+      }
+    ]
+  },
+  {
+    "sha": "0c28e87e64f1e49d71fef3df66a3e3d47a824ee9",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:24:53Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:27:25Z"
+      },
+      "message": "Updated travis-ci config",
+      "tree": {
+        "sha": "b4ac7ae081b9a60a040c5ac16eae930f4921349a",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/b4ac7ae081b9a60a040c5ac16eae930f4921349a"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/0c28e87e64f1e49d71fef3df66a3e3d47a824ee9",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/0c28e87e64f1e49d71fef3df66a3e3d47a824ee9",
+    "html_url": "https://github.com/nijotz/shitstream/commit/0c28e87e64f1e49d71fef3df66a3e3d47a824ee9",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/0c28e87e64f1e49d71fef3df66a3e3d47a824ee9/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "d43594399423130df05bbbef36f1fcbea5b369fa",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/d43594399423130df05bbbef36f1fcbea5b369fa",
+        "html_url": "https://github.com/nijotz/shitstream/commit/d43594399423130df05bbbef36f1fcbea5b369fa"
+      }
+    ]
+  },
+  {
+    "sha": "d43594399423130df05bbbef36f1fcbea5b369fa",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:19:47Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:19:47Z"
+      },
+      "message": "Added a simple backend test",
+      "tree": {
+        "sha": "b58e86954079e639ca19bfd00eccdae86793e54b",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/b58e86954079e639ca19bfd00eccdae86793e54b"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/d43594399423130df05bbbef36f1fcbea5b369fa",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/d43594399423130df05bbbef36f1fcbea5b369fa",
+    "html_url": "https://github.com/nijotz/shitstream/commit/d43594399423130df05bbbef36f1fcbea5b369fa",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/d43594399423130df05bbbef36f1fcbea5b369fa/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "a12f4d42c1763cfd0512967e921497ea94f4a4a6",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/a12f4d42c1763cfd0512967e921497ea94f4a4a6",
+        "html_url": "https://github.com/nijotz/shitstream/commit/a12f4d42c1763cfd0512967e921497ea94f4a4a6"
+      }
+    ]
+  },
+  {
+    "sha": "a12f4d42c1763cfd0512967e921497ea94f4a4a6",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:18:46Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:18:46Z"
+      },
+      "message": "Ignore settings file",
+      "tree": {
+        "sha": "2fe24457a63ad84219bbfd804ebd3c295a9b0c30",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/2fe24457a63ad84219bbfd804ebd3c295a9b0c30"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/a12f4d42c1763cfd0512967e921497ea94f4a4a6",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/a12f4d42c1763cfd0512967e921497ea94f4a4a6",
+    "html_url": "https://github.com/nijotz/shitstream/commit/a12f4d42c1763cfd0512967e921497ea94f4a4a6",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/a12f4d42c1763cfd0512967e921497ea94f4a4a6/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9a146b1aea3e4dfcd5d51a8c5e246967ff0109af",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/9a146b1aea3e4dfcd5d51a8c5e246967ff0109af",
+        "html_url": "https://github.com/nijotz/shitstream/commit/9a146b1aea3e4dfcd5d51a8c5e246967ff0109af"
+      }
+    ]
+  },
+  {
+    "sha": "9a146b1aea3e4dfcd5d51a8c5e246967ff0109af",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:18:20Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:18:20Z"
+      },
+      "message": "Very simple settings module",
+      "tree": {
+        "sha": "85f73abe3db20f520e86b2a2ad410213a2161e0c",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/85f73abe3db20f520e86b2a2ad410213a2161e0c"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/9a146b1aea3e4dfcd5d51a8c5e246967ff0109af",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/9a146b1aea3e4dfcd5d51a8c5e246967ff0109af",
+    "html_url": "https://github.com/nijotz/shitstream/commit/9a146b1aea3e4dfcd5d51a8c5e246967ff0109af",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/9a146b1aea3e4dfcd5d51a8c5e246967ff0109af/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "da975feb642cb3bad69aeec5e20d3884f227f225",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/da975feb642cb3bad69aeec5e20d3884f227f225",
+        "html_url": "https://github.com/nijotz/shitstream/commit/da975feb642cb3bad69aeec5e20d3884f227f225"
+      }
+    ]
+  },
+  {
+    "sha": "da975feb642cb3bad69aeec5e20d3884f227f225",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:17:51Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-31T06:17:51Z"
+      },
+      "message": "Made testing requirements separate from project requirements",
+      "tree": {
+        "sha": "93bd72955047c19b428ac25303285819536c98b0",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/93bd72955047c19b428ac25303285819536c98b0"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/da975feb642cb3bad69aeec5e20d3884f227f225",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/da975feb642cb3bad69aeec5e20d3884f227f225",
+    "html_url": "https://github.com/nijotz/shitstream/commit/da975feb642cb3bad69aeec5e20d3884f227f225",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/da975feb642cb3bad69aeec5e20d3884f227f225/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "0c03fe3f05baf2f11881bd0939b3b2c0bfbf36ce",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/0c03fe3f05baf2f11881bd0939b3b2c0bfbf36ce",
+        "html_url": "https://github.com/nijotz/shitstream/commit/0c03fe3f05baf2f11881bd0939b3b2c0bfbf36ce"
+      }
+    ]
+  },
+  {
+    "sha": "0c03fe3f05baf2f11881bd0939b3b2c0bfbf36ce",
+    "commit": {
+      "author": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-29T23:46:19Z"
+      },
+      "committer": {
+        "name": "Nick Tzaperas",
+        "email": "nick@nijotz.com",
+        "date": "2014-08-29T23:46:19Z"
+      },
+      "message": "Inital setup of karma/qunit tests",
+      "tree": {
+        "sha": "21f1568f7c934212576268b10a4c44c689e976c1",
+        "url": "https://api.github.com/repos/nijotz/shitstream/git/trees/21f1568f7c934212576268b10a4c44c689e976c1"
+      },
+      "url": "https://api.github.com/repos/nijotz/shitstream/git/commits/0c03fe3f05baf2f11881bd0939b3b2c0bfbf36ce",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/nijotz/shitstream/commits/0c03fe3f05baf2f11881bd0939b3b2c0bfbf36ce",
+    "html_url": "https://github.com/nijotz/shitstream/commit/0c03fe3f05baf2f11881bd0939b3b2c0bfbf36ce",
+    "comments_url": "https://api.github.com/repos/nijotz/shitstream/commits/0c03fe3f05baf2f11881bd0939b3b2c0bfbf36ce/comments",
+    "author": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "nijotz",
+      "id": 398399,
+      "avatar_url": "https://avatars.githubusercontent.com/u/398399?v=2",
+      "gravatar_id": "b000ad23cd2a77528f4cbb1aa2bea215",
+      "url": "https://api.github.com/users/nijotz",
+      "html_url": "https://github.com/nijotz",
+      "followers_url": "https://api.github.com/users/nijotz/followers",
+      "following_url": "https://api.github.com/users/nijotz/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nijotz/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nijotz/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nijotz/subscriptions",
+      "organizations_url": "https://api.github.com/users/nijotz/orgs",
+      "repos_url": "https://api.github.com/users/nijotz/repos",
+      "events_url": "https://api.github.com/users/nijotz/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nijotz/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "9a9b5b627b5edfcbc7f4beabae7accb2e30a3880",
+        "url": "https://api.github.com/repos/nijotz/shitstream/commits/9a9b5b627b5edfcbc7f4beabae7accb2e30a3880",
+        "html_url": "https://github.com/nijotz/shitstream/commit/9a9b5b627b5edfcbc7f4beabae7accb2e30a3880"
+      }
+    ]
+  }
+]
