@@ -1,0 +1,26 @@
+{
+    "title": "shitstream Playlist Schema",
+    "type": "object",
+    "properties": {
+        "playlist": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string"},
+                "songs": {
+                    "type": "array",
+                    "items": {"type": "string"}
+                },
+                "current_song_pos": {"type": ["integer", "null"]}
+            },
+            "required": [
+                "id",
+                "songs"
+            ]
+        },
+
+        "playlist_songs": {"type": "array"}
+    },
+    "required": [
+        "playlist"
+    ]
+}
