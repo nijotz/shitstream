@@ -13,9 +13,11 @@ before_script:
     - cp tests/fixtures/mp3/* music/mp3
     - sed -i "s%^music_directory.*%music_directory \"$(pwd)/music/\"%" mpd.conf
     - mpd mpd.conf
+    - npm install karma
 
 script:
-    coverage run --source . tests/main.py
+    - coverage run --source . tests/main.py
+    - karma start --single-run --browsers PhantomJS
 
 after_success:
     coveralls
