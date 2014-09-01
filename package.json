@@ -5,6 +5,7 @@
         "karma-qunit": "0.1.1",
         "karma-phantomjs-launcher": "0.1.2",
         "karma": "0.12.1",
-        "karma-cli": "0.0.4"
+        "karma-cli": "0.0.4",
+        "karma-ember-preprocessor": "1.5.0"
      }
  }
