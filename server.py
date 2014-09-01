@@ -227,12 +227,15 @@ def get_playlist_json(playlist_code):
     ]
 
     song_ids = [ song.get('id') for song in songs ]
+    pos = mpdc.currentsong().get('pos')
+    if pos:
+        pos = int(pos)
 
     return jsonify({
         'playlist': {
             'id': playlist_code,
             'songs': song_ids,
-            'current_song_pos': int(mpdc.currentsong().get('pos'))
+            'current_song_pos': pos
         },
 
         'playlist_songs': songs
