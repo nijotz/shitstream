@@ -1,0 +1,24 @@
+<h2>{{name}}</h2>
+<h3>Albums</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Queue</th>
+    </tr>
+  </thead>
+  {{#each albums}}
+  <tr>
+    <td>
+      {{#link-to 'album' this}}{{name}}{{/link-to}}
+    </td>
+    <td>
+      <button {{action "queue_album" this}}>
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </td>
+  </tr>
+  {{/each}}
+</table>
+<h3>Non-Album Songs</h3>
+{{render "songs" non_album_songs}}

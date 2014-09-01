@@ -1,0 +1,29 @@
+{{!-- FIXME Duplicated from "songs" template.  Couldn't figure out
+      how to reuse properly and want to move forward --}}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Title</th>
+      <th>Length</th>
+      <th>Filename</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+  {{#each}}
+    <tr {{bind-attr class="playing:success"}}>
+      <td>{{song.artist.name}}</td>
+      <td>{{song.album.name}}</td>
+      <td>{{song.title}}</td>
+      <td>{{song.length}}</td>
+      <td>{{song.file}}</td>
+      <td>
+        <button {{action "dequeue_song" this}} class="close" type="button">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+      </td>
+    </tr>
+  {{/each}}
+</table>

@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="content">
+      <p>Put a URL to a song in the box below to add it to the queue.</p>
+      <p>Currently, only YouTube URLs are supported</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>
+      {{input type="text" class="form-control" placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" value=url}}
+    </div>
+    <br></br>
+  </div>
+  <div class="col-md-4">
+    <button id="queue-btn" class="btn btn-default" {{action "queue_url" url}}>
+      Add URL to Queue
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <pre id="messages" class="well"></pre>
+  </div>
+</div>

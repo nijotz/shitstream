@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Title</th>
+      <th>Length</th>
+      <th>Filename</th>
+      <th>Queue</th>
+    </tr>
+  </thead>
+  {{#each}}
+    <tr {{bind-attr class="playing:success"}}>
+      <td>{{artist.name}}</td>
+      <td>{{album.name}}</td>
+      <td>{{title}}</td>
+      <td>{{length}}</td>
+      <td>{{file}}</td>
+      <td>
+        <button {{action "queue_song" this}}>
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </td>
+    </tr>
+  {{/each}}
+</table>
