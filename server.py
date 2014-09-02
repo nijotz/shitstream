@@ -353,10 +353,14 @@ def add_url(msg):
 
 @app.route('/api/v1.0/listeners')
 def get_listeners():
-    page = requests.get('http://store.local:9000/status.xsl')
-    tree = html.fromstring(page.text)
-    elem = tree.xpath('//td[text()="Current Listeners:"]/following-sibling::td')
-    return jsonify({'listeners':elem[0].text})
+    try:
+        url = settings.icecast_status_url
+        page = requests.get(url)
+        tree = html.fromstring(page.text)
+        elem = tree.xpath('//td[text()="Current Listeners:"]/following-sibling::td')
+        return jsonify({'listeners':elem[0].text})
+    except:
+        return jsonify({'listeners': None})
 
 if __name__ == '__main__':
     socketio.run(app)

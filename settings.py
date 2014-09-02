@@ -12,5 +12,8 @@ def config_get(section, key, default):
 
 mpd_server = config_get('mpd', 'server', 'localhost')
 mpd_port = config_get('mpd', 'port', 6600)
-download_dir = config_get('downloaders', 'download_dir', 'music/in')
 mpd_dir = config_get('mpd', 'music_dir', 'music')
+
+icecast_status_url = config_get('icecast', 'url', 'http://localhost:8000/status.xml')
+
+download_dir = config_get('downloaders', 'download_dir', 'music/in')
