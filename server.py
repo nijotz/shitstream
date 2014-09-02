@@ -170,7 +170,7 @@ def get_song_code(song_uri):
 def get_song(song_code):
     song_uri = decode(song_code)
     print song_uri
-    result = mpdc.lsinfo(song_uri)
+    result = mpdc.find('file', song_uri)
     if result:
         song = result[0]
         song['id'] = get_song_code(song.get('file'))
