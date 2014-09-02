@@ -12,9 +12,9 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li>{{#link-to 'artists'}}Browse{{/link-to}}</li>
-          <li>{{#link-to 'playlist' 'current'}}Queue{{/link-to}}</li>
-          <li>{{#link-to 'add_url'}}Add URL{{/link-to}}</li>
+          <li id="nav-link-browse">{{#link-to 'artists'}}Browse{{/link-to}}</li>
+          <li id="nav-link-queue">{{#link-to 'playlist' 'current'}}Queue{{/link-to}}</li>
+          <li id="nav-link-add">{{#link-to 'add_url'}}Add URL{{/link-to}}</li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="navbar-text">Listeners: {{listeners}}</li>

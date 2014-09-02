@@ -10,14 +10,14 @@
     </tr>
   </thead>
   {{#each}}
-    <tr {{bind-attr class="playing:success"}}>
+    <tr class="album-song" {{bind-attr class="playing:success"}}>
       <td>{{artist.name}}</td>
       <td>{{album.name}}</td>
       <td>{{title}}</td>
       <td>{{length}}</td>
       <td>{{file}}</td>
       <td>
-        <button {{action "queue_song" this}}>
+        <button class="queue-btn" {{action "queue_song" this}}>
           <span class="glyphicon glyphicon-plus"></span>
         </button>
       </td>

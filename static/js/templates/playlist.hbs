@@ -1,11 +1,11 @@
-<div class="row">
+<div class="row" id="current-queue">
   <h3>Current queue <small>Ordered from current song to last song </small></h3>
   <div class="col-md-12">
     {{render "songlist" future_songs}}
   </div>
 </div>
 
-<div class="row">
+<div class="row" id="past-queue">
   <h3>Past songs <small>Ordered from last played song to oldest song</small></h3>
   <div class="col-md-12">
     {{render "songlist" past_songs}}

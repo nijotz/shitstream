@@ -12,7 +12,7 @@
     </tr>
   </thead>
   {{#each}}
-    <tr {{bind-attr class="playing:success"}}>
+    <tr class="playlist-song" {{bind-attr class="playing:success"}}>
       <td>{{song.artist.name}}</td>
       <td>{{song.album.name}}</td>
       <td>{{song.title}}</td>
