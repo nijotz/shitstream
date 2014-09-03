@@ -20,24 +20,35 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 
+def mpd_connect(mpdc=None):
+    if not mpdc:
+        mpdc = MPDClient()
+    else:
+        try:
+            mpdc.disconnect()
+        except:
+            mpdc = MPDClient()
+
+    # Try connecting a few times, sometimes MPD can get flooded
+    attempts = 0
+    connected = False
+    while connected == False and attempts < 4:
+        try:
+            mpdc.connect(settings.mpd_server, settings.mpd_port)  #FIXME: make configurable
+            connected = True
+        except socket.error:
+            connected = False
+        attempts += 1
+        time.sleep(0.5)
+
+    return mpdc
+
 # Quick and dirty way to get a new mpd client connection on every request.  It
 # times out if I make a global one.  The mpdc variable will be available to any
 # function that is wrapped by @mpd and will be fresh instance of MPDClient.
 def mpd(func):
     def fn_wrap(*args, **kwargs):
-        mpdc = MPDClient()
-
-        # Try connecting a few times, sometimes MPD can get flooded
-        attempts = 0
-        connected = False
-        while connected == False and attempts < 4:
-            try:
-                mpdc.connect(settings.mpd_server, settings.mpd_port)  #FIXME: make configurable
-                connected = True
-            except socket.error:
-                connected = False
-            attempts += 1
-            time.sleep(0.5)
+        mpdc = mpd_connect()
 
         # Set 'mpdc' in the global context, making sure not to overwrite an
         # existing global
@@ -326,6 +337,7 @@ def add_url(msg):
 
     common = os.path.commonprefix([in_dir, music_dir])
     uri = filename.replace(common, '')
+    mpdc = mpd_connect()
     if uri[0] == '/':
         uri = uri[1:]
 
