@@ -2,6 +2,7 @@
 
 import base64
 import datetime
+import glob
 import os
 import socket
 import time
@@ -347,6 +348,16 @@ if app.debug:
     @app.route('/tests')
     def tests():
         return send_file('tests.html')
+
+    @app.route('/tests/reset')
+    def tests_reset(mpdc=mpd_connect()):
+        files_glob = os.path.join(settings.download_dir, '*')
+        files = glob.glob(files_glob)
+        for f in files:
+            os.remove(f)
+        update_mpd(mpdc=mpdc)
+        mpdc.clear()
+        return jsonify({'status': 'OK'})
 
 if __name__ == '__main__':
     socketio.run(app)
