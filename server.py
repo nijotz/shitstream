@@ -269,6 +269,17 @@ def add_album_to_playlist(playlist_code, album_code, mpdc=mpd_connect()):
 def add_url():
     emit('response', {'msg': 'Connected'});
 
+def update_mpd(uri=None, updating=None, mpdc=mpd_connect()):
+    job = mpdc.update(uri)
+    added = False
+    while not added:
+        cur_job = mpdc.status().get('updating_db')
+        if (cur_job and cur_job <= job):
+            if updating:
+                updating()
+            time.sleep(1)
+        else:
+            added = True
 
 @socketio.on('add_url', namespace='/api/v1.0/add_url/')
 def add_url(msg, mpdc=mpd_connect()):
@@ -308,15 +319,8 @@ def add_url(msg, mpdc=mpd_connect()):
 
     # Add song to MPD
     emit('response', {'msg': 'Adding song to music database'})
-    job = mpdc.update(uri)
-    added = False
-    while not added:
-        cur_job = mpdc.status().get('updating_db')
-        if (cur_job and cur_job <= job):
-            emit('response', {'msg': 'Music database still updating'})
-            time.sleep(1)
-        else:
-            added = True
+    update_mpd(uri,
+        emit('response', {'msg': 'Music database still updating'}))
     emit('response', {'msg': 'Song added to music database'})
 
     # Add song to Queue
