@@ -51,6 +51,37 @@ test('adding song to queue will show up on queue page', function() {
     });
 });
 
+test('adding url to queue', function() {
+    visit("/add_url");
+    andThen(function() {
+        fillIn("#add-url-field", 'https://www.youtube.com/watch?v=OFbE3lHTcuo');
+    });
+
+    var waiter;
+    waiter = function () {
+        var messages = $('#messages').html();
+        if (messages) {
+            if (messages.trim().endsWith('Song queued')) {
+                console.log('Song queued, continuing tests');
+                Ember.Test.unregisterWaiter(waiter);
+                return true;
+            }
+        }
+        else {
+            console.log('Song not queued, waiting');
+            return false;
+        }
+    };
+
+    andThen(function() {
+        click('#queue-btn');
+        Ember.Test.registerWaiter(waiter);
+        console.log('Waiting for song to queue');
+    });
+
+    equal(true, true);
+});
+
 //test('adding url to queue will fetch metadata for song', function() {
 //    visit("/add_url");
 //    andThen(function() {
