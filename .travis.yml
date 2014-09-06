@@ -19,7 +19,7 @@ before_script:
 
 script:
     - coverage run --source . tests/main.py
-    - phantomjs static/js/tests/runner-list.js http://localhost:5000/tests
+    - python server.py & phantomjs static/js/tests/runner-list.js http://localhost:5000/tests
 
 after_success:
     coveralls
