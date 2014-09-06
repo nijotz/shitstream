@@ -7,7 +7,20 @@ module('integration tests', {
             App.reset();
         });
     },
-    teardown: function() { }
+    teardown: function() {
+        var waiter;
+        waiter = function () {
+            return false;
+        }
+        Ember.Test.registerWaiter(waiter);
+        Ember.$.ajax({
+            url: '/tests/reset',
+            success: function() {
+                Ember.Test.unregisterWaiter(waiter);
+            }
+        });
+        andThen(function () {});
+    }
 });
 
 test('github commits pulls 5 commits', function() {
