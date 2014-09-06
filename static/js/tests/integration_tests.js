@@ -61,14 +61,12 @@ test('adding url to queue', function() {
     waiter = function () {
         var messages = $('#messages').html();
         if (messages) {
-            if (messages.trim().endsWith('Song queued')) {
-                console.log('Song queued, continuing tests');
+            if (messages.trim().match(/Song queued$/)) {
                 Ember.Test.unregisterWaiter(waiter);
                 return true;
             }
         }
         else {
-            console.log('Song not queued, waiting');
             return false;
         }
     };
