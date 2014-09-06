@@ -36,7 +36,7 @@ def mpd_connect(mpdc=None):
     connected = False
     while connected == False and attempts < 4:
         try:
-            mpdc.connect(settings.mpd_server, settings.mpd_port)  #FIXME: make configurable
+            mpdc.connect(settings.mpd_server, settings.mpd_port)
             connected = True
         except socket.error:
             connected = False
