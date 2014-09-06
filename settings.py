@@ -4,9 +4,9 @@ config = ConfigParser.ConfigParser()
 
 config.read('shitstream.conf')
 
-def config_get(section, key, default):
+def config_get(section, key, default, type_method=config.get):
     try:
-        return config.get(section, key, default)
+        return type_method(section, key)
     except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
         return default
 
@@ -17,3 +17,5 @@ mpd_dir = config_get('mpd', 'music_dir', 'music')
 icecast_status_url = config_get('icecast', 'url', 'http://localhost:8000/status.xml')
 
 download_dir = config_get('downloaders', 'download_dir', 'music/in')
+
+debug = config_get('general', 'debug', True, config.getboolean)
