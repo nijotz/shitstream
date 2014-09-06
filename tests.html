@@ -32,7 +32,6 @@
         Ember.$.ajax({
           url: template,
           cache: false,
-          async: true,
           success: function (source) {
             var input = Ember.Handlebars.precompile(source.toString());
             Ember.TEMPLATES[templateName] = Ember.Handlebars.template(input);
