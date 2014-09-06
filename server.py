@@ -374,5 +374,10 @@ def get_listeners():
     except:
         return jsonify({'listeners': None})
 
+if app.debug:
+    @app.route('/tests')
+    def tests():
+        return send_file('tests.html')
+
 if __name__ == '__main__':
     socketio.run(app)
