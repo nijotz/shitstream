@@ -115,7 +115,11 @@ App.ApplicationRoute = Ember.Route.extend({
         Ember.$.getJSON('/api/v1.0/listeners').
         then(function(data) {
             Ember.run(function() {
-                controller.set('listeners', data['listeners']);
+                var listeners = '?';
+                if (data['listeners']) {
+                    listeners = data['listeners']
+                }
+                controller.set('listeners', listeners);
             });
         })
     }
