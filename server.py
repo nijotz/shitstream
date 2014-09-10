@@ -22,6 +22,14 @@ app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
 
+def mpd(func):
+    def fn_wrap(*args, **kwargs):
+        if not kwargs.get('mpdc'):
+            kwargs['mpdc'] = mpd_connect()
+        return func(*args, **kwargs)
+    fn_wrap.func_name = func.func_name
+    return fn_wrap
+
 def mpd_connect(mpdc=None):
     if not mpdc:
         mpdc = MPDClient()
@@ -64,7 +72,8 @@ def index():
     return send_file('index.html')
 
 @app.route('/api/v1.0/artists')
-def get_artists(mpdc=mpd_connect()):
+@mpd
+def get_artists(mpdc=None):
 
     songs = mpdc.listallinfo()
     artists = {}
@@ -114,7 +123,8 @@ def get_artist_json(artist_code):
 def get_artist_code(artist_name):
     return encode(artist_name)
 
-def get_artist(artist_code, mpdc=mpd_connect()):
+@mpd
+def get_artist(artist_code, mpdc=None):
 
     artist_name = decode(artist_code)
     album_names = set()
@@ -150,7 +160,8 @@ def get_song_json(song_code):
 def get_song_code(song_uri):
     return encode(song_uri)
 
-def get_song(song_code, mpdc=mpd_connect()):
+@mpd
+def get_song(song_code, mpdc=None):
     song_uri = decode(song_code)
     result = mpdc.find('file', song_uri)
     if result:
@@ -171,7 +182,8 @@ def decode_album_code(code):
     return  decode(code).split('/-/')
 
 @app.route('/api/v1.0/albums/<album_code>')
-def get_album_json(album_code, mpdc=mpd_connect()):
+@mpd
+def get_album_json(album_code, mpdc=None):
     artist_name, album_name = decode_album_code(album_code)
     songs = mpdc.search('album', album_name, 'artist', artist_name)
     date = ''
@@ -194,7 +206,8 @@ def get_album_json(album_code, mpdc=mpd_connect()):
     })
 
 @app.route('/api/v1.0/playlists/<playlist_code>')
-def get_playlist_json(playlist_code, mpdc=mpd_connect()):
+@mpd
+def get_playlist_json(playlist_code, mpdc=None):
     if playlist_code == 'current':
         playlist = mpdc.playlistinfo()
     else:
@@ -232,7 +245,8 @@ def decode_playlist_song_code(code):
     return decode(code).split('/-/')
 
 @app.route('/api/v1.0/playlistSongs/<playlist_song_code>', methods=['DELETE'])
-def del_song_from_playlist(playlist_song_code, mpdc=mpd_connect()):
+@mpd
+def del_song_from_playlist(playlist_song_code, mpdc=None):
     playlist_code, song_id = decode_playlist_song_code(playlist_song_code)
     if playlist_code == 'current':
         mpdc.deleteid(song_id)
@@ -242,7 +256,8 @@ def del_song_from_playlist(playlist_song_code, mpdc=mpd_connect()):
     return jsonify({'status': 'OK'})  #FIXME: Not sure what to return from DELETEs
 
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_song/<song_code>')
-def add_song_to_playlist(playlist_code, song_code, mpdc=mpd_connect()):
+@mpd
+def add_song_to_playlist(playlist_code, song_code, mpdc=None):
     if playlist_code == 'current':
         songid = mpdc.addid(decode(song_code))
         if not mpdc.currentsong():
@@ -253,7 +268,8 @@ def add_song_to_playlist(playlist_code, song_code, mpdc=mpd_connect()):
     return jsonify({'status': 'OK'}) #FIXME: Not sure what to return from DELETEs
 
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_album/<album_code>')
-def add_album_to_playlist(playlist_code, album_code, mpdc=mpd_connect()):
+@mpd
+def add_album_to_playlist(playlist_code, album_code, mpdc=None):
     artist_name, album_name = decode(album_code).split('/-/')
     if playlist_code == 'current':
         songs = mpdc.search('album', album_name, 'artist', artist_name)
@@ -273,7 +289,8 @@ def add_album_to_playlist(playlist_code, album_code, mpdc=mpd_connect()):
 def add_url():
     emit('response', {'msg': 'Connected'});
 
-def update_mpd(uri=None, updating=None, mpdc=mpd_connect()):
+@mpd
+def update_mpd(uri=None, updating=None, mpdc=None):
     job = mpdc.update(uri)
     added = False
     while not added:
@@ -285,8 +302,9 @@ def update_mpd(uri=None, updating=None, mpdc=mpd_connect()):
         else:
             added = True
 
+@mpd
 @socketio.on('add_url', namespace='/api/v1.0/add_url/')
-def add_url(msg, mpdc=mpd_connect()):
+def add_url(msg, mpdc=None):
     in_dir = settings.download_dir
     music_dir = settings.mpd_dir
 
@@ -353,7 +371,8 @@ if app.debug:
         return send_file('tests.html')
 
     @app.route('/tests/reset')
-    def tests_reset(mpdc=mpd_connect()):
+    @mpd
+    def tests_reset(mpdc=None):
         files_glob = os.path.join(settings.download_dir, '*')
         files = glob.glob(files_glob)
         for f in files:
