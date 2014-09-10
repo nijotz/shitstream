@@ -174,11 +174,13 @@ def decode_album_code(code):
 def get_album_json(album_code, mpdc=mpd_connect()):
     artist_name, album_name = decode_album_code(album_code)
     songs = mpdc.search('album', album_name, 'artist', artist_name)
+    date = ''
     song_codes = []
     for song in songs:
         for tag in ['albumartistsort', 'albumartist', 'artist']:
             if song.get(tag) == artist_name:
                 song_codes.append(encode(song.get('file')))
+                date = song.get('date')
                 break
 
     return jsonify({
@@ -186,6 +188,7 @@ def get_album_json(album_code, mpdc=mpd_connect()):
             'id': album_code,
             'name': album_name,
             'artist': encode(artist_name),
+            'date': date,
             'songs': song_codes
         }
     })

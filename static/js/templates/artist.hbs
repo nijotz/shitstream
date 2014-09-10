@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Release Date</th>
       <th>Queue</th>
     </tr>
   </thead>
@@ -12,6 +13,7 @@
     <td>
       {{#link-to 'album' this class="album-link"}}{{name}}{{/link-to}}
     </td>
+    <td>{{date}}</td>
     <td>
       <button {{action "queue_album" this}}>
         <span class="glyphicon glyphicon-plus"></span>

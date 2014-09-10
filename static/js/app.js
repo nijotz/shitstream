@@ -54,6 +54,7 @@ App.Artist = DS.Model.extend({
 App.Album = DS.Model.extend({
     name: DS.attr('string'),
     artist: DS.belongsTo('artist'),
+    date: DS.attr('string'),
     songs: DS.hasMany('song', {async:true})
 });
 
