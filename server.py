@@ -292,15 +292,21 @@ def add_album_to_playlist(playlist_code, album_code, mpdc=None):
         songs = get_album_songs(artist_name, album_name, mpdc=mpdc)
         firstsongid = None
         for song in songs:
+            # FIXME: trusts the order in which the songs are returned, doesn't
+            # sort by track number.
+
+            # Store the first song of the album, so if nothing is currently
+            # playing, we know which song to start with
             songid = mpdc.addid(song.get('file'))
             if not firstsongid:
                 firstsongid = songid
+
         if not mpdc.currentsong():
             mpdc.playid(firstsongid)
     else:
-        raise Exception
+        raise Exception  #FIXME
 
-    return jsonify({'status': 'OK'})
+    return jsonify({'status': 'OK'})  #FIXME
 
 @socketio.on('connect', namespace='/api/v1.0/add_url/')
 def add_url():
