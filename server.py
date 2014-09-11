@@ -309,7 +309,7 @@ def add_album_to_playlist(playlist_code, album_code, mpdc=None):
     return jsonify({'status': 'OK'})  #FIXME
 
 @socketio.on('connect', namespace='/api/v1.0/add_url/')
-def add_url():
+def add_url_connect():
     emit('response', {'msg': 'Connected'});
 
 @mpd
@@ -327,7 +327,7 @@ def update_mpd(uri=None, updating=None, mpdc=None):
 
 @mpd
 @socketio.on('add_url', namespace='/api/v1.0/add_url/')
-def add_url(msg, mpdc=None):
+def add_url_event(msg, mpdc=None):
     in_dir = settings.download_dir
     music_dir = settings.mpd_dir
 
