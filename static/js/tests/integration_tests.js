@@ -80,6 +80,36 @@ test('adding url to queue', function() {
     equal(true, true);
 });
 
+test('view album with multiple artist tags', function() {
+    visit("/music/artists");
+    andThen(function() {
+        click("#artist-list .list-group-item:contains('Octopus')");
+    });
+    andThen(function() {
+        click(".album-link:contains('Avalanche')");
+    });
+    andThen(function() {
+        var songs = find('.album-song').length;
+        equal(songs > 0, true);
+    });
+});
+
+test('queue album with multiple artist tags', function() {
+    visit("/music/artists");
+    andThen(function() {
+        click("#artist-list .list-group-item:contains('Octopus')");
+    });
+    andThen(function() {
+        var album_lnk = find(".album-list > td > album-link:contains('Avalanche')");
+        var queue_btn = $(album_lnk).parent().parent().find('button')[0];
+        click(queue_btn);
+    });
+    andThen(function() {
+        var alerts = find('#alert-placeholder').length;
+        equal(alerts > 0, true);
+    });
+});
+
 //test('adding url to queue will fetch metadata for song', function() {
 //    visit("/add_url");
 //    andThen(function() {
