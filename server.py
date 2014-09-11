@@ -185,7 +185,7 @@ def decode_album_code(code):
 @mpd
 def get_album_json(album_code, mpdc=None):
     artist_name, album_name = decode_album_code(album_code)
-    songs = mpdc.search('album', album_name, 'artist', artist_name)
+    songs = get_album_songs(artist_name, album_name, mpdc=mpdc)
     date = ''
     song_codes = []
     for song in songs:
@@ -204,6 +204,23 @@ def get_album_json(album_code, mpdc=None):
             'songs': song_codes
         }
     })
+
+@mpd
+def get_album_songs(artist_name, album_name, mpdc=None):
+    possible_songs = mpdc.search('album', album_name)
+    songs = []
+    for song in possible_songs:
+        # Verify this song's album belongs to the right artist
+        correct_artist = False
+        for tag in ['albumartistsort', 'albumartist', 'artist']:
+            if song.get(tag) == artist_name:
+                correct_artist = True
+                break
+        if not correct_artist:
+            continue
+
+        songs.append(song)
+    return songs
 
 @app.route('/api/v1.0/playlists/<playlist_code>')
 @mpd
@@ -272,7 +289,7 @@ def add_song_to_playlist(playlist_code, song_code, mpdc=None):
 def add_album_to_playlist(playlist_code, album_code, mpdc=None):
     artist_name, album_name = decode(album_code).split('/-/')
     if playlist_code == 'current':
-        songs = mpdc.search('album', album_name, 'artist', artist_name)
+        songs = get_album_songs(artist_name, album_name, mpdc=mpdc)
         firstsongid = None
         for song in songs:
             songid = mpdc.addid(song.get('file'))

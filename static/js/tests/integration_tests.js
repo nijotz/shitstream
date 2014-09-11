@@ -100,12 +100,12 @@ test('queue album with multiple artist tags', function() {
         click("#artist-list .list-group-item:contains('Octopus')");
     });
     andThen(function() {
-        var album_lnk = find(".album-list > td > album-link:contains('Avalanche')");
+        var album_lnk = find(".album-list > td > .album-link:contains('Avalanche')");
         var queue_btn = $(album_lnk).parent().parent().find('button')[0];
         click(queue_btn);
     });
     andThen(function() {
-        var alerts = find('#alert-placeholder').length;
+        var alerts = find("#alert-placeholder .alert:contains('Album added to queue')").length;
         equal(alerts > 0, true);
     });
 });
