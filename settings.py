@@ -14,7 +14,7 @@ mpd_server = config_get('mpd', 'server', 'localhost')
 mpd_port = config_get('mpd', 'port', 6600)
 mpd_dir = config_get('mpd', 'music_dir', 'music')
 
-icecast_status_url = config_get('icecast', 'url', 'http://localhost:8000/status.xml')
+icecast_status_url = config_get('icecast', 'url', 'http://localhost:8000/status.xsl')
 
 download_dir = config_get('downloaders', 'download_dir', 'music/in')
 
