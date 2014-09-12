@@ -32,7 +32,7 @@ test('github commits pulls 5 commits', function() {
 });
 
 test('adding song to queue will show up on queue page', function() {
-    visit("/music/artists");
+    visit("/music/");
     andThen(function() {
         click('#artist-list .list-group-item:first');
     });
@@ -81,7 +81,7 @@ test('adding url to queue', function() {
 });
 
 test('view album with multiple artist tags', function() {
-    visit("/music/artists");
+    visit("/music/");
     andThen(function() {
         click("#artist-list .list-group-item:contains('Octopus')");
     });
@@ -95,7 +95,7 @@ test('view album with multiple artist tags', function() {
 });
 
 test('queue album with multiple artist tags', function() {
-    visit("/music/artists");
+    visit("/music/");
     andThen(function() {
         click("#artist-list .list-group-item:contains('Octopus')");
     });
