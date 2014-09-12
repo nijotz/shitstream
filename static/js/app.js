@@ -21,12 +21,10 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 
 App.Router.map(function() {
     this.resource('music', function() {
-        this.resource('artists', function() {
-            this.resource('artist', {path: ':artist_id'}, function() {
+        this.resource('artists', {path: '/'}, function() {
+            this.resource('artist', {path: 'artists/:artist_id'}, function() {
             });
-        });
-        this.resource('albums', function() {
-            this.resource('album', {path: ':album_id'});
+            this.resource('album', {path: 'albums/:album_id'});
         });
     });
     this.route('add_url');
