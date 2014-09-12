@@ -9,6 +9,7 @@
       <th>Queue</th>
     </tr>
   </thead>
+  <tbody>
   {{#each}}
     <tr class="album-song" {{bind-attr class="playing:success"}}>
       <td>{{artist.name}}</td>
@@ -23,4 +24,5 @@
       </td>
     </tr>
   {{/each}}
+  </tbody>
 </table>
