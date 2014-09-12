@@ -1,6 +1,7 @@
 Flask==0.10.1
 flask-conditional==0.1
 Flask-SocketIO==0.3.8
+Flask-SQLAlchemy==2.0
 ipdb==0.8
 ipython==2.1.0
 lxml==3.3.5

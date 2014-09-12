@@ -19,3 +19,5 @@ icecast_status_url = config_get('icecast', 'url', 'http://localhost:8000/status.
 download_dir = config_get('downloaders', 'download_dir', 'music/in')
 
 debug = config_get('general', 'debug', True, config.getboolean)
+
+db_uri = config_get('db', 'uri', 'sqlite:///test.db')

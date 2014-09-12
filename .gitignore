@@ -5,3 +5,4 @@ shitstream.conf
 .coverage
 music/
 .coveralls.yml
+test.db

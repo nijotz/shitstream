@@ -6,15 +6,19 @@ import glob
 import os
 import socket
 import time
+
 from flask import Flask, jsonify, send_file
 from flask.ext.conditional import conditional
 from flask.ext.socketio import SocketIO, emit
 from lxml import html
 from mpd import MPDClient
 import requests
+
+import db
 from downloaders.youtube import regex as youtube_regex,\
     download as download_youtube_url
 import settings
+
 
 app = Flask(__name__)
 if settings.debug:
@@ -407,4 +411,6 @@ def tests_reset(mpdc=None):
     return jsonify({'status': 'OK'})
 
 if __name__ == '__main__':
+    db.db.create_all()
+    db.update_db()
     socketio.run(app)
