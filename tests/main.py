@@ -19,7 +19,9 @@ def json_schema_test(schema_file):
             schema = json.loads(schema_string)
 
             return_value = function(*args, **kwargs)
-            assert return_value.status_code == 200
+            if return_value.status_code != 200:
+                print return_value.data
+                assert return_value.status_code == 200
             json_data = json.loads(return_value.data)
             validate(json_data, schema)
         return wrapper

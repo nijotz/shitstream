@@ -50,16 +50,15 @@ def get_playlist_json(playlist_code, mpdc=None):
     song_files = [song.get('file') for song in playlist]
     songs = db.Song.query.filter(db.Song.uri.in_(song_files))
     song_map = dict([(song.uri, song) for song in songs])
+    songs = []
 
-    songs = [
-        {
-            'id': encode_playlist_song_code(song.get('pos'), song.get('id')),
-            'pos': song.get('pos'),
-            'song': song_map[song.get('file')].id,
-            'playlist': playlist_code
-        }
-        for song in playlist
-    ]
+    for song in playlist:
+        new_song = {}
+        new_song['id'] = encode_playlist_song_code(song.get('pos'), song.get('id'))
+        new_song['pos'] = song.get('pos')
+        new_song['song'] = song_map[song.get('file')].id
+        new_song['playlist'] = playlist_code
+        songs.append(new_song)
 
     song_ids = [ song.get('id') for song in songs ]
     pos = mpdc.currentsong().get('pos')
