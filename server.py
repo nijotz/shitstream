@@ -432,7 +432,7 @@ if __name__ == '__main__':
 
     manager = restless.APIManager(app, flask_sqlalchemy_db=db.db)
     manager.create_api(
-        db.Song,
+        db.Artist,
         methods=['GET'],
         url_prefix=api_prefix,
         collection_name='artists',

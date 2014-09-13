@@ -33,14 +33,16 @@ class Album(db.Model):
 
 class Artist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text)
-    alpha_name = db.Column(db.Text)
+    name = db.Column(db.Text, unique=True)
+    name_alpha = db.Column(db.Text, unique=True)
 
 
 @mpd
 def update_db(mpdc=None):
     songs = mpdc.listallinfo()
     for song in songs:
+
+        # Add song
         uri = song.get('file')
         if not uri:
             continue
@@ -57,6 +59,29 @@ def update_db(mpdc=None):
         except:
             track = None
         new_song.track = track
+
+        # Add artist
+        albumartistsort = song.get('albumartistsort')
+        albumartist = song.get('albumartist')
+        artist_name = song.get('artist')
+        artist = None
+
+        if albumartistsort:
+            artist = Artist.query.filter_by(name_alpha=albumartistsort).first()
+
+        if not artist and albumartist:
+            artist = Artist.query.filter_by(name=albumartist).first()
+
+        if not artist and artist_name:
+            artist = Artist.query.filter_by(name=artist_name).first()
+
+        if not artist:
+            artist = Artist()
+            for name in [albumartistsort, albumartist, artist_name]:
+                if name:
+                    artist.name = name
+                    db.session.add(artist)
+                    break
 
         db.session.add(new_song)
         print 'New song'
