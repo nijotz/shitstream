@@ -3,7 +3,7 @@ body {
   padding-bottom: 20px;
 }
 
-.active {
+.nav .active {
   font-weight: bold;
 }
 

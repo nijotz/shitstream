@@ -13,7 +13,7 @@
   </thead>
   <tbody>
   {{#each}}
-    <tr class="playlist-song" {{bind-attr class="playing:success"}}>
+    <tr {{bind-attr class=":playlist-song played:active played:text-muted"}}>
       <td>{{song.artist.name}}</td>
       <td>{{song.album.name}}</td>
       <td>{{song.name}}</td>

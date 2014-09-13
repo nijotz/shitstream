@@ -22,15 +22,12 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
 App.Router.map(function() {
     this.resource('music', function() {
         this.resource('artists', {path: '/'}, function() {
-            this.resource('artist', {path: 'artists/:artist_id'}, function() {
-            });
+            this.resource('artist', {path: 'artists/:artist_id'});
             this.resource('album', {path: 'albums/:album_id'});
         });
     });
     this.route('add_url');
-    this.resource('playlists', function() {
-        this.resource('playlist', {path: ':playlist_id'});
-    });
+    this.resource('queue');
 });
 
 App.LoadingView = Ember.View.extend({
@@ -66,18 +63,13 @@ App.Song = DS.Model.extend({
     length: DS.attr('string'),
     uri: DS.attr('string'),
     playing: DS.attr('boolean'),
-    playlists: DS.hasMany('playlist_songs', {async:true})
+    queue: DS.hasMany('queue', {async:true})
 });
 
-App.Playlist = DS.Model.extend({
-    songs: DS.hasMany('playlist_songs', {async:true}),
-    current_song_pos: DS.attr('number')
-})
-
-App.PlaylistSong = DS.Model.extend({
-    playlist: DS.belongsTo('playlist', {async:true}),
+App.Queue = DS.Model.extend({
     pos: DS.attr('number'),
-    song: DS.belongsTo('song', {async:true})
+    song: DS.belongsTo('song', {async:true}),
+    played: DS.attr('boolean')
 })
 
 App.ArtistsView = Ember.View.extend({
@@ -226,77 +218,9 @@ App.SongRoute = Ember.Route.extend({
     }
 });
 
-App.PlaylistController = Ember.ObjectController.extend({
-    filter_songs: function(future) {
-        current_song_pos = this.get('model.current_song_pos');
-
-        // Preserve 'this' through the Land of Promise Hell
-        var self = this;
-
-        // All this data is loaded async, so we need to return a new
-        // PromiseArray to the template that will eventually contain the future
-        // songs in the queue
-        return DS.PromiseArray.create({
-            promise: self.get('model.songs').then(function(songs) {
-                songs = songs.filter(function(song) {
-                    // If not playing, everything is part of the past queue
-                    if (current_song_pos === null) { return !future; }
-
-                    // FIXME: Holy shit, I'm soo tired and this logic can be
-                    // simplified, I'm sure.
-                    return ((song.get('pos') >= current_song_pos) && future) ||
-                        ((song.get('pos') < current_song_pos) && !future);
-                });
-
-                if (!future) {
-                    songs = songs.toArray().reverse();
-                }
-
-                return songs
-            })
-        });
-    },
-
-    future_songs: function() {
-        return this.filter_songs(true);
-    }.property('current_song_pos', 'songs'),
-
-    past_songs: function() {
-        return this.filter_songs(false);
-    }.property('current_song_pos', 'songs')
-})
-
-App.PlaylistRoute = Ember.Route.extend({
+App.QueueRoute = Ember.Route.extend({
     model: function(params) {
-        return this.store.find('playlist', params.playlist_id);
-    },
-    actions: {
-        'dequeue_song': function(playlist_song) {
-            playlist_song.destroyRecord();
-            /*
-            $.getJSON(
-                "/api/v1.0/playlists/current/dequeue_song/" + pos, //FIXME
-                function(data) {
-                    $('#alert-placeholder').append(
-                        '<div class="alert alert-success alert-dismissible" role="alert">' +
-                            '<button type="button" class="close" data-dismiss="alert">' +
-                                '<span aria-hidden="true">&times;</span>' +
-                                '<span class="sr-only">Close</span>' +
-                            '</button>' +
-                            'Song removed from queue' +
-                        '</div>'
-                    )
-
-                    var alertdiv = $('#alert-placeholder').children('.alert:last-child')
-                    window.setTimeout(function() {
-                        $(alertdiv).fadeTo(500, 0).slideUp(500, function(){
-                            alertdiv.remove();
-                        });
-                    }, 3000);
-                }
-            );
-            */
-        }
+        return this.store.find('queue');
     }
 });
 

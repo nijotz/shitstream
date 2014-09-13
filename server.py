@@ -39,50 +39,13 @@ def encode_playlist_song_code(song_position, song_id):
 def decode_playlist_song_code(code):
     return [int(x) for x in code.split('.')]
 
-@app.route('/api/v1.0/playlists/<playlist_code>')
-@mpd
-def get_playlist_json(playlist_code, mpdc=None):
-    if playlist_code == 'current':
-        playlist = mpdc.playlistinfo()
-    else:
-        return {}
-
-    song_files = [song.get('file') for song in playlist]
-    songs = db.Song.query.filter(db.Song.uri.in_(song_files))
-    song_map = dict([(song.uri, song) for song in songs])
-    songs = []
-
-    for song in playlist:
-        new_song = {}
-        new_song['id'] = encode_playlist_song_code(song.get('pos'), song.get('id'))
-        new_song['pos'] = song.get('pos')
-        new_song['song'] = song_map[song.get('file')].id
-        new_song['playlist'] = playlist_code
-        songs.append(new_song)
-
-    song_ids = [ song.get('id') for song in songs ]
-    pos = mpdc.currentsong().get('pos')
-    if pos:
-        pos = int(pos)
-
-    return jsonify({
-        'playlist': {
-            'id': playlist_code,
-            'songs': song_ids,
-            'current_song_pos': pos
-        },
-
-        'playlist_songs': songs
-    })
-
-@app.route('/api/v1.0/playlistSongs/<playlist_song_code>', methods=['DELETE'])
+@app.route(api_prefix + '/playlistSongs/<playlist_song_code>', methods=['DELETE'])
 @mpd
 def del_song_from_playlist(playlist_song_code, mpdc=None):
     song_pos, song_id = decode_playlist_song_code(playlist_song_code)
     if int(mpdc.playlistinfo(song_pos)[0].get('id')) == song_id:
         mpdc.delete(song_pos)
     else:
-        import ipdb; ipdb.set_trace()
         raise Exception
     return jsonify({'status': 'OK'})  #FIXME: Not sure what to return from DELETEs
 
@@ -258,6 +221,16 @@ def init():
         postprocessors={
             'GET_MANY': [emberify('albums', db.Album)],
             'GET_SINGLE': [emberify('album', db.Album, many=False)]
+        },
+    )
+    manager.create_api(
+        db.Queue,
+        methods=['GET'],
+        url_prefix=api_prefix,
+        collection_name='queue',
+        postprocessors={
+            'GET_MANY': [emberify('queue', db.Queue)],
+            'GET_SINGLE': [emberify('queue', db.Queue, many=False)]
         },
     )
 
