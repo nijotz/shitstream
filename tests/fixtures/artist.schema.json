@@ -5,11 +5,11 @@
         "artist": {
             "type": "object",
             "properties": {
-                "id": {"type": "string"},
+                "id": {"type": "number"},
                 "name": {"type": "string"},
                 "albums": {
                     "type": "array",
-                    "items": {"type": "string"}
+                    "items": {"type": "number"}
                 },
                 "non_album_songs": {
                     "type": "array",

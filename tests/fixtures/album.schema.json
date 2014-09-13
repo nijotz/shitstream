@@ -5,12 +5,12 @@
         "album": {
             "type": "object",
             "properties": {
-                "id": {"type": "string"},
+                "id": {"type": "number"},
                 "name": {"type": "string"},
-                "artist": {"type": "string"},
+                "artist": {"type": "number"},
                 "songs": {
                     "type": "array",
-                    "items": {"type": "string"}
+                    "items": {"type": "number"}
                 }
             },
             "required": [

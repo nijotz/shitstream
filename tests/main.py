@@ -19,8 +19,9 @@ def json_schema_test(schema_file):
             schema = json.loads(schema_string)
 
             return_value = function(*args, **kwargs)
+            if return_value.status_code != 200:
+                raise Exception
             json_data = json.loads(return_value.data)
-
             validate(json_data, schema)
         return wrapper
     return json_schema_test_decorator
@@ -41,11 +42,11 @@ class MainTestCase(unittest.TestCase):
 
     @json_schema_test('tests/fixtures/artist.schema.json')
     def test_artist(self):
-        return self.client.get('/api/v1.0/artists/JVSXE6TCN5XGK4Q-')
+        return self.client.get('/api/v1.0/artists/1')
 
     @json_schema_test('tests/fixtures/album.schema.json')
     def test_album(self):
-        return self.client.get('/api/v1.0/albums/JVSXE6TCN5XGK4RPFUXWIYLUEBXG62LTMUQHI2DP')
+        return self.client.get('/api/v1.0/albums/1')
 
     @json_schema_test('tests/fixtures/playlist.schema.json')
     def test_queue(self):
