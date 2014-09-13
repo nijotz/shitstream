@@ -1,5 +1,6 @@
 Flask==0.10.1
 flask-conditional==0.1
+Flask-Restless==0.14.2
 Flask-SocketIO==0.3.8
 Flask-SQLAlchemy==2.0
 ipdb==0.8

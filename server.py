@@ -10,6 +10,7 @@ import time
 from flask import Flask, jsonify, send_file
 from flask.ext.conditional import conditional
 from flask.ext.socketio import SocketIO, emit
+from flask.ext import restless
 from lxml import html
 from mpd import MPDClient
 import requests
@@ -26,6 +27,7 @@ if settings.debug:
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
+api_prefix = '/api/v1.0'
 
 def mpd(func):
     def fn_wrap(*args, **kwargs):
@@ -76,7 +78,7 @@ def decode(string):
 def index():
     return send_file('index.html')
 
-@app.route('/api/v1.0/artists')
+#@app.route('/api/v1.0/artists')
 @mpd
 def get_artists(mpdc=None):
 
@@ -410,7 +412,33 @@ def tests_reset(mpdc=None):
     mpdc.clear()
     return jsonify({'status': 'OK'})
 
+
+def get_ember_patcher(collection_name):
+    def emberify(result=None, **kw):
+        if not result:
+            return
+
+        del(result['num_results'])
+        del(result['page'])
+        del(result['total_pages'])
+        result[collection_name] = result['objects']
+        del(result['objects'])
+
+    return emberify
+
 if __name__ == '__main__':
     db.db.create_all()
     db.update_db()
+
+    manager = restless.APIManager(app, flask_sqlalchemy_db=db.db)
+    manager.create_api(
+        db.Song,
+        methods=['GET'],
+        url_prefix=api_prefix,
+        collection_name='artists',
+        postprocessors={
+            'GET_MANY': [get_ember_patcher('artists')]
+        }
+    )
+
     socketio.run(app)
