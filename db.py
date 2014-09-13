@@ -36,11 +36,9 @@ class Artist(db.Model):
     name = db.Column(db.Text, unique=True)
     name_alpha = db.Column(db.Text, unique=True)
 
-    #FIXME
-    #@hybrid_property
-    #def non_album_songs(self):
-    #    return [song.id for song in self.songs if song.album == None]
-
+    @hybrid_property
+    def non_album_songs(self):
+        return self.songs.filter(Song.album == None).all()
 
 @mpd
 def update_db(mpdc=None):

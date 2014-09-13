@@ -27,10 +27,11 @@ def emberify(collection, model=None, many=True):
         # Go through each column and see if there's a foreign key involved
         del_columns = []
         for key, val in record.iteritems():
-            column = getattr(model, key)
+            column = model.__dict__.get(key)
 
             # Some sort of relationship
-            if type(column.property) is sqlalchemy.orm.relationships.RelationshipProperty:
+            property = getattr(column, 'property', None)
+            if property and type(property) is sqlalchemy.orm.relationships.RelationshipProperty:
                 id_column = next(iter(column.property.local_columns))
 
                 # This model is being referenced by something else
