@@ -2,7 +2,6 @@
 
 import glob
 import os
-import socket
 import time
 
 from flask import Flask, jsonify, send_file
@@ -10,13 +9,12 @@ from flask.ext.conditional import conditional
 from flask.ext.socketio import SocketIO, emit
 from flask.ext import restless
 from lxml import html
-from mpd import MPDClient
 import requests
 
-import db
 from downloaders.youtube import regex as youtube_regex,\
     download as download_youtube_url
 from emberify import emberify
+from mpd_util import mpd, mpd_connect
 import settings
 
 
@@ -24,42 +22,11 @@ app = Flask(__name__)
 if settings.debug:
     app.debug = True
 app.config['SECRET_KEY'] = 'secret!'
+app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
 socketio = SocketIO(app)
-
 api_prefix = '/api/v1.0'
 
-
-def mpd(func):
-    def fn_wrap(*args, **kwargs):
-        if not kwargs.get('mpdc'):
-            kwargs['mpdc'] = mpd_connect()
-        return func(*args, **kwargs)
-    fn_wrap.func_name = func.func_name
-    return fn_wrap
-
-
-def mpd_connect(mpdc=None):
-    if not mpdc:
-        mpdc = MPDClient()
-    else:
-        try:
-            mpdc.disconnect()
-        except:
-            mpdc = MPDClient()
-
-    # Try connecting a few times, sometimes MPD can get flooded
-    attempts = 0
-    connected = False
-    while connected == False and attempts < 4:
-        try:
-            mpdc.connect(settings.mpd_server, settings.mpd_port)
-            connected = True
-        except socket.error:
-            connected = False
-        attempts += 1
-        time.sleep(0.5)
-
-    return mpdc
+import db
 
 
 @app.route('/')
@@ -257,7 +224,7 @@ def tests_reset(mpdc=None):
     return jsonify({'status': 'OK'})
 
 
-if __name__ == '__main__':
+def init():
     db.db.create_all()
     db.update_db()
 
@@ -295,4 +262,7 @@ if __name__ == '__main__':
         },
     )
 
+
+if __name__ == '__main__':
+    init()
     socketio.run(app)

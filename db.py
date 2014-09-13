@@ -1,11 +1,10 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.hybrid import hybrid_property
 
-import settings
-from server import app, mpd
+from mpd_util import mpd
+from server import app
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
 db = SQLAlchemy(app)
 
 

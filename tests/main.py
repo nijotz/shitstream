@@ -10,6 +10,8 @@ import json
 from jsonschema import validate
 
 
+server.init()
+
 def json_schema_test(schema_file):
     def json_schema_test_decorator(function):
         def wrapper(*args, **kwargs):
