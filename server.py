@@ -26,6 +26,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
 socketio = SocketIO(app)
 api_prefix = '/api/v1.0'
 
+
 import db
 
 
@@ -50,7 +51,7 @@ def del_song_from_playlist(playlist_song_code, mpdc=None):
     return jsonify({'status': 'OK'})  #FIXME: Not sure what to return from DELETEs
 
 #FIXME: This should be a put, couldn't figure out the ember.js side of it
-@app.route('/api/v1.0/playlists/<playlist_code>/queue_song/<song_code>')
+@app.route(api_prefix + '/playlists/<playlist_code>/queue_song/<song_code>')
 @mpd
 def add_song_to_playlist(playlist_code, song_code, mpdc=None):
     if playlist_code != 'current':
@@ -62,7 +63,7 @@ def add_song_to_playlist(playlist_code, song_code, mpdc=None):
 
     return jsonify({'status': 'OK'}) #FIXME: Return new PlaylistSong
 
-@app.route('/api/v1.0/playlists/<playlist_code>/queue_album/<album_code>')
+@app.route(api_prefix + '/playlists/<playlist_code>/queue_album/<album_code>')
 @mpd
 def add_album_to_playlist(playlist_code, album_code, mpdc=None):
     if playlist_code != 'current':
@@ -85,7 +86,7 @@ def add_album_to_playlist(playlist_code, album_code, mpdc=None):
 
     return jsonify({'status': 'OK'})  #FIXME
 
-@socketio.on('connect', namespace='/api/v1.0/add_url/')
+@socketio.on('connect', namespace = api_prefix + '/add_url/')
 def add_url_connect():
     emit('response', {'msg': 'Connected'});
 
@@ -103,7 +104,7 @@ def update_mpd(uri=None, updating=None, mpdc=None):
             added = True
 
 @mpd
-@socketio.on('add_url', namespace='/api/v1.0/add_url/')
+@socketio.on('add_url', namespace = api_prefix + '/add_url/')
 def add_url_event(msg, mpdc=None):
     in_dir = settings.download_dir
     music_dir = settings.mpd_dir
@@ -154,7 +155,7 @@ def add_url_event(msg, mpdc=None):
 
     emit('disconnect')
 
-@app.route('/api/v1.0/listeners')
+@app.route(api_prefix + '/listeners')
 def get_listeners():
     try:
         url = settings.icecast_status_url
