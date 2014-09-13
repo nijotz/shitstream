@@ -28,6 +28,7 @@ socketio = SocketIO(app)
 
 api_prefix = '/api/v1.0'
 
+
 def mpd(func):
     def fn_wrap(*args, **kwargs):
         if not kwargs.get('mpdc'):
@@ -35,6 +36,7 @@ def mpd(func):
         return func(*args, **kwargs)
     fn_wrap.func_name = func.func_name
     return fn_wrap
+
 
 def mpd_connect(mpdc=None):
     if not mpdc:
@@ -59,9 +61,16 @@ def mpd_connect(mpdc=None):
 
     return mpdc
 
+
 @app.route('/')
 def index():
     return send_file('index.html')
+
+def encode_playlist_song_code(song_position, song_id):
+    return '{}.{}'.format(song_position, song_id)
+
+def decode_playlist_song_code(code):
+    return [int(x) for x in code.split('.')]
 
 @app.route('/api/v1.0/playlists/<playlist_code>')
 @mpd
@@ -71,11 +80,15 @@ def get_playlist_json(playlist_code, mpdc=None):
     else:
         return {}
 
+    song_files = [song.get('file') for song in playlist]
+    songs = db.Song.query.filter(db.Song.uri.in_(song_files))
+    song_map = dict([(song.uri, song) for song in songs])
+
     songs = [
         {
-            'id': get_playlist_song_code(playlist_code, song.get('id')),
+            'id': encode_playlist_song_code(song.get('pos'), song.get('id')),
             'pos': song.get('pos'),
-            'song': get_song_code(song.get('file')),
+            'song': song_map[song.get('file')].id,
             'playlist': playlist_code
         }
         for song in playlist
@@ -99,47 +112,47 @@ def get_playlist_json(playlist_code, mpdc=None):
 @app.route('/api/v1.0/playlistSongs/<playlist_song_code>', methods=['DELETE'])
 @mpd
 def del_song_from_playlist(playlist_song_code, mpdc=None):
-    playlist_code, song_id = decode_playlist_song_code(playlist_song_code)
-    if playlist_code == 'current':
-        mpdc.deleteid(song_id)
+    song_pos, song_id = decode_playlist_song_code(playlist_song_code)
+    if int(mpdc.playlistinfo(song_pos)[0].get('id')) == song_id:
+        mpdc.delete(song_pos)
     else:
-        mpdc.playlistdelete(decode(playlist_code), song_id)
-
+        import ipdb; ipdb.set_trace()
+        raise Exception
     return jsonify({'status': 'OK'})  #FIXME: Not sure what to return from DELETEs
 
+#FIXME: This should be a put, couldn't figure out the ember.js side of it
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_song/<song_code>')
 @mpd
 def add_song_to_playlist(playlist_code, song_code, mpdc=None):
-    if playlist_code == 'current':
-        songid = mpdc.addid(decode(song_code))
-        if not mpdc.currentsong():
-            mpdc.playid(songid)
-    else:
-        mpdc.playlistadd(decode(playlist_code), decode(song_code))
+    if playlist_code != 'current':
+        raise Exception
+    song = db.Song.query.filter(db.Song.id == song_code).one()
+    songid = mpdc.addid(song.uri)
+    if not mpdc.currentsong():
+        mpdc.playid(songid)
 
-    return jsonify({'status': 'OK'}) #FIXME: Not sure what to return from DELETEs
+    return jsonify({'status': 'OK'}) #FIXME: Return new PlaylistSong
 
 @app.route('/api/v1.0/playlists/<playlist_code>/queue_album/<album_code>')
 @mpd
 def add_album_to_playlist(playlist_code, album_code, mpdc=None):
-    artist_name, album_name = decode(album_code).split('/-/')
-    if playlist_code == 'current':
-        songs = get_album_songs(artist_name, album_name, mpdc=mpdc)
-        firstsongid = None
-        for song in songs:
-            # FIXME: trusts the order in which the songs are returned, doesn't
-            # sort by track number.
+    if playlist_code != 'current':
+        raise Exception
+    album = db.Album.query.filter(db.Album.id == album_code).one()
+    songs = album.songs
+    firstsongid = None
+    for song in songs:
+        # FIXME: trusts the order in which the songs are returned, doesn't
+        # sort by track number.
 
-            # Store the first song of the album, so if nothing is currently
-            # playing, we know which song to start with
-            songid = mpdc.addid(song.get('file'))
-            if not firstsongid:
-                firstsongid = songid
+        # Store the first song of the album, so if nothing is currently
+        # playing, we know which song to start with
+        songid = mpdc.addid(song.uri)
+        if not firstsongid:
+            firstsongid = songid
 
-        if not mpdc.currentsong():
-            mpdc.playid(firstsongid)
-    else:
-        raise Exception  #FIXME
+    if not mpdc.currentsong():
+        mpdc.playid(firstsongid)
 
     return jsonify({'status': 'OK'})  #FIXME
 
