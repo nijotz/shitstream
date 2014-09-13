@@ -1,4 +1,5 @@
 from flask.ext.sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.hybrid import hybrid_property
 
 import settings
 from server import app, mpd
@@ -11,15 +12,15 @@ db = SQLAlchemy(app)
 class Song(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     uri = db.Column(db.Text, unique=True, nullable=False)
-    date = db.Column(db.String(32))
     name = db.Column(db.Text)
     track = db.Column(db.Integer)
+    length = db.Column(db.Integer)
 
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
-    artist = db.relationship('Artist', backref=db.backref('songs', lazy='dynamic'))
+    artist = db.relationship('Artist', backref=db.backref('songs'))
 
     album_id = db.Column(db.Integer, db.ForeignKey('album.id'))
-    album = db.relationship('Album', backref=db.backref('songs', lazy='dynamic'))
+    album = db.relationship('Album', backref=db.backref('songs'))
 
 
 class Album(db.Model):
@@ -28,13 +29,18 @@ class Album(db.Model):
     date = db.Column(db.String(32))
 
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
-    artist = db.relationship('Artist', backref=db.backref('albums', lazy='dynamic'))
+    artist = db.relationship('Artist', backref=db.backref('albums'))
 
 
 class Artist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, unique=True)
     name_alpha = db.Column(db.Text, unique=True)
+
+    #FIXME
+    #@hybrid_property
+    #def non_album_songs(self):
+    #    return [song.id for song in self.songs if song.album == None]
 
 
 @mpd
@@ -54,13 +60,14 @@ def update_db(mpdc=None):
         new_song.uri = uri
         new_song.name = song.get('title')
         new_song.date = song.get('date')
+        new_song.length = song.get('time')
         try:
             track = int(song.get('track'))
         except:
             track = None
         new_song.track = track
 
-        # Add artist
+        # Get or create artist
         albumartistsort = song.get('albumartistsort')
         albumartist = song.get('albumartist')
         artist_name = song.get('artist')
@@ -76,14 +83,26 @@ def update_db(mpdc=None):
             artist = Artist.query.filter_by(name=artist_name).first()
 
         if not artist:
-            artist = Artist()
             for name in [albumartistsort, albumartist, artist_name]:
                 if name:
+                    artist = Artist()
                     artist.name = name
                     db.session.add(artist)
                     break
 
+        new_song.artist = artist
+
+        # Get or create album
+        album_name = song.get('album')
+        album = Album.query.filter_by(name=album_name, artist=new_song.artist).first()
+        if not album and album_name:
+            album = Album()
+            album.name = album_name
+            album.artist = new_song.artist
+            album.date = new_song.date
+            new_song.album = album
+            db.session.add(album)
+
         db.session.add(new_song)
-        print 'New song'
 
     db.session.commit()

@@ -1,7 +1,5 @@
 #!flask/bin/python
 
-import base64
-import datetime
 import glob
 import os
 import socket
@@ -18,6 +16,7 @@ import requests
 import db
 from downloaders.youtube import regex as youtube_regex,\
     download as download_youtube_url
+from emberify import emberify
 import settings
 
 
@@ -60,171 +59,9 @@ def mpd_connect(mpdc=None):
 
     return mpdc
 
-# I don't want to deal with replicating the MPD database and dealing with sync
-# issues, and MPD doesn't expose any kind of unique IDs for
-# songs/albums/artists, so I just say fuckit and base32 encode names and make
-# that the slug.  Albums are identified by 'artist/-/album'.  Songs are the
-# URI, which is something MPD keeps unique, it's the songs file location.
-# Artists are just identified by their name.
-def encode(string):
-    if string:
-        return base64.b32encode(string).replace('=', '-')
-    return ''
-
-def decode(string):
-    return base64.b32decode(string.replace('-', '='))
-
 @app.route('/')
 def index():
     return send_file('index.html')
-
-#@app.route('/api/v1.0/artists')
-@mpd
-def get_artists(mpdc=None):
-
-    songs = mpdc.listallinfo()
-    artists = {}
-
-    for song in songs:
-        for tag in ['albumartistsort', 'albumartist', 'artist']:
-            artist = song.get(tag)
-            if artist:
-                break
-        if not artist:
-            continue  #TODO
-
-        artist_code = get_artist_code(artist)
-        if not artists.get(artist_code):
-            artists[artist_code] = {
-                'name': artist,
-                'albums': set(),
-                'non_album_songs': set()
-            }
-
-        album = song.get('album')
-        if album:
-            album_code = get_album_code(album, artist)
-            artists[artist_code]['albums'].add(album_code)
-        else:
-            artists[artist_code]['non_album_songs'].add(
-                get_song_code(song.get('title'))
-            )
-
-    artists = [
-        {
-            'id': key,
-            'name': value['name'],
-            'albums': list(value['albums']),
-            'non_album_songs': list(value['non_album_songs'])
-        }
-        for key, value in artists.iteritems()
-    ]
-
-    return jsonify({ 'artists': artists })
-
-
-@app.route('/api/v1.0/artists/<artist_code>')
-def get_artist_json(artist_code):
-    return jsonify({ 'artist': get_artist(artist_code) })
-
-def get_artist_code(artist_name):
-    return encode(artist_name)
-
-@mpd
-def get_artist(artist_code, mpdc=None):
-
-    artist_name = decode(artist_code)
-    album_names = set()
-    non_album_songs = []
-    artist_songs = mpdc.search('artist', artist_name)
-
-    for song in artist_songs:
-        album = song.get('album')
-        if album:
-            album_names.add(album)
-        else:
-            song_id = get_song_code(song.get('file'))
-            if song_id:
-                non_album_songs.append(song_id)
-
-    albums = [
-        get_album_code(name, artist_name)
-        for name in album_names
-        if name
-    ]
-
-    return {
-        'id': artist_code,
-        'name': artist_name,
-        'albums': albums,
-        'non_album_songs': non_album_songs
-    }
-
-@app.route('/api/v1.0/songs/<song_code>')
-def get_song_json(song_code):
-    return jsonify({ 'song': get_song(song_code) })
-
-def get_song_code(song_uri):
-    return encode(song_uri)
-
-@mpd
-def get_song(song_code, mpdc=None):
-    song_uri = decode(song_code)
-    result = mpdc.find('file', song_uri)
-    if result:
-        song = result[0]
-        song['id'] = get_song_code(song.get('file'))
-        song['artist'] = get_artist_code(song.get('artist'))
-        song['album'] = get_album_code(song.get('album'), song.get('artist'))
-        song['length'] = str(datetime.timedelta(
-            seconds=int(song['time'] or 0)))
-        return song
-    else:
-        return {}
-
-def get_album_code(album_name, artist_name):
-    return encode(str(artist_name) + '/-/' + str(album_name))  #FIXME
-
-def decode_album_code(code):
-    return  decode(code).split('/-/')
-
-@app.route('/api/v1.0/albums/<album_code>')
-@mpd
-def get_album_json(album_code, mpdc=None):
-    artist_name, album_name = decode_album_code(album_code)
-    songs = get_album_songs(artist_name, album_name, mpdc=mpdc)
-    date = ''
-    song_codes = []
-    for song in songs:
-        song_codes.append(encode(song.get('file')))
-        date = song.get('date')
-
-    return jsonify({
-        'album': {
-            'id': album_code,
-            'name': album_name,
-            'artist': encode(artist_name),
-            'date': date,
-            'songs': song_codes
-        }
-    })
-
-@mpd
-def get_album_songs(artist_name, album_name, mpdc=None):
-    possible_songs = mpdc.search('album', album_name)
-    songs = []
-    for song in possible_songs:
-        # Verify this song's album belongs to the right artist
-        correct_artist = False
-        for tag in ['albumartistsort', 'albumartist', 'artist']:
-            if song.get(tag) == artist_name:
-                correct_artist = True
-                break
-        if not correct_artist:
-            continue
-
-        songs.append(song)
-    return songs
 
 @app.route('/api/v1.0/playlists/<playlist_code>')
 @mpd
@@ -258,12 +95,6 @@ def get_playlist_json(playlist_code, mpdc=None):
 
         'playlist_songs': songs
     })
-
-def get_playlist_song_code(playlist_code, song_id):
-    return encode('{}/-/{}'.format(playlist_code, song_id))
-
-def decode_playlist_song_code(code):
-    return decode(code).split('/-/')
 
 @app.route('/api/v1.0/playlistSongs/<playlist_song_code>', methods=['DELETE'])
 @mpd
@@ -413,32 +244,42 @@ def tests_reset(mpdc=None):
     return jsonify({'status': 'OK'})
 
 
-def get_ember_patcher(collection_name):
-    def emberify(result=None, **kw):
-        if not result:
-            return
-
-        del(result['num_results'])
-        del(result['page'])
-        del(result['total_pages'])
-        result[collection_name] = result['objects']
-        del(result['objects'])
-
-    return emberify
-
 if __name__ == '__main__':
     db.db.create_all()
     db.update_db()
 
     manager = restless.APIManager(app, flask_sqlalchemy_db=db.db)
+
+    #FIXME: copypaste
     manager.create_api(
         db.Artist,
         methods=['GET'],
         url_prefix=api_prefix,
         collection_name='artists',
         postprocessors={
-            'GET_MANY': [get_ember_patcher('artists')]
-        }
+            'GET_MANY': [emberify('artists', db.Artist)],
+            'GET_SINGLE': [emberify('artist', db.Artist, many=False)]
+        },
+    )
+    manager.create_api(
+        db.Song,
+        methods=['GET'],
+        url_prefix=api_prefix,
+        collection_name='songs',
+        postprocessors={
+            'GET_MANY': [emberify('songs', db.Song)],
+            'GET_SINGLE': [emberify('song', db.Song, many=False)]
+        },
+    )
+    manager.create_api(
+        db.Album,
+        methods=['GET'],
+        url_prefix=api_prefix,
+        collection_name='albums',
+        postprocessors={
+            'GET_MANY': [emberify('albums', db.Album)],
+            'GET_SINGLE': [emberify('album', db.Album, many=False)]
+        },
     )
 
     socketio.run(app)

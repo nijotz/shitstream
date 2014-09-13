@@ -14,9 +14,9 @@
     <tr class="album-song" {{bind-attr class="playing:success"}}>
       <td>{{artist.name}}</td>
       <td>{{album.name}}</td>
-      <td>{{title}}</td>
+      <td>{{name}}</td>
       <td>{{length}}</td>
-      <td>{{file}}</td>
+      <td>{{uri}}</td>
       <td>
         <button class="queue-btn" {{action "queue_song" this}}>
           <span class="glyphicon glyphicon-plus"></span>

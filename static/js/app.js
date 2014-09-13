@@ -62,9 +62,9 @@ App.Album = DS.Model.extend({
 App.Song = DS.Model.extend({
     artist: DS.belongsTo('artist'),
     album: DS.belongsTo('album'),
-    title: DS.attr('string'),
+    name: DS.attr('string'),
     length: DS.attr('string'),
-    file: DS.attr('string'),
+    uri: DS.attr('string'),
     playing: DS.attr('boolean'),
     playlists: DS.hasMany('playlist_songs', {async:true})
 });
