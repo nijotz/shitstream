@@ -16,7 +16,6 @@ class Song(db.Model):
     length = db.Column(db.Integer)
 
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
-    artist = db.relationship('Artist', backref=db.backref('songs'))
 
     album_id = db.Column(db.Integer, db.ForeignKey('album.id'))
     album = db.relationship('Album', backref=db.backref('songs'))
@@ -35,6 +34,7 @@ class Artist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text, unique=True)
     name_alpha = db.Column(db.Text, unique=True)
+    songs = db.relationship('Song', backref=db.backref('artist'), lazy='dynamic')
 
     @hybrid_property
     def non_album_songs(self):
