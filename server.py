@@ -45,25 +45,18 @@ def api_route(route, *args, **kwargs):
 def index():
     return send_file('index.html')
 
-def encode_playlist_song_code(song_position, song_id):
-    return '{}.{}'.format(song_position, song_id)
 
-def decode_playlist_song_code(code):
-    return [int(x) for x in code.split('.')]
-
-@api_route('/playlistSongs/<playlist_song_code>', methods=['DELETE'])
+@api_route('/queue/<queue_id>', methods=['DELETE'])
 @mpd
-def del_song_from_playlist(playlist_song_code, mpdc=None):
-    song_pos, song_id = decode_playlist_song_code(playlist_song_code)
-    if int(mpdc.playlistinfo(song_pos)[0].get('id')) == song_id:
-        mpdc.delete(song_pos)
-    else:
-        raise Exception
+def del_song_from_queue(queue_id, mpdc=None):
+    queue = db.Queue.query.filter(db.Queue.id == queue_id).one()
+    mpdc.deleteid(queue.id)
     return jsonify({'status': 'OK'})  #FIXME: Not sure what to return from DELETEs
+
 
 @api_route('/queue', methods=['POST'])
 @mpd
-def add_song_to_playlist(mpdc=None):
+def add_song_to_queue(mpdc=None):
     song_id = request.json['queue']['song']
     song = db.Song.query.filter(db.Song.id == song_id).one()
     queue_id = int(mpdc.addid(song.uri))

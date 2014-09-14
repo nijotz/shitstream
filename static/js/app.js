@@ -222,6 +222,11 @@ App.SongRoute = Ember.Route.extend({
 App.QueueRoute = Ember.Route.extend({
     model: function(params) {
         return this.store.find('queue');
+    },
+    actions: {
+        dequeue_song: function(queue) {
+            queue.destroyRecord();
+        }
     }
 });
 
