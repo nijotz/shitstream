@@ -7,6 +7,7 @@ import os
 import socket
 import time
 from flask import Flask, jsonify, send_file
+from flask.ext.conditional import conditional
 from flask.ext.socketio import SocketIO, emit
 from lxml import html
 from mpd import MPDClient
@@ -385,21 +386,25 @@ def get_listeners():
     except:
         return jsonify({'listeners': None})
 
-if app.debug:
-    @app.route('/tests')
-    def tests():
-        return send_file('tests.html')
+##
+## Test methods, enabled only if debug is True
+##
 
-    @app.route('/tests/reset')
-    @mpd
-    def tests_reset(mpdc=None):
-        files_glob = os.path.join(settings.download_dir, '*')
-        files = glob.glob(files_glob)
-        for f in files:
-            os.remove(f)
-        update_mpd(mpdc=mpdc)
-        mpdc.clear()
-        return jsonify({'status': 'OK'})
+@conditional(app.route('/tests'), app.debug)
+def tests():
+    return send_file('tests.html')
+
+
+@conditional(app.route('/tests/reset'), app.debug)
+@mpd
+def tests_reset(mpdc=None):
+    files_glob = os.path.join(settings.download_dir, '*')
+    files = glob.glob(files_glob)
+    for f in files:
+        os.remove(f)
+    update_mpd(mpdc=mpdc)
+    mpdc.clear()
+    return jsonify({'status': 'OK'})
 
 if __name__ == '__main__':
     socketio.run(app)

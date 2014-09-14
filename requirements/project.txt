@@ -1,4 +1,5 @@
 Flask==0.10.1
+flask-conditional==0.1
 Flask-SocketIO==0.3.8
 ipdb==0.8
 ipython==2.1.0
