@@ -1,5 +1,6 @@
 #!flask/bin/python
 
+from functools import wraps
 import glob
 import os
 import time
@@ -30,6 +31,16 @@ api_prefix = '/api/v1.0'
 import db
 
 
+def api_route(route, *args, **kwargs):
+    def wrapper(function):
+        @app.route(api_prefix + route, *args, **kwargs)
+        @wraps(function)
+        def route_fn(*args, **kwargs):
+            return function(*args, **kwargs)
+        return route_fn
+    return wrapper
+
+
 @app.route('/')
 def index():
     return send_file('index.html')
@@ -40,7 +51,7 @@ def encode_playlist_song_code(song_position, song_id):
 def decode_playlist_song_code(code):
     return [int(x) for x in code.split('.')]
 
-@app.route(api_prefix + '/playlistSongs/<playlist_song_code>', methods=['DELETE'])
+@api_route('/playlistSongs/<playlist_song_code>', methods=['DELETE'])
 @mpd
 def del_song_from_playlist(playlist_song_code, mpdc=None):
     song_pos, song_id = decode_playlist_song_code(playlist_song_code)
@@ -51,7 +62,7 @@ def del_song_from_playlist(playlist_song_code, mpdc=None):
     return jsonify({'status': 'OK'})  #FIXME: Not sure what to return from DELETEs
 
 #FIXME: This should be a put, couldn't figure out the ember.js side of it
-@app.route(api_prefix + '/playlists/<playlist_code>/queue_song/<song_code>')
+@api_route('/queue/<playlist_code>/queue_song/<song_code>')
 @mpd
 def add_song_to_playlist(playlist_code, song_code, mpdc=None):
     if playlist_code != 'current':
@@ -63,7 +74,7 @@ def add_song_to_playlist(playlist_code, song_code, mpdc=None):
 
     return jsonify({'status': 'OK'}) #FIXME: Return new PlaylistSong
 
-@app.route(api_prefix + '/playlists/<playlist_code>/queue_album/<album_code>')
+@api_route('/playlists/<playlist_code>/queue_album/<album_code>')
 @mpd
 def add_album_to_playlist(playlist_code, album_code, mpdc=None):
     if playlist_code != 'current':
@@ -155,7 +166,7 @@ def add_url_event(msg, mpdc=None):
 
     emit('disconnect')
 
-@app.route(api_prefix + '/listeners')
+@api_route('/listeners')
 def get_listeners():
     try:
         url = settings.icecast_status_url
