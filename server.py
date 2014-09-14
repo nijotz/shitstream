@@ -70,28 +70,6 @@ def add_song_to_queue(mpdc=None):
         'song': song_id
     }})
 
-@api_route('/playlists/<playlist_code>/queue_album/<album_code>')
-@mpd
-def add_album_to_playlist(playlist_code, album_code, mpdc=None):
-    if playlist_code != 'current':
-        raise Exception
-    album = db.Album.query.filter(db.Album.id == album_code).one()
-    songs = album.songs
-    firstsongid = None
-    for song in songs:
-        # FIXME: trusts the order in which the songs are returned, doesn't
-        # sort by track number.
-
-        # Store the first song of the album, so if nothing is currently
-        # playing, we know which song to start with
-        songid = mpdc.addid(song.uri)
-        if not firstsongid:
-            firstsongid = songid
-
-    if not mpdc.currentsong():
-        mpdc.playid(firstsongid)
-
-    return jsonify({'status': 'OK'})  #FIXME
 
 @socketio.on('connect', namespace = api_prefix + '/add_url/')
 def add_url_connect():

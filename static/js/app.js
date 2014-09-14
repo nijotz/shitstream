@@ -182,27 +182,33 @@ App.MusicRoute = Ember.Route.extend({
             });
         },
         queue_album: function(album) {
-            $.getJSON(
-                "/api/v1.0/playlists/current/queue_album/" + album.get('id'), //FIXME
-                function(data) {
-                    $('#alert-placeholder').append(
-                        '<div class="alert alert-success alert-dismissible" role="alert">' +
-                            '<button type="button" class="close" data-dismiss="alert">' +
-                                '<span aria-hidden="true">&times;</span>' +
-                                '<span class="sr-only">Close</span>' +
-                            '</button>' +
-                            'Album added to queue' +
-                        '</div>'
-                    )
+            var self = this;
+            album.get('songs')
+            .then(function(songs) {
+                songs.forEach(function(song) {
+                    self.store.createRecord('queue', {
+                        'song': song
+                    })
+                    .save()
+                })
+            }).then(function(data) {
+                $('#alert-placeholder').append(
+                    '<div class="alert alert-success alert-dismissible" role="alert">' +
+                        '<button type="button" class="close" data-dismiss="alert">' +
+                            '<span aria-hidden="true">&times;</span>' +
+                            '<span class="sr-only">Close</span>' +
+                        '</button>' +
+                        'Album added to queue' +
+                    '</div>'
+                )
 
-                    var alertdiv = $('#alert-placeholder').children('.alert:last-child')
-                    window.setTimeout(function() {
-                        $(alertdiv).fadeTo(500, 0).slideUp(500, function(){
-                            alertdiv.remove();
-                        });
-                    }, 3000);
-                }
-            );
+                var alertdiv = $('#alert-placeholder').children('.alert:last-child')
+                window.setTimeout(function() {
+                    $(alertdiv).fadeTo(500, 0).slideUp(500, function(){
+                        alertdiv.remove();
+                    });
+                }, 3000);
+            });
         }
     }
 });
