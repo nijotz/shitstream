@@ -5,7 +5,7 @@ import glob
 import os
 import time
 
-from flask import Flask, jsonify, send_file
+from flask import Flask, jsonify, request, send_file
 from flask.ext.conditional import conditional
 from flask.ext.socketio import SocketIO, emit
 from flask.ext import restless
@@ -61,18 +61,21 @@ def del_song_from_playlist(playlist_song_code, mpdc=None):
         raise Exception
     return jsonify({'status': 'OK'})  #FIXME: Not sure what to return from DELETEs
 
-#FIXME: This should be a put, couldn't figure out the ember.js side of it
-@api_route('/queue/<playlist_code>/queue_song/<song_code>')
+@api_route('/queue', methods=['POST'])
 @mpd
-def add_song_to_playlist(playlist_code, song_code, mpdc=None):
-    if playlist_code != 'current':
-        raise Exception
-    song = db.Song.query.filter(db.Song.id == song_code).one()
-    songid = mpdc.addid(song.uri)
+def add_song_to_playlist(mpdc=None):
+    song_id = request.json['queue']['song']
+    song = db.Song.query.filter(db.Song.id == song_id).one()
+    queue_id = int(mpdc.addid(song.uri))
+    queue_data = mpdc.playlistid(queue_id)[0]
     if not mpdc.currentsong():
-        mpdc.playid(songid)
+        mpdc.playid(queue_id)
 
-    return jsonify({'status': 'OK'}) #FIXME: Return new PlaylistSong
+    return jsonify({'queue': {
+        'id': queue_id,
+        'pos': queue_data['pos'],
+        'song': song_id
+    }})
 
 @api_route('/playlists/<playlist_code>/queue_album/<album_code>')
 @mpd
