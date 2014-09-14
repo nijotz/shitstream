@@ -386,10 +386,10 @@ def get_listeners():
     except:
         return jsonify({'listeners': None})
 
+
 ##
 ## Test methods, enabled only if debug is True
 ##
-
 @conditional(app.route('/tests'), app.debug)
 def tests():
     return send_file('tests.html')
