@@ -51,7 +51,7 @@ def index():
 def del_song_from_queue(queue_id, mpdc=None):
     queue = db.Queue.query.filter(db.Queue.id == queue_id).one()
     mpdc.deleteid(queue.id)
-    return jsonify({'status': 'OK'})  #FIXME: Not sure what to return from DELETEs
+    return jsonify({})
 
 
 @api_route('/queue', methods=['POST'])
