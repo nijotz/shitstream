@@ -49,9 +49,9 @@ class MainTestCase(unittest.TestCase):
     def test_album(self):
         return self.client.get('/api/v1.0/albums/1')
 
-    @json_schema_test('tests/fixtures/playlist.schema.json')
+    @json_schema_test('tests/fixtures/queue.schema.json')
     def test_queue(self):
-        return self.client.get('/api/v1.0/playlists/current')
+        return self.client.get('/api/v1.0/queue')
 
 
 class AddURLTestCase(unittest.TestCase):

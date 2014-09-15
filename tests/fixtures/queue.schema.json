@@ -1,26 +1,25 @@
 {
-    "title": "shitstream Playlist Schema",
+    "title": "shitstream Queue Schema",
     "type": "object",
     "properties": {
-        "playlist": {
-            "type": "object",
-            "properties": {
-                "id": {"type": "string"},
-                "songs": {
-                    "type": "array",
-                    "items": {"type": "string"}
-                },
-                "current_song_pos": {"type": ["integer", "null"]}
+        "queue": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "number"},
+                    "song": {"type": "number"},
+                    "pos": {"type": "number"}
+                }
             },
             "required": [
                 "id",
-                "songs"
+                "song",
+                "pos"
             ]
-        },
-
-        "playlist_songs": {"type": "array"}
+        }
     },
     "required": [
-        "playlist"
+        "queue"
     ]
 }
