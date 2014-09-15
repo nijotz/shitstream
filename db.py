@@ -36,7 +36,7 @@ class Song(db.Model):
 
 class Album(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text)
+    name = db.Column(db.Text, nullable=False)
     date = db.Column(db.String(32))
 
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
@@ -45,7 +45,7 @@ class Album(db.Model):
 
 class Artist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text, unique=True)
+    name = db.Column(db.Text, unique=True, nullable=False)
     name_alpha = db.Column(db.Text, unique=True)
     songs = db.relationship('Song', backref=db.backref('artist'), lazy='dynamic')
 
