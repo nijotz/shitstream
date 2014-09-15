@@ -62,10 +62,16 @@ class Queue(db.Model):
     played = db.Column(db.Boolean, default=False, nullable=False)
 
 
+def clear_db_songs():
+    Song.query.filter().delete()
+    Album.query.filter().delete()
+    Artist.query.filter().delete()
+
+
 @mpd
 def update_db_songs(mpdc=None):
-    songs = mpdc.listallinfo()
 
+    songs = mpdc.listallinfo()
     for song in songs:
 
         # Get or create song
@@ -91,8 +97,9 @@ def update_db_songs(mpdc=None):
             'name': song.get('albumartist') or song.get('artist'),
             'name_alpha': song.get('albumartistsort')
         }
-        artist, _ = get_or_create(db.session, Artist, **artist_data)
-        new_song.artist = artist
+        if artist_data['name']:
+            artist, _ = get_or_create(db.session, Artist, **artist_data)
+            new_song.artist = artist
 
         # Get or create album
         album_data = {
@@ -100,28 +107,44 @@ def update_db_songs(mpdc=None):
             'artist': new_song.artist,
             'date': song.get('date')
         }
-        album, _ = get_or_create(db.session, Album, **album_data)
-        new_song.album = album
+        if album_data['name']:
+            album, _ = get_or_create(db.session, Album, **album_data)
+            new_song.album = album
 
     db.session.commit()
 
 
 @mpd
 def update_db_queue(mpdc=None):
-    playlist = mpdc.playlistinfo()
+    # For now just clear the queue data and reload it
+    for queue in Queue.query.all():
+        db.session.delete(queue)
+
+    queue = mpdc.playlistinfo()
     current_song_pos = mpdc.currentsong().get('pos')
 
-    for song in playlist:
-        queue_song = {
+    for song in queue:
+        queue = {
             'id': song.get('id'),
             'song': Song.query.filter(Song.uri == song.get('file')).one(),
             'pos': int(song.get('pos')),
             'played': int(song.get('pos')) < current_song_pos
         }
-        get_or_create(db.session, Queue, **queue_song)
+        get_or_create(db.session, Queue, **queue)
+
     db.session.commit()
 
 
 def update_db():
+    clear_db_songs()
     update_db_songs()
     update_db_queue()
+
+
+@mpd
+def update_on_change(mpdc=None):
+    while True:
+        mpdc.idle()
+        update_db_queue()
+        update_db_songs()
+        print 'Updated db'

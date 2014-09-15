@@ -3,6 +3,7 @@
 from functools import wraps
 import glob
 import os
+import threading
 import time
 
 from flask import Flask, jsonify, request, send_file
@@ -19,17 +20,20 @@ from mpd_util import mpd, mpd_connect
 import settings
 
 
-app = Flask(__name__)
-if settings.debug:
-    app.debug = True
-app.config['SECRET_KEY'] = 'secret!'
-app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
-socketio = SocketIO(app)
-api_prefix = '/api/v1.0'
+def create_app():
 
+    app = Flask(__name__)
+    if settings.debug:
+        app.debug = True
+    app.config['SECRET_KEY'] = 'secret!'
+    app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
+    return app
 
+app = create_app()
 import db
 
+api_prefix = '/api/v1.0'
+socketio = SocketIO(app)
 
 def api_route(route, *args, **kwargs):
     def wrapper(function):
@@ -176,6 +180,9 @@ def init():
     db.db.create_all()
     db.update_db()
 
+    mpd_updates = threading.Thread(target=db.update_on_change)
+    mpd_updates.start()
+
     manager = restless.APIManager(app, flask_sqlalchemy_db=db.db)
 
     #FIXME: copypaste
@@ -219,7 +226,6 @@ def init():
             'GET_SINGLE': [emberify('queue', db.Queue, many=False)]
         },
     )
-
 
 if __name__ == '__main__':
     init()
