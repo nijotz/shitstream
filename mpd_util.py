@@ -14,12 +14,12 @@ def mpd(func):
 
 def mpd_connect(mpdc=None):
     if not mpdc:
-        mpdc = MPDClient()
+        mpdc = MPDClient(use_unicode=True)
     else:
         try:
             mpdc.disconnect()
         except:
-            mpdc = MPDClient()
+            mpdc = MPDClient(use_unicode=True)
 
     # Try connecting a few times, sometimes MPD can get flooded
     attempts = 0
