@@ -94,7 +94,7 @@ def update_db_songs(mpdc=None):
             'track': track,
             'length': song.get('time')
         }
-        new_song, _ = get_or_create(db.session, Song, **song_data)
+        new_song = Song.query.filter(Song.uri == uri).first() or Song(**song_data)
 
         # Get or create artist
         artist_name = song.get('albumartist') or song.get('artist')
@@ -105,20 +105,24 @@ def update_db_songs(mpdc=None):
             'name': artist_name,
             'name_alpha': song.get('albumartistsort')
         }
-        if artist_data['name']:
-            artist, _ = get_or_create(db.session, Artist, **artist_data)
+        if artist_name:
+            artist = Artist.query.filter(Artist.name == artist_data['name']).first() or Artist(**artist_data)
+            db.session.add(artist)
             new_song.artist = artist
 
         # Get or create album
         album_data = {
             'name': song.get('album'),
-            'artist': new_song.artist,
             'date': song.get('date')
         }
+        if new_song.artist:
+            album_data['artist'] = new_song.artist
         if album_data['name']:
-            album, _ = get_or_create(db.session, Album, **album_data)
+            album = Album.query.filter(Album.name == album_data['name']).first() or Album(**album_data)
+            db.session.add(album)
             new_song.album = album
 
+        db.session.add(new_song)
     db.session.commit()
     print 'Updated song db'  #FIXME: proper logging
 
