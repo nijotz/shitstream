@@ -155,5 +155,4 @@ def update_on_change(mpdc=None):
     while True:
         mpdc.idle()
         update_db_queue()
-        update_db_songs()
         print 'Updated db'
