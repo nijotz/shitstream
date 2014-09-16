@@ -97,8 +97,12 @@ def update_db_songs(mpdc=None):
         new_song, _ = get_or_create(db.session, Song, **song_data)
 
         # Get or create artist
+        artist_name = song.get('albumartist') or song.get('artist')
+        # Not sure why, python-mpd2 returned a list once and I couldn't figure it out
+        if type(artist_name) is list:
+            artist_name = artist_name[0]
         artist_data = {
-            'name': song.get('albumartist') or song.get('artist'),
+            'name': artist_name,
             'name_alpha': song.get('albumartistsort')
         }
         if artist_data['name']:
