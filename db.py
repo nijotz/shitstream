@@ -73,6 +73,8 @@ def clear_db_songs():
 @mpd
 def update_db_songs(mpdc=None):
 
+    print 'Updating song db'  #FIXME: proper logging
+
     songs = mpdc.listallinfo()
     for song in songs:
 
@@ -114,6 +116,7 @@ def update_db_songs(mpdc=None):
             new_song.album = album
 
     db.session.commit()
+    print 'Updated song db'  #FIXME: proper logging
 
 
 @mpd
