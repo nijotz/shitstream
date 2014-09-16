@@ -195,6 +195,7 @@ def init():
             'GET_MANY': [emberify('artists', db.Artist)],
             'GET_SINGLE': [emberify('artist', db.Artist, many=False)]
         },
+        results_per_page=None
     )
     manager.create_api(
         db.Song,
@@ -205,6 +206,7 @@ def init():
             'GET_MANY': [emberify('songs', db.Song)],
             'GET_SINGLE': [emberify('song', db.Song, many=False)]
         },
+        results_per_page=None
     )
     manager.create_api(
         db.Album,
@@ -215,6 +217,7 @@ def init():
             'GET_MANY': [emberify('albums', db.Album)],
             'GET_SINGLE': [emberify('album', db.Album, many=False)]
         },
+        results_per_page=None
     )
     manager.create_api(
         db.Queue,
@@ -225,6 +228,7 @@ def init():
             'GET_MANY': [emberify('queue', db.Queue)],
             'GET_SINGLE': [emberify('queue', db.Queue, many=False)]
         },
+        results_per_page=None
     )
 
 if __name__ == '__main__':
