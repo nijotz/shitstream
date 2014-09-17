@@ -141,7 +141,7 @@ def clear_db_queue():
 @mpd
 def update_db_queue(mpdc=None):
     queue = mpdc.playlistinfo()
-    current_song_pos = mpdc.currentsong().get('pos')
+    current_song_pos = int(mpdc.currentsong().get('pos'))
 
     for song in queue:
         queue = {
