@@ -73,57 +73,63 @@ def clear_db_songs():
     print 'Cleared songs'
 
 
+def new_song_from_mpd_data(song):
+    # Get or create song
+    uri = song.get('file')
+    assert uri
+
+    try:
+        track = int(song.get('track'))
+    except:
+        track = None
+
+    song_data = {
+        'uri': uri,
+        'name': song.get('title'),
+        'track': track,
+        'length': song.get('time')
+    }
+    new_song = Song.query.filter(Song.uri == uri).first() or Song(**song_data)
+
+    # Get or create artist
+    artist_name = song.get('albumartist') or song.get('artist')
+    # Not sure why, python-mpd2 returned a list once and I couldn't figure it out
+    if type(artist_name) is list:
+        artist_name = artist_name[0]
+    artist_data = {
+        'name': artist_name,
+        'name_alpha': song.get('albumartistsort')
+    }
+    if artist_name:
+        artist = Artist.query.filter(Artist.name == artist_data['name']).first() or Artist(**artist_data)
+        db.session.add(artist)
+        new_song.artist = artist
+
+    # Get or create album
+    album_data = {
+        'name': song.get('album'),
+        'date': song.get('date')
+    }
+    if new_song.artist:
+        album_data['artist'] = new_song.artist
+    if album_data['name']:
+        album = Album.query.filter(Album.name == album_data['name']).first() or Album(**album_data)
+        db.session.add(album)
+        new_song.album = album
+
+    db.session.add(new_song)
+    return new_song
+
+
 @mpd
 def update_db_songs(mpdc=None):
     print 'Updating song db'  #FIXME: proper logging
     songs = mpdc.listallinfo()
     for song in songs:
-
-        # Get or create song
-        uri = song.get('file')
-        if not uri:
+        # listallinfo returns directories, ignore them
+        if not song.get('file'):
             continue
-
-        try:
-            track = int(song.get('track'))
-        except:
-            track = None
-
-        song_data = {
-            'uri': uri,
-            'name': song.get('title'),
-            'track': track,
-            'length': song.get('time')
-        }
-        new_song = Song.query.filter(Song.uri == uri).first() or Song(**song_data)
-
-        # Get or create artist
-        artist_name = song.get('albumartist') or song.get('artist')
-        # Not sure why, python-mpd2 returned a list once and I couldn't figure it out
-        if type(artist_name) is list:
-            artist_name = artist_name[0]
-        artist_data = {
-            'name': artist_name,
-            'name_alpha': song.get('albumartistsort')
-        }
-        if artist_name:
-            artist = Artist.query.filter(Artist.name == artist_data['name']).first() or Artist(**artist_data)
-            db.session.add(artist)
-            new_song.artist = artist
-
-        # Get or create album
-        album_data = {
-            'name': song.get('album'),
-            'date': song.get('date')
-        }
-        if new_song.artist:
-            album_data['artist'] = new_song.artist
-        if album_data['name']:
-            album = Album.query.filter(Album.name == album_data['name']).first() or Album(**album_data)
-            db.session.add(album)
-            new_song.album = album
-
-        db.session.add(new_song)
+        new_song_from_mpd_data(song)
     db.session.commit()
     print 'Updated song db'  #FIXME: proper logging
 

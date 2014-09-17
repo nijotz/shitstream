@@ -135,6 +135,11 @@ def add_url_event(msg, mpdc=None):
         emit('response', {'msg': 'Music database still updating'}))
     emit('response', {'msg': 'Song added to music database'})
 
+    # Add song to database
+    song = mpdc.listallinfo(uri)[0]
+    db.new_song_from_mpd_data(song)
+    db.db.session.commit()
+
     # Add song to Queue
     emit('response', {'msg': 'Adding song to queue'})
     songid = mpdc.addid(uri)
