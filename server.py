@@ -178,10 +178,13 @@ def tests_reset(mpdc=None):
 
 def init():
     db.db.create_all()
-    db.update_db()
+    db.clear_db_songs()
 
-    mpd_updates = threading.Thread(target=db.update_on_change)
-    mpd_updates.start()
+    queue_updates = threading.Thread(target=db.update_queue_on_change)
+    queue_updates.start()
+
+    song_updates = threading.Thread(target=db.update_songs_on_change)
+    song_updates.start()
 
     manager = restless.APIManager(app, flask_sqlalchemy_db=db.db)
 
@@ -230,6 +233,7 @@ def init():
         },
         results_per_page=None
     )
+
 
 if __name__ == '__main__':
     init()

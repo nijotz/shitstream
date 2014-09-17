@@ -65,16 +65,17 @@ class Queue(db.Model):
 
 
 def clear_db_songs():
+    print 'Clearing songs'
     Song.query.filter().delete()
     Album.query.filter().delete()
     Artist.query.filter().delete()
+    db.session.commit()
+    print 'Cleared songs'
 
 
 @mpd
 def update_db_songs(mpdc=None):
-
     print 'Updating song db'  #FIXME: proper logging
-
     songs = mpdc.listallinfo()
     for song in songs:
 
@@ -127,12 +128,14 @@ def update_db_songs(mpdc=None):
     print 'Updated song db'  #FIXME: proper logging
 
 
-@mpd
-def update_db_queue(mpdc=None):
+def clear_db_queue():
     # For now just clear the queue data and reload it
     for queue in Queue.query.all():
         db.session.delete(queue)
 
+
+@mpd
+def update_db_queue(mpdc=None):
     queue = mpdc.playlistinfo()
     current_song_pos = mpdc.currentsong().get('pos')
 
@@ -148,15 +151,19 @@ def update_db_queue(mpdc=None):
     db.session.commit()
 
 
-def update_db():
-    clear_db_songs()
-    update_db_songs()
-    update_db_queue()
-
+@mpd
+def update_queue_on_change(mpdc=None):
+    while True:
+        print 'Updating db (queue)'
+        clear_db_queue()
+        update_db_queue()
+        print 'Updated db (queue)'
+        mpdc.idle()
 
 @mpd
-def update_on_change(mpdc=None):
+def update_songs_on_change(mpdc=None):
     while True:
+        print 'Updating db (songs)'
+        update_db_songs()
+        print 'Updated db (songs)'
         mpdc.idle()
-        update_db_queue()
-        print 'Updated db'
