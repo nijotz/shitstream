@@ -123,7 +123,6 @@ def new_song_from_mpd_data(song):
 
 @mpd
 def update_db_songs(mpdc=None):
-    print 'Updating song db'  #FIXME: proper logging
     songs = mpdc.listallinfo()
     for song in songs:
         # listallinfo returns directories, ignore them
@@ -131,7 +130,6 @@ def update_db_songs(mpdc=None):
             continue
         new_song_from_mpd_data(song)
     db.session.commit()
-    print 'Updated song db'  #FIXME: proper logging
 
 
 def clear_db_queue():
@@ -157,6 +155,7 @@ def update_db_queue(mpdc=None):
     db.session.commit()
 
 
+#FIXME: proper logging instead of print
 @mpd
 def update_queue_on_change(mpdc=None):
     while True:
