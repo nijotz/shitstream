@@ -183,7 +183,8 @@ def tests_reset(mpdc=None):
 
 def init():
     db.db.create_all()
-    db.clear_db_songs()
+    if settings.db_clear_on_load:
+        db.clear_db_songs()
 
     queue_updates = threading.Thread(target=db.update_queue_on_change)
     queue_updates.start()
