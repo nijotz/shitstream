@@ -163,7 +163,7 @@ def update_queue_on_change(mpdc=None):
         clear_db_queue()
         update_db_queue()
         print 'Updated db (queue)'
-        mpdc.idle()
+        mpdc.idle('playlist')
 
 @mpd
 def update_songs_on_change(mpdc=None):
@@ -171,4 +171,4 @@ def update_songs_on_change(mpdc=None):
         print 'Updating db (songs)'
         update_db_songs()
         print 'Updated db (songs)'
-        mpdc.idle()
+        mpdc.idle('database')
