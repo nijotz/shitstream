@@ -124,11 +124,15 @@ def new_song_from_mpd_data(song):
 @mpd
 def update_db_songs(mpdc=None):
     songs = mpdc.listallinfo()
+    total = len(songs)
+    num = 0
     for song in songs:
         # listallinfo returns directories, ignore them
         if not song.get('file'):
             continue
         new_song_from_mpd_data(song)
+        num += 1
+        print 'Added song {}/{}'.format(num, total)  #FIXME: proper logging
     db.session.commit()
 
 
