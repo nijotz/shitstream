@@ -2,7 +2,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.sql.expression import ClauseElement
 
-from mpd_util import mpd
+from mpd_util import mpd, mpd_connect
 from server import app
 
 
@@ -173,4 +173,5 @@ def update_songs_on_change(mpdc=None):
         print 'Updating db (songs)'
         update_db_songs()
         print 'Updated db (songs)'
+        mpdc = mpd_connect()   #FIXME: proper timeout handling
         mpdc.idle('database')
