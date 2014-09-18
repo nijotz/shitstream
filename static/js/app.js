@@ -57,8 +57,8 @@ App.Album = DS.Model.extend({
 });
 
 App.Song = DS.Model.extend({
-    artist: DS.belongsTo('artist'),
-    album: DS.belongsTo('album'),
+    artist: DS.belongsTo('artist', {async:true}),
+    album: DS.belongsTo('album', {async:true}),
     name: DS.attr('string'),
     length: DS.attr('string'),
     uri: DS.attr('string'),
@@ -186,10 +186,9 @@ App.MusicRoute = Ember.Route.extend({
             album.get('songs')
             .then(function(songs) {
                 songs.forEach(function(song) {
-                    self.store.createRecord('queue', {
-                        'song': song
-                    })
-                    .save()
+                    var queue = self.store.createRecord('queue', {})
+                    queue.set('song', song)
+                    queue.get('song').then(function() {queue.save()})
                 })
             }).then(function(data) {
                 $('#alert-placeholder').append(
