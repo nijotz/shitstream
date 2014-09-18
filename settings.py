@@ -21,4 +21,4 @@ download_dir = config_get('downloaders', 'download_dir', 'music/in')
 debug = config_get('general', 'debug', True, config.getboolean)
 
 db_uri = config_get('db', 'uri', 'sqlite:///test.db')
-db_clear_on_load = config_get('db', 'clear_on_load', True)
+db_clear_on_load = config_get('db', 'clear_on_load', True, config.getboolean)
