@@ -123,17 +123,25 @@ def new_song_from_mpd_data(song):
 
 @mpd
 def update_db_songs(mpdc=None):
-    songs = mpdc.listallinfo()
-    total = len(songs)
+    mpd_songs = dict([ (song.get('file'), song) for song in mpdc.listallinfo() if song.get('file')])
+    mpd_song_files = set( mpd_songs.keys() )
+
+    db_songs = dict([ (song.uri, song) for song in Song.query.all() ])
+    db_song_files = set( db_songs.keys() )
+
+    mpd_only_song_files = mpd_song_files.difference(db_song_files)
+    db_only_song_files = db_song_files.difference(mpd_song_files)
+
+    total = len(mpd_only_song_files)
     num = 0
-    for song in songs:
-        # listallinfo returns directories, ignore them
-        if not song.get('file'):
-            continue
-        new_song_from_mpd_data(song)
+    for song_file in mpd_only_song_files:
+        new_song_from_mpd_data(mpd_songs[song_file])
         num += 1
         print 'Added song {}/{}'.format(num, total)  #FIXME: proper logging
     db.session.commit()
+
+    for song_file in db_only_song_files:
+        pass  #TODO
 
 
 def clear_db_queue():
@@ -152,7 +160,7 @@ def update_db_queue(mpdc=None):
     for song in queue:
         queue = {
             'id': song.get('id'),
-            'song': Song.query.filter(Song.uri == song.get('file')).one(),
+            'song': new_song_from_mpd_data(song),
             'pos': int(song.get('pos')),
             'played': int(song.get('pos')) < current_song_pos
         }
