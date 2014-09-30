@@ -6,8 +6,8 @@ module('integration tests', {
         Ember.run(function() {
             App.reset();
         });
-    },
-    teardown: function() {
+
+        // Wait on back end to reset
         var waiter;
         waiter = function () {
             return false;
