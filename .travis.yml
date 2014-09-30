@@ -5,6 +5,7 @@ python:
 install: "pip install -r requirements/project.txt -r requirements/tests.txt"
 
 before_script:
+    - sudo apt-get update
     - sudo apt-get install -y mpd libav-tools libavcodec-extra-53
     - sudo service mpd stop
     - mkdir ~/.mpd/
