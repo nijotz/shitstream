@@ -78,7 +78,7 @@ def add_song_to_queue(mpdc=None):
 @api_route('/queue/album', methods=['POST'])
 @mpd
 def add_album_to_queue(mpdc=None):
-    #TODO: some kind of lock to make sure a song isn't queue between album
+    #TODO: some kind of lock to make sure a song isn't queued between album
     # songs by another request
 
     album_id = request.json['album']['id']

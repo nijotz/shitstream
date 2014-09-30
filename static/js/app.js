@@ -161,13 +161,17 @@ App.AddUrlRoute = Ember.Route.extend({
 App.MusicRoute = Ember.Route.extend({
     actions: {
         queue_song: function(song) {
-            this.store.createRecord('queue', {
-                'song': song
-            })
-            .save()
+            var queue = this.store.createRecord('queue', {});
+            queue.set('song', song);
+            queue.get('song', song)
             .then(function(data) {
+                queue.save();
+            })
+            .then(function(data) {
+                // Success
                 flash('Song added to queue');
             }, function(data) {
+                // Failure
                 flash('Failed to add song to queue', 'danger');
             });
         },
@@ -235,7 +239,7 @@ App.ArtistsController = Ember.ArrayController.extend({
 
 // type can be success, info, warning, danger
 function flash(msg, type) {
-    type = typeof type !== 'undefind' ? type : 'success';
+    type = typeof type !== 'undefined' ? type : 'success';
 
     $('#alert-placeholder').append(
         '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' +
