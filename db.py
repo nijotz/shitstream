@@ -79,7 +79,11 @@ def new_song_from_mpd_data(song):
     assert uri
 
     try:
-        track = int(song.get('track'))
+        track_str = song.get('track')
+        if track_str.find('/'):
+            track = int(track_str.split('/')[0])
+        else:
+            track = int(track_str)
     except:
         track = None
 
