@@ -10,7 +10,7 @@ before_script:
     - mkdir ~/.mpd/
     - touch ~/.mpd/database
     - mkdir -p music/mp3
-    - cp tests/fixtures/mp3/* music/mp3
+    - cp -R tests/fixtures/mp3/* music/mp3
     - sed -i "s%^music_directory.*%music_directory \"$(pwd)/music/\"%" mpd.conf
     - mpd mpd.conf
     - python server.py &

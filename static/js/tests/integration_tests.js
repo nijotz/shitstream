@@ -108,6 +108,39 @@ test('queue album with multiple artist tags', function() {
         var alerts = find("#alert-placeholder .alert:contains('Album added to queue')").length;
         equal(alerts > 0, true);
     });
+    andThen(function() {
+        click('#nav-link-queue a');
+    })
+    andThen(function() {
+        var queue = find(".playlist-song").length;
+        equal(queue > 0, true);
+    });
+});
+
+test('album queues in correct order', function() {
+    visit("/music/");
+    andThen(function() {
+        click("#artist-list .list-group-item:contains('alt-J')");
+    });
+    andThen(function() {
+        var album_lnk = find(".album-list > td > .album-link:contains('An Awesome Wave')");
+        var queue_btn = $(album_lnk).parent().parent().find('button')[0];
+        click(queue_btn);
+    });
+    andThen(function() {
+        var alerts = find("#alert-placeholder .alert:contains('Album added to queue')").length;
+        equal(alerts > 0, true);
+    });
+    andThen(function() {
+        click('#nav-link-queue a');
+    })
+    andThen(function() {
+        equal(find(".playlist-song:eq(0) .song-file").html().contains('01'), true);
+        equal(find(".playlist-song:eq(1) .song-file").html().contains('02'), true);
+        equal(find(".playlist-song:eq(2) .song-file").html().contains('03'), true);
+        equal(find(".playlist-song:eq(3) .song-file").html().contains('04'), true);
+        equal(find(".playlist-song:eq(4) .song-file").html().contains('05'), true);
+    });
 });
 
 //test('adding url to queue will fetch metadata for song', function() {
