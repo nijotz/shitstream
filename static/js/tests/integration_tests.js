@@ -135,11 +135,11 @@ test('album queues in correct order', function() {
         click('#nav-link-queue a');
     })
     andThen(function() {
-        equal(find(".playlist-song:eq(0) .song-file").html().contains('01'), true);
-        equal(find(".playlist-song:eq(1) .song-file").html().contains('02'), true);
-        equal(find(".playlist-song:eq(2) .song-file").html().contains('03'), true);
-        equal(find(".playlist-song:eq(3) .song-file").html().contains('04'), true);
-        equal(find(".playlist-song:eq(4) .song-file").html().contains('05'), true);
+        for (var i = 0; i < 5; i++) {
+            var song = find(".playlist-song:eq(+" + i.toString() + ") .song-file")[0];
+            var html = $(song).html();
+            equal(html.indexOf('0' + (i + 1).toString()) > -1, true);
+        }
     });
 });
 
