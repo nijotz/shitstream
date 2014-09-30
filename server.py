@@ -75,6 +75,39 @@ def add_song_to_queue(mpdc=None):
     }})
 
 
+@api_route('/queue/album', methods=['POST'])
+@mpd
+def add_album_to_queue(mpdc=None):
+    #TODO: some kind of lock to make sure a song isn't queue between album
+    # songs by another request
+
+    album_id = request.json['album']['id']
+    album = db.Album.query.filter(db.Album.id == album_id).one()
+    songs = db.Song.query.filter(db.Song.album_id == album.id).order_by(db.Song.track).all()
+
+    # Capture queued songs to send back to the client
+    queue = []
+    first = None
+    for song in songs:
+
+        queue_id = int(mpdc.addid(song.uri))
+        queue_data = mpdc.playlistid(queue_id)[0]
+        queue.append({
+            'id': queue_id,
+            'pos': queue_data['pos'],
+            'song': song.id
+        })
+
+        if not first:
+            first = queue_id
+
+    # If not currently playing, play the first song of the album
+    if not mpdc.currentsong():
+        mpdc.playid(first)
+
+    return jsonify({'queue': queue})
+
+
 @socketio.on('connect', namespace = api_prefix + '/add_url/')
 def add_url_connect():
     emit('response', {'msg': 'Connected'});

@@ -173,31 +173,34 @@ App.MusicRoute = Ember.Route.extend({
         },
         queue_album: function(album) {
             var self = this;
-            album.get('songs')
-            .then(function(songs) {
-                songs.forEach(function(song) {
-                    var queue = self.store.createRecord('queue', {})
-                    queue.set('song', song)
-                    queue.get('song').then(function() {queue.save()})
-                })
-            }).then(function(data) {
-                $('#alert-placeholder').append(
-                    '<div class="alert alert-success alert-dismissible" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert">' +
-                            '<span aria-hidden="true">&times;</span>' +
-                            '<span class="sr-only">Close</span>' +
-                        '</button>' +
-                        'Album added to queue' +
-                    '</div>'
-                )
 
-                var alertdiv = $('#alert-placeholder').children('.alert:last-child')
-                window.setTimeout(function() {
-                    $(alertdiv).fadeTo(500, 0).slideUp(500, function(){
-                        alertdiv.remove();
-                    });
-                }, 3000);
-            });
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1.0/queue/album',
+                data: JSON.stringify({
+                    album: album.serialize({includeId:true})
+                }),
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json"
+            })
+            .done(function(data) {
+                Ember.run(function() {
+
+                queue_songs = data['queue']
+                //(i=0; i<arr.length; i++) is used instead of (var i in arr)
+                //because for some reason extra keys are being put on the array
+                //object, it's probably ember.js adding to the array prototype
+                for (var i=0; i<queue_songs.length; i++) {
+                    var queue_data = queue_songs[i];
+                    var queue = self.store.push('queue', queue_data);
+                }
+                flash('Album added to queue');
+
+                });
+            })
+            .fail(function(data) {
+                flash('Error adding album to queue', 'error');
+            })
         }
     }
 });
