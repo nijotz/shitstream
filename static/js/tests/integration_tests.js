@@ -127,29 +127,37 @@ test('queue album with multiple artist tags', function() {
 });
 
 test('album queues in correct order', function() {
-    visit("/music/");
-    andThen(function() {
-        click("#artist-list .list-group-item:contains('alt-J')");
-    });
-    andThen(function() {
-        var album_lnk = find(".album-list > td > .album-link:contains('An Awesome Wave')");
-        var queue_btn = $(album_lnk).parent().parent().find('button')[0];
-        click(queue_btn);
-    });
-    andThen(function() {
-        var alerts = find("#alert-placeholder .alert:contains('Album added to queue')").length;
-        equal(alerts > 0, true);
-    });
-    andThen(function() {
-        click('#nav-link-queue a');
-    })
-    andThen(function() {
-        for (var i = 0; i < 5; i++) {
-            var song = find(".playlist-song:eq(+" + i.toString() + ") .song-file")[0];
-            var html = $(song).html();
-            equal(html.indexOf('0' + (i + 1).toString()) > -1, true);
-        }
-    });
+    function base_test(artist, album) {
+        visit("/music/");
+        andThen(function() {
+            click("#artist-list .list-group-item:contains('" + artist + "')");
+        });
+        andThen(function() {
+            var album_lnk = find(".album-list > td > .album-link:contains('" + album + "')");
+            var queue_btn = $(album_lnk).parent().parent().find('button')[0];
+            click(queue_btn);
+        });
+        andThen(function() {
+            var alerts = find("#alert-placeholder .alert:contains('Album added to queue')").length;
+            equal(alerts > 0, true);
+        });
+        andThen(function() {
+            click('#nav-link-queue a');
+        })
+        andThen(function() {
+            for (var i = 0; i < 5; i++) {
+                var song = find(".playlist-song:eq(+" + i.toString() + ") .song-file")[0];
+                var html = $(song).html();
+                equal(html.indexOf('0' + (i + 1).toString()) > -1, true);
+            }
+        });
+    }
+
+    // Has 1, 2, 3, etc tracks tags
+    base_test('alt-J', 'An Awesome Wave');
+
+    // Has 1/7, 2/7, 3/7, etc tracks tags
+    base_test('Atriarch', 'Ritual of Passing');
 });
 
 //test('adding url to queue will fetch metadata for song', function() {
