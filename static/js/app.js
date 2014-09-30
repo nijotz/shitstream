@@ -109,6 +109,7 @@ App.ArtistRoute = Ember.Route.extend({
 
 App.ApplicationRoute = Ember.Route.extend({
     setupController: function(controller) {
+        // TODO: use app namespace (api/v1.0)
         Ember.$.getJSON('/api/v1.0/listeners').
         then(function(data) {
             Ember.run(function() {
@@ -139,6 +140,7 @@ App.AddUrlRoute = Ember.Route.extend({
         queue_url: function(url) {
 
             $('#queue-btn').prop('disabled', true);
+            // TODO: use app namespace (api/v1.0)
             var socket = io.connect('/api/v1.0/add_url/');
 
             socket.on('connect', function() {
