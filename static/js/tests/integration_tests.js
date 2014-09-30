@@ -1,6 +1,19 @@
 App.setupForTesting();
 App.injectTestHelpers();
 
+function async_wait(func) {
+    var waiter;
+    waiter = function () {
+        return false;
+    }
+    function finished() {
+        Ember.Test.unregisterWaiter(waiter);
+    }
+    Ember.Test.registerWaiter(waiter);
+    func(finished);
+    andThen(function () {});
+}
+
 module('integration tests', {
     setup: function() {
         Ember.run(function() {
@@ -8,18 +21,14 @@ module('integration tests', {
         });
 
         // Wait on back end to reset
-        var waiter;
-        waiter = function () {
-            return false;
-        }
-        Ember.Test.registerWaiter(waiter);
-        Ember.$.ajax({
-            url: '/tests/reset',
-            success: function() {
-                Ember.Test.unregisterWaiter(waiter);
-            }
-        });
-        andThen(function () {});
+        async_wait(function(finished) {
+            Ember.$.ajax({
+                url: '/tests/reset',
+                success: function() {
+                    finished();
+                }
+            });
+        })
     }
 });
 
