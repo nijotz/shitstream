@@ -32,12 +32,14 @@ App.Router.map(function() {
 
 App.LoadingView = Ember.View.extend({
     jquery: function() {
-        function more_poop(poop) {
-          poop.innerHTML += " 💩";
-          setTimeout(function() { more_poop(poop); }, 100);
+        function more_poop() {
+          poop = document.getElementById('poop');
+          if (poop) {
+              poop.innerHTML += " 💩";
+              setTimeout(function() { more_poop(poop); }, 100);
+          }
         }
-        poop = document.getElementById('poop');
-        more_poop(poop);
+        more_poop();
     }.on('didInsertElement')
 });
 
