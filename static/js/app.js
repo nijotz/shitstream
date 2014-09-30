@@ -166,22 +166,9 @@ App.MusicRoute = Ember.Route.extend({
             })
             .save()
             .then(function(data) {
-                $('#alert-placeholder').append(
-                    '<div class="alert alert-success alert-dismissible" role="alert">' +
-                        '<button type="button" class="close" data-dismiss="alert">' +
-                            '<span aria-hidden="true">&times;</span>' +
-                            '<span class="sr-only">Close</span>' +
-                        '</button>' +
-                        'Song added to queue' +
-                    '</div>'
-                )
-
-                var alertdiv = $('#alert-placeholder').children('.alert:last-child')
-                window.setTimeout(function() {
-                    $(alertdiv).fadeTo(500, 0).slideUp(500, function(){
-                        alertdiv.remove();
-                    });
-                }, 3000);
+                flash('Song added to queue');
+            }, function(data) {
+                flash('Failed to add song to queue', 'danger');
             });
         },
         queue_album: function(album) {
@@ -242,3 +229,25 @@ App.ArtistsController = Ember.ArrayController.extend({
     sortProperties: ['name'],
     sortAscending: true,
 });
+
+// type can be success, info, warning, danger
+function flash(msg, type) {
+    type = typeof type !== 'undefind' ? type : 'success';
+
+    $('#alert-placeholder').append(
+        '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' +
+            '<button type="button" class="close" data-dismiss="alert">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '<span class="sr-only">Close</span>' +
+            '</button>' +
+            msg +
+        '</div>'
+    )
+
+    var alertdiv = $('#alert-placeholder').children('.alert:last-child')
+    window.setTimeout(function() {
+        $(alertdiv).fadeTo(500, 0).slideUp(500, function(){
+            alertdiv.remove();
+        });
+    }, 3000);
+}
