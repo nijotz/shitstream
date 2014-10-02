@@ -234,6 +234,11 @@ App.QueueRoute = Ember.Route.extend({
     }
 });
 
+App.SongsController = Ember.ArrayController.extend({
+    sortProperties: ['track'],
+    sortAscending: true
+});
+
 App.ArtistsController = Ember.ArrayController.extend({
     sortProperties: ['name'],
     sortAscending: true,
