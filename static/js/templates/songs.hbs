@@ -2,10 +2,10 @@
   <thead>
     <tr>
       <th>Artist</th>
+      <th>Track</th>
       <th>Album</th>
       <th>Title</th>
       <th>Length</th>
-      <th>Filename</th>
       <th>Queue</th>
     </tr>
   </thead>
@@ -13,10 +13,10 @@
   {{#each}}
     <tr class="album-song" {{bind-attr class="playing:success"}}>
       <td>{{artist.name}}</td>
+      <td>{{track}}</td>
       <td>{{album.name}}</td>
       <td>{{name}}</td>
       <td>{{length}}</td>
-      <td>{{uri}}</td>
       <td>
         <button class="queue-btn" {{action "queue_song" this}}>
           <span class="glyphicon glyphicon-plus"></span>
