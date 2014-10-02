@@ -7,6 +7,7 @@
           <th>Position</th>
           <th>Artist</th>
           <th>Album</th>
+          <th>Track</th>
           <th>Title</th>
           <th>Length</th>
           <th>Remove</th>
@@ -17,7 +18,8 @@
         <tr {{bind-attr class=":playlist-song played:active played:text-muted"}}>
           <td class="song-pos">{{pos}}</td>
           <td class="song-artist">{{song.artist.name}}</td>
-          <td class="song-albu">{{song.album.name}}</td>
+          <td class="song-album">{{song.album.name}}</td>
+          <td class="song-track">{{song.track}}</td>
           <td class="song-name">{{song.name}}</td>
           <td class="song-length">{{song.length}}</td>
           <td>

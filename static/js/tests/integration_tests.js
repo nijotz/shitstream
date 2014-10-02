@@ -146,9 +146,9 @@ test('album queues in correct order', function() {
         })
         andThen(function() {
             for (var i = 0; i < 5; i++) {
-                var song = find(".playlist-song:eq(+" + i.toString() + ") .song-file")[0];
+                var song = find(".playlist-song:eq(+" + i.toString() + ") .song-track")[0];
                 var html = $(song).html();
-                equal(html.indexOf('0' + (i + 1).toString()) > -1, true);
+                equal(html.indexOf((i + 1).toString()) > -1, true);
             }
         });
     }
