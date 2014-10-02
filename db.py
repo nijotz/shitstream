@@ -52,9 +52,7 @@ class Artist(db.Model):
 
     @hybrid_property
     def non_album_songs(self):
-        #FIXME: should return actual song objects, returning IDs for ember,
-        #this should be in emberify
-        return [song.id for song in self.songs.filter(Song.album == None).all()]
+        return self.songs.filter(Song.album == None).all()
 
 
 class Queue(db.Model):
