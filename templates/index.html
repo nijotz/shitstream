@@ -6,32 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="/static/img/favicon.ico">
+    <link rel="icon" href="static/img/favicon.ico">
 
     <title>shitstream</title>
 
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/main.css" rel="stylesheet">
-    <link href="/static/css/qunit-1.15.0.css" rel="stylesheet">
+    {% block css %}
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/main.css" rel="stylesheet">
+    {% endblock %}
   </head>
   <body>
-    <div id="qunit"></div>
-    <div id="qunit-fixture"></div>
-    <script src="/static/js/lib/jquery-1.10.2.js"></script>
-    <script src="/static/js/lib/bootstrap.min.js"></script>
-    <script src="/static/js/lib/handlebars-1.1.2.js"></script>
-    <script src="/static/js/lib/ember-1.7.0.js"></script>
-    <script src="/static/js/lib/ember-data-1.0.0-beta9.js"></script>
-    <script src="/static/js/lib/socket.io-0.9.16.js"></script>
-    <script src="/static/js/app.js"></script>
-    <script src="/static/js/lib/qunit-1.15.0.js"></script>
-    <script src="/static/js/tests/integration_tests.js"></script>
+    {% block js %}
+    <script src="static/js/lib/jquery-1.10.2.js"></script>
+    <script src="static/js/lib/bootstrap.min.js"></script>
+    <script src="static/js/lib/handlebars-1.1.2.js"></script>
+    <script src="static/js/lib/ember-1.7.0.js"></script>
+    <script src="static/js/lib/ember-data-1.0.0-beta10.js"></script>
+    <script src="static/js/lib/socket.io-0.9.16.js"></script>
+    <script src="static/js/lib/moment-2.8.3.js"></script>
+    <script src="static/js/lib/moment-duration-format-1.3.0.js"></script>
+    <script src="static/js/app.js"></script>
     <script>
       function compile(template) {
         var templateName = template.split('/templates/').reverse()[0].replace('.hbs', '');
-        Ember.$.ajax({
+        $.ajax({
           url: template,
           cache: false,
+          async: false,
           success: function (source) {
             var input = Ember.Handlebars.precompile(source.toString());
             Ember.TEMPLATES[templateName] = Ember.Handlebars.template(input);
@@ -49,5 +50,6 @@
       compile('/static/js/templates/queue.hbs');
       compile('/static/js/templates/songs.hbs');
     </script>
+    {% endblock %}
   </body>
 </html>

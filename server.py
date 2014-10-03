@@ -6,7 +6,7 @@ import os
 import threading
 import time
 
-from flask import Flask, jsonify, request, send_file
+from flask import Flask, jsonify, request, render_template
 from flask.ext.conditional import conditional
 from flask.ext.socketio import SocketIO, emit
 from flask.ext import restless
@@ -47,7 +47,7 @@ def api_route(route, *args, **kwargs):
 
 @app.route('/')
 def index():
-    return send_file('index.html')
+    return render_template('index.html')
 
 
 @api_route('/queue/<queue_id>', methods=['DELETE'])
@@ -199,7 +199,7 @@ def get_listeners():
 ##
 @conditional(app.route('/tests'), app.debug)
 def tests():
-    return send_file('tests.html')
+    return render_template('tests.html')
 
 
 @conditional(app.route('/tests/reset'), app.debug)
