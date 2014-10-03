@@ -17,6 +17,9 @@
           <span class="author-name">
             Commited by <a {{bind-attr href=author.html_url}}><strong>@{{author.login}}</strong></a>
           </span>
+          <span class="commit-timestamp">
+            on {{commit.committer.date}}
+          </span>
         </li>
       {{/each}}
       </ul>

@@ -134,7 +134,13 @@ App.IndexRoute = Ember.Route.extend({
             'https://api.github.com/repos/nijotz/shitstream/commits'
         ).then(function(data) {
             return Ember.run(function() {
-                return data.splice(0, 5);
+                data = data.splice(0, 5);
+                for (var i=0; i<data.length; i++) {
+                    var committer = data[i]['commit']['committer'];
+                    var date_human = moment(committer['date']);
+                    committer['date'] = date_human.format('MMM DD YYYY');
+                }
+                return data;
             });
         })
     }
