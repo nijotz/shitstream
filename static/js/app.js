@@ -63,10 +63,15 @@ App.Song = DS.Model.extend({
     album: DS.belongsTo('album', {async:true}),
     track: DS.attr('number'),
     name: DS.attr('string'),
-    length: DS.attr('string'),
+    length: DS.attr('number'),
     uri: DS.attr('string'),
     playing: DS.attr('boolean'),
-    queue: DS.hasMany('queue', {async:true})
+    queue: DS.hasMany('queue', {async:true}),
+
+    length_human: Ember.computed('length', function() {
+        var duration = moment.duration(this.get('length'), 'seconds');
+        return duration.format('h[h] m[m] s[s]');
+    })
 });
 
 App.Queue = DS.Model.extend({
