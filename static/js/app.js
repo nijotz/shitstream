@@ -70,7 +70,7 @@ App.Song = DS.Model.extend({
 
     length_human: Ember.computed('length', function() {
         var duration = moment.duration(this.get('length'), 'seconds');
-        return duration.format('h[h] m[m] s[s]');
+        return duration.format('mm:ss', {trim:false});
     })
 });
 
