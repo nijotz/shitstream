@@ -1,7 +1,7 @@
 import copy
 import sqlalchemy
 
-def emberify_record(model, record=None, sideload=False):
+def emberified_record(model, record=None):
     """
     Ember expects the reference field to have the ID.  What is being
     recieved by restless is the reference field has the de-referenced data
@@ -25,8 +25,8 @@ def emberify_record(model, record=None, sideload=False):
     # Go through each column/property on the model and see if there's a foreign
     # key that may be in the result that needs to be rearranged for Ember
     sideload_refs = {}
+    missing = False
     for property_name in model.__dict__.keys():
-
         prop = model.__dict__[property_name]
 
         # Some sort of relationship property on the model
@@ -42,6 +42,16 @@ def emberify_record(model, record=None, sideload=False):
 
                 # sideload
                 referencing_data = record.get(property_name, [])
+
+                # If there's supposed to be a list of referencing ids according
+                # to the sqla model, but there isn't data in the record, do not
+                # sideload. We don't want ember to think there is no
+                # referencing data, flask-restless just didn't query this far
+                if not referencing_data:
+                    missing = True
+                    sideload = False
+                    sideload_refs = {}
+
                 if sideload and referencing_data:
 
                     # Get the other class so that it can be sideloaded as well
@@ -49,12 +59,13 @@ def emberify_record(model, record=None, sideload=False):
                     for referencing_item in referencing_data:
 
                         # Get any sideloaded data we can from the referencing class
-                        sideload_data = emberify_record(other_class, referencing_item)
+                        sideload_data, missing = emberify_record(other_class, referencing_item)
                         for model_name, model_data in sideload_data:
                             sideload_refs[model_name] = sideload_refs.get(model_name, []) + model_data
 
-                        # Sideload the models that are referencing this data
-                        sideload_refs[property_name] = sideload_refs.get(property_name, []) + [referencing_item]
+                        # Sideload the models that are referencing this data if there wasn't any missing data
+                        if not missing:
+                            sideload_refs[property_name] = sideload_refs.get(property_name, []) + [referencing_item]
 
                 # Ember expects a list of reference ids, val is a list of
                 # the actual objects, turn into a list of ids
@@ -62,11 +73,17 @@ def emberify_record(model, record=None, sideload=False):
                 for other_item in referencing_data:
                     #FIXME: assuming 'id' is primary key
                     other_ids.append(other_item['id'])
-                record[property_name] = other_ids
+                if other_ids:
+                    record[property_name] = other_ids
 
             # This relationship is a reference to another model
             else:
                 referenced_data = record.get(property_name)
+                if not referenced_data:
+                    missing = True
+                    sideload = False
+                    sideload_refs = {}
+
                 if sideload and referenced_data:
                     # Plural the refernce name for the sideloaded colection
                     sideload_model = property_name + 's'
@@ -87,14 +104,14 @@ def emberify_record(model, record=None, sideload=False):
                     record[property_name] = record[id_column.name]
                     del record[id_column.name]
 
-    return sideload_refs
+    return sideload_refs, missing
 
 def emberify(collection, model=None, many=True):
 
     def emberify_single(result=None, **kw):
         # Modify data structure to match what ember expects and get the data
         # the should be sideloaded
-        sideload = emberify_record(model, result, sideload=True)
+        sideload, _ = emberify_record(model, result, sideload=True)
         result[collection] = copy.deepcopy(result)
         for key in result.keys():
             if key != collection:
@@ -114,7 +131,7 @@ def emberify(collection, model=None, many=True):
 
         # Handle foreign keys
         for item in result[collection]:
-            sideload = emberify_record(model, item, sideload=True)
+            sideload, _ = emberify_record(model, item, sideload=True)
             for ref_model, data in sideload.iteritems():
                 if not result.get(ref_model):
                     result[ref_model] = data
