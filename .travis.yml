@@ -2,7 +2,7 @@ language: python
 python:
     - "2.7"
 
-install: "pip install -r requirements/project.txt -r requirements/tests.txt"
+install: "pip install -r requirements.txt -r requirements_tests.txt"
 
 before_script:
     - sudo apt-get update
