@@ -1,8 +1,11 @@
-Flask==0.10.1
+Flask-Admin==1.0.8
 flask-conditional==0.1
 Flask-Restless==0.14.2
+Flask-Script==2.0.5
 Flask-SocketIO==0.3.8
 Flask-SQLAlchemy==2.0
+Flask-User==0.5.3
+Flask==0.10.1
 ipdb==0.8
 ipython==2.1.0
 lxml==3.3.5
@@ -10,5 +13,3 @@ pexpect==3.3
 python-mpd2==0.5.3
 requests==2.3.0
 youtube-dl==2014.08.24.6
-Flask-Admin==1.0.8
-Flask-User==0.5.3
