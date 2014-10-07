@@ -16,7 +16,7 @@ mpd_dir = config_get('mpd', 'music_dir', 'music')
 
 icecast_status_url = config_get('icecast', 'url', 'http://localhost:8000/status.xsl')
 
-download_dir = config_get('downloaders', 'download_dir', 'music/in')
+download_dir = config_get('downloaders', 'download_dir', 'music/in')  #FIXME make sure this is within mpd_dir
 
 debug = config_get('general', 'debug', True, config.getboolean)
 
