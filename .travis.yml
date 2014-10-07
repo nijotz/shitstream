@@ -14,7 +14,7 @@ before_script:
     - cp -R tests/fixtures/mp3/* music/mp3
     - sed -i "s%^music_directory.*%music_directory \"$(pwd)/music/\"%" mpd.conf
     - mpd mpd.conf
-    - python server.py &
+    - python server.py runserver &
     - npm install
     - export PATH=node_modules/.bin:${PATH}
 
