@@ -131,36 +131,11 @@ def update_mpd(uri=None, updating=None, mpdc=None):
         else:
             added = True
 
-@mpd
-@socketio.on('add_url', namespace = api_prefix + '/add_url/')
-def add_url_event(msg, mpdc=None):
+def add_url(url, output):
     in_dir = settings.download_dir
     music_dir = settings.mpd_dir
 
-    if not msg:
-        emit('response', {'msg': 'No URL received'})
-        return
-
-    url = msg.get('url', None)
-    if not url:
-        emit('response', {'msg': 'No URL received'})
-        return
-
-    emit('response', {'msg': 'Received URL'})
-
-    if not youtube_regex.match(url):
-        emit('response', {'msg': 'URL does not appear to be valid'})
-        return
-
-    emit('response', {'msg': 'URL appears to be valid'})
-    emit('response', {'msg': 'Starting youtube-dl'})
-
-    try:
-        filename = download_youtube_url(url, in_dir, emit)
-    except Exception as exception:
-        emit('response', {'msg': str(exception)})
-        emit('disconnect')
-        return
+    filename = download_youtube_url(url, in_dir, output)
 
     common = os.path.commonprefix([in_dir, music_dir])
     uri = filename.replace(common, '')
@@ -169,10 +144,9 @@ def add_url_event(msg, mpdc=None):
         uri = uri[1:]
 
     # Add song to MPD
-    emit('response', {'msg': 'Adding song to music database'})
-    update_mpd(uri,
-        emit('response', {'msg': 'Music database still updating'}))
-    emit('response', {'msg': 'Song added to music database'})
+    output('Adding song to music database')
+    update_mpd(uri, lambda: output('Music database still updating'))
+    output('Song added to music database')
 
     # Add song to database
     song = mpdc.listallinfo(uri)[0]
@@ -180,11 +154,41 @@ def add_url_event(msg, mpdc=None):
     db.db.session.commit()
 
     # Add song to Queue
-    emit('response', {'msg': 'Adding song to queue'})
+    output('Adding song to queue')
     songid = mpdc.addid(uri)
     if not mpdc.currentsong():
         mpdc.playid(songid)
-    emit('response', {'msg': 'Song queued'})
+    output('Song queued')
+
+@mpd
+@socketio.on('add_url', namespace = api_prefix + '/add_url/')
+def add_url_event(msg, mpdc=None):
+    output = lambda m: emit('response', {'msg': m})
+
+    if not msg:
+        output('No URL received')
+        return  #FIXME disconnect
+
+    url = msg.get('url', None)
+    if not url:
+        output('No URL received')
+        return  #FIXME disconnect
+
+    output('Received URL')
+
+    if not youtube_regex.match(url):
+        output('URL does not appear to be valid')
+        return  #FIXME disconnect
+
+    output('URL appears to be valid')
+    output('Starting youtube-dl')
+
+    try:
+        add_url(url, output)
+    except Exception as exception:
+        output(str(exception))
+        emit('disconnect')
+        return
 
     emit('disconnect')
 

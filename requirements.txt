@@ -13,3 +13,5 @@ pexpect==3.3
 python-mpd2==0.5.3
 requests==2.3.0
 youtube-dl==2014.08.24.6
+pyechonest==8.0.2
+google-api-python-client==1.2

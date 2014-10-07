@@ -2,6 +2,8 @@ import commands
 import re
 import sys
 import pexpect
+from apiclient.discovery import build
+import settings
 
 regex = re.compile('https?://(www\.)?youtube.com/.*')
 
@@ -16,7 +18,7 @@ version_map = {
 
 default_version = '2014.06.19'
 
-def download(url, target, emit):
+def download(url, target, output):
 
     template = '{}/%(title)s-%(id)s.%(ext)s'.format(target)
     child = pexpect.spawn("youtube-dl -v --keep --extract-audio --audio-format mp3 \
@@ -37,7 +39,7 @@ def download(url, target, emit):
 
     # youtube-dl is downloading
     if i == 0:
-        emit('response', {'msg': 'Downloading song'})
+        output('Downloading song')
         downloading = True
         while downloading:
 
@@ -47,13 +49,22 @@ def download(url, target, emit):
                 re.compile(expect['downloaded'])
             ])
             if j == 0:
-                emit('response', {'msg': child.match.group('perc')})
+                output(child.match.group('perc'))
             elif j == 1:
-                emit('response', {'msg': 'Download and conversion finished'})
+                output('Download and conversion finished')
                 downloading = False
 
     elif i == 1:
-        emit('response', {'msg': 'Song already exists, skipping download'})
+        output('Song already exists, skipping download')
 
     filename = child.match.group('file')
     return filename
+
+def search(text):
+    youtube = build('youtube', 'v3', developerKey=settings.dj_youtube_api_key)
+    response = youtube.search().list(
+        q=text,
+        part='id,snippet',
+        videoCategoryId=10,
+        type='video').execute()
+    return 'https://www.youtube.com/watch?v=' + response.get('items')[0]['id']['videoId']

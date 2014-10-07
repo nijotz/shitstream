@@ -11,7 +11,7 @@ def bumper(mpdc=None):
         prev_song_was_bump = True
         bumped = False
         for song in mpdc.playlistinfo():
-            if not song.get('file', '').startswith(settings.bumps_dir):
+            if not song.get('file', '').startswith(settings.dj_bumps_dir):
                 if not prev_song_was_bump:
                     print "Bumpin' it"
                     pos = int(song.get('pos'))
@@ -41,7 +41,7 @@ def bump_it(pos, mpdc):
 @mpd
 def get_random_bump(mpdc):
     try:
-        bumps = [ bump for bump in mpdc.listallinfo(settings.bumps_dir) if bump.get('file', None) ]
+        bumps = [ bump for bump in mpdc.listallinfo(settings.dj_bumps_dir) if bump.get('file', None) ]
     except:
         bumps = None
     if bumps:
@@ -49,7 +49,7 @@ def get_random_bump(mpdc):
 
 def filter_bumps(songs):
     for song in songs:
-        if song.get('file', '').startswith(settings.bumps_dir):
+        if song.get('file', '').startswith(settings.dj_bumps_dir):
             del(song)
     return songs
 

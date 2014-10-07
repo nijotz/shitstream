@@ -23,4 +23,7 @@ debug = config_get('general', 'debug', True, config.getboolean)
 db_uri = config_get('db', 'uri', 'sqlite:///test.db')
 db_clear_on_load = config_get('db', 'clear_on_load', True, config.getboolean)
 
-bumps_dir = config_get('deejay', 'bumps_dir', 'bumps')
+dj_bumps_dir = config_get('deejay', 'bumps_dir', 'bumps')
+dj_echonest_api_key = config_get('deejay', 'echonest_api_key', '')
+dj_codegen_binary = config_get('deejay', 'codegen_binary', '/usr/local/bin/echoprint-codegen')
+dj_youtube_api_key = config_get('deejay', 'youtube_api_key', '')
