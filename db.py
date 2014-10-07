@@ -1,12 +1,17 @@
+from md5 import md5
+import os
 import threading
 
 from flask.ext.user import UserMixin
 from flask.ext.sqlalchemy import SQLAlchemy
+from GoogleTTS import audio_extract
+from sqlalchemy import event
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.sql.expression import ClauseElement
 
 from mpd_util import mpd, mpd_connect
 from server import app
+import settings
 
 
 db = SQLAlchemy(app)
@@ -77,8 +82,20 @@ class User(db.Model, UserMixin):
 
 
 class Bump(db.Model):
-     id = db.Column(db.Integer, primary_key=True)
-     text = db.Column(db.String(), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(), nullable=False)
+
+def create_bump_mp3(mapper, connection, target):
+    mpd_filename = os.path.join(
+        settings.bumps_dir,
+        md5(target.text).hexdigest() + '.mp3'
+    )
+    filename = os.path.join(settings.mpd_dir, mpd_filename)
+    if not os.path.exists(filename):
+        audio_extract(target.text, {'output': filename})
+    return mpd_filename
+event.listen(Bump, 'after_update', create_bump_mp3)
+event.listen(Bump, 'after_insert', create_bump_mp3)
 
 
 def clear_db_songs():
