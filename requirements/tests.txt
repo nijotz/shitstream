@@ -1,2 +1,3 @@
 jsonschema
 coveralls
+Flask-DebugToolbar==0.9.0
