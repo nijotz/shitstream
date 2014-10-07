@@ -24,8 +24,18 @@ class UserView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated()
 
+
+class BumpView(ModelView):
+
+    def __init__(self, session, **kwargs):
+        super(BumpView, self).__init__(db.Bump, session, **kwargs)
+
+    def is_accessible(self):
+        return current_user.is_authenticated()
+
 def setup(app):
     admin = Admin(app, index_view=MyAdminIndexView())
     admin.add_view(UserView(db.db.session))
+    admin.add_view(BumpView(db.db.session))
     
     return admin

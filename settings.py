@@ -22,3 +22,5 @@ debug = config_get('general', 'debug', True, config.getboolean)
 
 db_uri = config_get('db', 'uri', 'sqlite:///test.db')
 db_clear_on_load = config_get('db', 'clear_on_load', True, config.getboolean)
+
+bumps_dir = 'bumps' #FIXME: actually load from config

@@ -1,3 +1,5 @@
+import threading
+
 from flask.ext.user import UserMixin
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -74,6 +76,11 @@ class User(db.Model, UserMixin):
      password = db.Column(db.String(255), nullable=False, default='')
 
 
+class Bump(db.Model):
+     id = db.Column(db.Integer, primary_key=True)
+     text = db.Column(db.String(), nullable=False)
+
+
 def clear_db_songs():
     print 'Clearing songs'
     Song.query.filter().delete()
@@ -135,69 +142,97 @@ def new_song_from_mpd_data(song):
     return new_song
 
 
-@mpd
-def update_db_songs(mpdc=None):
-    mpd_songs = dict([ (song.get('file'), song) for song in mpdc.listallinfo() if song.get('file')])
-    mpd_song_files = set( mpd_songs.keys() )
+class MPDSyncer(threading.Thread):
 
-    db_songs = dict([ (song.uri, song) for song in Song.query.all() ])
-    db_song_files = set( db_songs.keys() )
+    def __init__(self, filters=[], *args, **kwargs):
+        self.filters = filters
+        super(MPDSyncer, self).__init__(target=self.sync, *args, **kwargs)
 
-    mpd_only_song_files = mpd_song_files.difference(db_song_files)
-    db_only_song_files = db_song_files.difference(mpd_song_files)
+    def filter(self, mpd_songs):
+        for filter in self.filters:
+            mpd_songs = filter(mpd_songs)
+        return mpd_songs
 
-    total = len(mpd_only_song_files)
-    num = 0
-    for song_file in mpd_only_song_files:
-        new_song_from_mpd_data(mpd_songs[song_file])
-        num += 1
-        print 'Added song {}/{}'.format(num, total)  #FIXME: proper logging
-    db.session.commit()
+    def add_filter(self, filter):
+        self.filters.append(filter)
 
-    for song_file in db_only_song_files:
-        pass  #TODO
-
-
-def clear_db_queue():
-    # For now just clear the queue data and reload it
-    for queue in Queue.query.all():
-        db.session.delete(queue)
-
-
-@mpd
-def update_db_queue(mpdc=None):
-    queue = mpdc.playlistinfo()
-    current_song_pos = mpdc.currentsong().get('pos')
-    if current_song_pos != None:
-        current_song_pos = int(current_song_pos)
-
-    for song in queue:
-        queue = {
-            'id': song.get('id'),
-            'song': new_song_from_mpd_data(song),
-            'pos': int(song.get('pos')),
-            'played': int(song.get('pos')) < current_song_pos
-        }
-        get_or_create(db.session, Queue, **queue)
-
-    db.session.commit()
+    def sync(self):
+        raise NotImplemented
 
 
 #FIXME: proper logging instead of print
-@mpd
-def update_queue_on_change(mpdc=None):
-    while True:
-        print 'Updating db (queue)'
-        clear_db_queue()
-        update_db_queue()
-        print 'Updated db (queue)'
-        mpdc.idle('playlist')
 
-@mpd
-def update_songs_on_change(mpdc=None):
-    while True:
-        print 'Updating db (songs)'
-        update_db_songs()
-        print 'Updated db (songs)'
-        mpdc = mpd_connect()   #FIXME: proper timeout handling
-        mpdc.idle('database')
+class SongMPDSyncer(MPDSyncer):
+
+    @mpd
+    def update_db_songs(self, mpdc=None):
+
+        songs = mpdc.listallinfo()
+        songs = self.filter(songs)
+
+        mpd_songs = dict([ (song.get('file'), song) for song in songs if song.get('file')])
+        mpd_song_files = set( mpd_songs.keys() )
+
+        db_songs = dict([ (song.uri, song) for song in Song.query.all() ])
+        db_song_files = set( db_songs.keys() )
+
+        mpd_only_song_files = mpd_song_files.difference(db_song_files)
+        db_only_song_files = db_song_files.difference(mpd_song_files)
+
+        total = len(mpd_only_song_files)
+        num = 0
+        for song_file in mpd_only_song_files:
+            new_song_from_mpd_data(mpd_songs[song_file])
+            num += 1
+            print 'Added song {}/{}'.format(num, total)  #FIXME: proper logging
+        db.session.commit()
+
+        for song_file in db_only_song_files:
+            pass  #TODO
+
+    @mpd
+    def sync(self, mpdc=None):
+        while True:
+            print 'Updating db (songs)'
+            self.update_db_songs(mpdc=mpdc)
+            print 'Updated db (songs)'
+            mpdc = mpd_connect()   #FIXME: proper timeout handling
+            mpdc.idle('database')
+
+
+class QueueMPDSyncer(MPDSyncer):
+
+    def clear_db_queue(self):
+        # For now just clear the queue data and reload it
+        for queue in Queue.query.all():
+            db.session.delete(queue)
+
+    @mpd
+    def update_db_queue(self, mpdc=None):
+
+        queue = mpdc.playlistinfo()
+        queue = self.filter(queue)
+
+        current_song_pos = mpdc.currentsong().get('pos')
+        if current_song_pos != None:
+            current_song_pos = int(current_song_pos)
+
+        for song in queue:
+            queue = {
+                'id': song.get('id'),
+                'song': new_song_from_mpd_data(song),
+                'pos': int(song.get('pos')),
+                'played': int(song.get('pos')) < current_song_pos
+            }
+            get_or_create(db.session, Queue, **queue)
+
+        db.session.commit()
+
+    @mpd
+    def sync(self, mpdc=None):
+        while True:
+            print 'Updating db (queue)'
+            self.clear_db_queue()
+            self.update_db_queue()
+            print 'Updated db (queue)'
+            mpdc.idle('playlist')

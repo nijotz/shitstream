@@ -11,6 +11,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 from flask.ext import restless
 from flask.ext.babel import Babel
 from flask.ext.conditional import conditional
+from flask.ext.script import Manager, Command
 from flask.ext.socketio import SocketIO, emit
 from flask.ext.user import UserManager, SQLAlchemyAdapter
 from lxml import html
@@ -225,11 +226,17 @@ def init():
     if settings.db_clear_on_load:
         db.clear_db_songs()
 
-    queue_updates = threading.Thread(target=db.update_queue_on_change)
+    from deejay import filter_bumps, deejay
+
+    queue_updates = db.QueueMPDSyncer()
+    queue_updates.add_filter(filter_bumps)
     queue_updates.start()
 
-    song_updates = threading.Thread(target=db.update_songs_on_change)
+    song_updates = db.SongMPDSyncer()
+    song_updates.add_filter(filter_bumps)
     song_updates.start()
+
+    deejay.start()
 
     manager = restless.APIManager(app, flask_sqlalchemy_db=db.db)
 
@@ -287,4 +294,11 @@ if __name__ == '__main__':
     babel = Babel(app)
     db_adapter = SQLAlchemyAdapter(db.db,  db.User)
     user_manager = UserManager(db_adapter, app)
-    socketio.run(app)
+    manager = Manager(app)
+
+    class SocketIOServer(Command):
+        def run(self):
+            socketio.run(app)
+
+    manager.add_command("runserver", SocketIOServer())
+    manager.run()
