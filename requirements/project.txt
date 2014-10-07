@@ -10,3 +10,5 @@ pexpect==3.3
 python-mpd2==0.5.3
 requests==2.3.0
 youtube-dl==2014.08.24.6
+Flask-Admin==1.0.8
+Flask-User==0.5.3

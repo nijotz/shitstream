@@ -1,3 +1,4 @@
+from flask.ext.user import UserMixin
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.sql.expression import ClauseElement
@@ -62,6 +63,15 @@ class Queue(db.Model):
     song_id = db.Column(db.Integer, db.ForeignKey('song.id'))
     song = db.relationship('Song', backref=db.backref('queue'))
     played = db.Column(db.Boolean, default=False, nullable=False)
+
+
+class User(db.Model, UserMixin):
+     id = db.Column(db.Integer, primary_key=True)
+     # Flask-User fields
+     active = db.Column(db.Boolean(), nullable=False, default=False)
+     username = db.Column(db.String(255), nullable=False, default='')
+     email = db.Column(db.String(255), nullable=False, default='')
+     password = db.Column(db.String(255), nullable=False, default='')
 
 
 def clear_db_songs():

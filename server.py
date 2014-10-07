@@ -7,9 +7,12 @@ import threading
 import time
 
 from flask import Flask, jsonify, request, render_template
+from flask_debugtoolbar import DebugToolbarExtension
+from flask.ext import restless
+from flask.ext.babel import Babel
 from flask.ext.conditional import conditional
 from flask.ext.socketio import SocketIO, emit
-from flask.ext import restless
+from flask.ext.user import UserManager, SQLAlchemyAdapter
 from lxml import html
 import requests
 
@@ -21,16 +24,19 @@ import settings
 
 
 def create_app():
-
     app = Flask(__name__)
     if settings.debug:
         app.debug = True
     app.config['SECRET_KEY'] = 'secret!'
     app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
+    app.config['USER_ENABLE_EMAIL'] = False
+
     return app
 
 app = create_app()
+
 import db
+from admin import setup as admin_setup
 
 api_prefix = '/api/v1.0'
 socketio = SocketIO(app)
@@ -276,4 +282,9 @@ def init():
 
 if __name__ == '__main__':
     init()
+    admin_setup(app)
+    toolbar = DebugToolbarExtension(app)
+    babel = Babel(app)
+    db_adapter = SQLAlchemyAdapter(db.db,  db.User)
+    user_manager = UserManager(db_adapter, app)
     socketio.run(app)
