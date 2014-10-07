@@ -225,17 +225,18 @@ def init():
     if settings.db_clear_on_load:
         db.clear_db_songs()
 
-    from deejay import filter_bumps, deejay
+    import deejay
+    from deejay import bumper
 
     queue_updates = db.QueueMPDSyncer()
-    queue_updates.add_filter(filter_bumps)
+    queue_updates.add_filter(bumper.filter_bumps)
     queue_updates.start()
 
     song_updates = db.SongMPDSyncer()
-    song_updates.add_filter(filter_bumps)
+    song_updates.add_filter(bumper.filter_bumps)
     song_updates.start()
 
-    deejay.start()
+    deejay.load_personality()
 
     manager = restless.APIManager(app, flask_sqlalchemy_db=db.db)
 

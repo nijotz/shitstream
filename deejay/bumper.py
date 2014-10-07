@@ -1,15 +1,11 @@
 import random
 import threading
-import time
 
-import db
 from mpd_util import mpd
 import settings
 
-
-
 @mpd
-def _deejay(mpdc=None):
+def bumper(mpdc=None):
     while True:
         print 'Checking bumps'
         prev_song_was_bump = True
@@ -31,7 +27,7 @@ def _deejay(mpdc=None):
         if bumped:
             continue
 
-        print 'Waiting for playlist upate to check bumps'
+        print 'Waiting for playlist update to check bumps'
         mpdc.idle('playlist')
 
 @mpd
@@ -57,4 +53,4 @@ def filter_bumps(songs):
             del(song)
     return songs
 
-deejay = threading.Thread(target=_deejay)
+personality = bumper
