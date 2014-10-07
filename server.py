@@ -7,7 +7,6 @@ import threading
 import time
 
 from flask import Flask, jsonify, request, render_template
-from flask_debugtoolbar import DebugToolbarExtension
 from flask.ext import restless
 from flask.ext.babel import Babel
 from flask.ext.conditional import conditional
@@ -290,7 +289,9 @@ def init():
 if __name__ == '__main__':
     init()
     admin_setup(app)
-    toolbar = DebugToolbarExtension(app)
+    if settings.debug:
+        from flask_debugtoolbar import DebugToolbarExtension
+        toolbar = DebugToolbarExtension(app)
     babel = Babel(app)
     db_adapter = SQLAlchemyAdapter(db.db,  db.User)
     user_manager = UserManager(db_adapter, app)
