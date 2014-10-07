@@ -95,6 +95,8 @@ def get_recommendations(prev):
         if more_songs:
             songs.append(more_songs)
     song_ids = [song.id for song in songs]
+    if not song_ids:
+        return []
     result = pyechonest.playlist.static(type='song-radio', song_id=song_ids, results=10)
     return result[5:]  # Does echonest return the five songs I gave it to seed?  Looks like..
     
