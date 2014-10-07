@@ -20,12 +20,14 @@ def queuer(mpdc):
             print 'Should queue, dewin it'
             queue_shit(mpdc=mpdc)
         else:
-            print 'Plenty of songs, waiting'
+            print 'Should not queue, waiting'
         mpdc.idle('playlist')
 
 @mpd
 def should_queue(mpdc):
     current_song = mpdc.currentsong()
+    if not current_song:
+        return False
     current_pos = int(current_song.get('pos'))
     queue = mpdc.playlistinfo()
     next_songs = filter(lambda x: int(x.get('pos')) >= current_pos, queue)
