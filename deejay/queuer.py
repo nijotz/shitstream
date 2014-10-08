@@ -20,7 +20,8 @@ def queuer(mpdc):
             print 'Should queue, dewin it'
             queue_shit(mpdc=mpdc)
         else:
-            print 'Should not queue, waiting'
+            print 'Should not queue'
+        print 'Queuer waiting'
         mpdc.idle('playlist')
 
 @mpd
