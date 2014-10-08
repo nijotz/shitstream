@@ -22,7 +22,7 @@ def queuer(mpdc):
         else:
             print 'Should not queue'
         print 'Queuer waiting'
-        mpdc.idle('playlist')
+        mpdc.idle(['playlist', 'player'])
 
 @mpd
 def should_queue(mpdc):

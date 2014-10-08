@@ -252,4 +252,4 @@ class QueueMPDSyncer(MPDSyncer):
             self.clear_db_queue()
             self.update_db_queue()
             print 'Updated db (queue)'
-            mpdc.idle('playlist')
+            mpdc.idle(['playlist', 'player'])
