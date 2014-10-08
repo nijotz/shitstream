@@ -86,7 +86,15 @@ test('adding url to queue', function() {
         console.log('Waiting for song to queue');
     });
 
-    equal(true, true);
+    andThen(function() {
+        click('#nav-link-queue a');
+    })
+
+    andThen(function() {
+        debugger;
+        var artist = find(".playlist-song .song-artist:contains('Fuck Buttons')");
+        equal(artist.length > 0, true);
+    })
 });
 
 test('view album with multiple artist tags', function() {
