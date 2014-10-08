@@ -34,7 +34,7 @@ def should_queue(mpdc):
     next_songs = filter(lambda x: int(x.get('pos')) >= current_pos, queue)
     timeleft = reduce(lambda x, y: x + float(y.get('time')), next_songs, 0)
     timeleft -= float(mpdc.status().get('elapsed', 0))
-    if timeleft < (60 * 5):
+    if timeleft < (60 * 10):
         return True
     return False
 
