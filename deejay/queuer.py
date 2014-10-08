@@ -52,8 +52,8 @@ def prev_songs(mpdc, num=5):
     queue = filter(lambda x: not x.get('file', '').startswith(settings.dj_bumps_dir), queue)  #FIXME: bumps filter needs dry
     queue_dict = dict([ (int(song.get('pos')), song) for song in queue ])
     sample = []
-    i = current_pos - 1
-    while len(sample) < num and i > 0:
+    i = current_pos
+    while len(sample) < num and i >= 0:
         song = queue_dict.get(i)
         if song:
             sample.append(song)
