@@ -10,6 +10,7 @@
           <th>Track</th>
           <th>Title</th>
           <th>Length</th>
+          <th>File</th>
           <th>Remove</th>
         </tr>
       </thead>
@@ -22,6 +23,7 @@
           <td class="song-track">{{song.track}}</td>
           <td class="song-name">{{song.name}}</td>
           <td class="song-length">{{song.length_human}}</td>
+          <td class="song-length">{{song.uri}}</td>
           <td>
             <button {{action "dequeue_song" this}} class="close" type="button">
               <span aria-hidden="true">&times;</span>
