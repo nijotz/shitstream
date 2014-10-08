@@ -48,9 +48,10 @@ def get_random_bump(mpdc):
         return random.choice(bumps)
 
 def filter_bumps(songs):
+    filtered = []
     for song in songs:
-        if song.get('file', '').startswith(settings.dj_bumps_dir):
-            del(song)
-    return songs
+        if not song.get('file', '').startswith(settings.dj_bumps_dir):
+            filtered.append(song)
+    return filtered
 
 personality = bumper
