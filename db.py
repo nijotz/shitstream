@@ -112,7 +112,7 @@ def clear_db_songs():
 def update_song_from_mpd_data(mpd_song):
     song = Song.query.filter(Song.uri == mpd_song.get('file')).one()
 
-    song.last_updated = mpd_song.get('last-updated')
+    song.last_modified = datetime.strptime(mpd_song.get('last-modified'), '%Y-%m-%dT%H:%M:%SZ')
     song.name = mpd_song.get('title')
     song.track = mpd_song.get('track')
     song.length = mpd_song.get('time')
