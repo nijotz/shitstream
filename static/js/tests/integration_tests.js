@@ -94,7 +94,7 @@ test('adding url to queue will show up on queue page, with tags', function() {
     andThen(function() {
         var artist = find(".playlist-song .song-artist:contains('Fuck Buttons')");
         equal(artist.length > 0, true);
-        var title = find(".playlist-song .song-title:contains('Surf Solar')");
+        var title = find(".playlist-song .song-name:contains('Surf Solar')");
         equal(title.length > 0, true);
     })
 });

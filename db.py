@@ -1,3 +1,4 @@
+from datetime import datetime
 from md5 import md5
 import os
 import threading
@@ -35,6 +36,7 @@ class Song(db.Model):
     name = db.Column(db.Text)
     track = db.Column(db.Integer)
     length = db.Column(db.Integer)
+    last_modified = db.Column(db.DateTime, nullable=False)
 
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
 
@@ -107,6 +109,17 @@ def clear_db_songs():
     print 'Cleared songs'
 
 
+def update_song_from_mpd_data(song):
+    song = Song.query.filter(Song.uri == song.get('file'))
+
+    song.last_updated = song.get('last-updated')
+    song.name = song.get('title')
+    song.track = song.get('track')
+    song.length = song.get('time')
+
+    # FIXME: album and artist updates are hard, castinating like a pro
+    #song.album.name = song.get('album')
+
 def new_song_from_mpd_data(song):
     # Get or create song
     uri = song.get('file')
@@ -125,7 +138,8 @@ def new_song_from_mpd_data(song):
         'uri': uri,
         'name': song.get('title'),
         'track': track,
-        'length': song.get('time')
+        'length': song.get('time'),
+        'last_modified': datetime.strptime(song.get('last-modified'), '%Y-%m-%dT%H:%M:%SZ')
     }
     new_song = Song.query.filter(Song.uri == uri).first() or Song(**song_data)
 
@@ -196,6 +210,16 @@ class SongMPDSyncer(MPDSyncer):
         mpd_only_song_files = mpd_song_files.difference(db_song_files)
         db_only_song_files = db_song_files.difference(mpd_song_files)
 
+        mpd_updated_song_files = []
+        for mpd_song_file in mpd_song_files:
+            mpd_song = mpd_songs[mpd_song_file]
+            mpd_song_update = mpd_song.get('last-modified')
+            db_song = db_songs.get(mpd_song.get('file'))
+            if db_song and mpd_song_update:
+                db_song_update = db_song.last_modified
+                if db_song_update < mpd_song_update:
+                    mpd_updated_song_files.append(mpd_song_file)
+
         total = len(mpd_only_song_files)
         num = 0
         for song_file in mpd_only_song_files:
@@ -204,8 +228,16 @@ class SongMPDSyncer(MPDSyncer):
             print 'Added song {}/{}'.format(num, total)  #FIXME: proper logging
         db.session.commit()
 
+        total = len(mpd_updated_song_files)
+        num = 0
+        for song_file in mpd_updated_song_files:
+            update_song_from_mpd_data(mpd_songs[song_file])
+            num += 1
+            print 'Updated song {}/{}'.format(num, total)  #FIXME: proper logging
+        db.session.commit()
+
         for song_file in db_only_song_files:
-            pass  #TODO
+            pass  #FIXME: delete. make configurable
 
     @mpd
     def sync(self, mpdc=None):
