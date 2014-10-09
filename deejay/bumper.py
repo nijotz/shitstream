@@ -15,7 +15,11 @@ def bumper(mpdc=None):
                 if not prev_song_was_bump:
                     print "Bumpin' it"
                     pos = int(song.get('pos'))
-                    bumped = bump_it(pos, mpdc=mpdc)
+                    bumped = False
+                    try:
+                        bumped = bump_it(pos, mpdc=mpdc)
+                    except:
+                        pass #FIXME: Getting bad song id sometimes (pos gets outdated?)
                     if bumped:
                         print 'Bumped'
                     break
