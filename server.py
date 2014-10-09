@@ -14,6 +14,7 @@ from flask.ext.script import Manager, Command
 from flask.ext.socketio import SocketIO, emit
 from flask.ext.user import UserManager, SQLAlchemyAdapter
 from lxml import html
+from mutagen.mp3 import MP3
 import requests
 
 from downloaders.youtube import regex as youtube_regex,\
@@ -160,14 +161,31 @@ def add_url(url, output):
         mpdc.playid(songid)
     output('Song queued')
 
-    # Identify song
+    # Identify and tag song
     output('Identifying song')
+    #Good ol' try-except-pass. Quality.
+    try:
+        tag_song_from_filename(filename)
+    except:
+        pass
     print subprocess.call("beet import -qsC '{}'".format(filename), shell=True)
 
     # Re-scan file
     output('Updating song database')
     update_mpd(uri, lambda: output('Music database still updating'))
     output('Song info updated')
+
+
+# artist and song are probably separated by a -
+def tag_song_from_filename(filepath):
+    filename = os.path.basename(filepath)
+    artist, title = filename.split('- ')[0:2]
+    title = ''.join(title.split('.')[0:-2]).strip()
+    artist = artist.strip()
+    id3info = MP3(filename)
+    id3info['artist'] = artist
+    id3info['title'] = title
+    return
 
 @mpd
 @socketio.on('add_url', namespace = api_prefix + '/add_url/')

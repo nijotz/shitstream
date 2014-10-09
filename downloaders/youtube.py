@@ -20,7 +20,7 @@ default_version = '2014.06.19'
 
 def download(url, target, output):
 
-    template = '{}/%(title)s-%(id)s.%(ext)s'.format(target)
+    template = '{}/%(title)s.%(id)s.%(ext)s'.format(target)
     child = pexpect.spawn("youtube-dl -v --keep --extract-audio --audio-format mp3 \
         --no-post-overwrites -o '{}' ".format(template) + url)
     child.logfile = sys.stdout
