@@ -1,4 +1,5 @@
 import os
+import re
 
 import pyechonest.config
 import pyechonest.song
@@ -97,7 +98,9 @@ def get_recommendations(prev):
             songs.append(more_songs)
     song_ids = [song.id for song in songs]
     if not song_ids:
+        print 'No previous songs identified'
         return []
+    print 'Identified {} previous songs'.format(len(song_ids))
     result = pyechonest.playlist.static(type='song-radio', song_id=song_ids, results=10)
     return result[5:]  # Does echonest return the five songs I gave it to seed?  Looks like..
     
@@ -112,5 +115,15 @@ def identify_song(song, mpdc):
     results = pyechonest.song.search(artist=artist, title=title)
     if results:
         return results[0]
+    print u'No results for: {} - {}'.format(artist,title)
+
+    # try stripping weird characters from the names
+    artist = re.sub(r'([^\s\w]|_)+', '', artist)
+    title = re.sub(r'([^\s\w]|_)+', '', title)
+
+    results = pyechonest.song.search(artist=artist, title=title)
+    if results:
+        return results[0]
+    print u'No results for: {} - {}'.format(artist,title)
 
 personality = queuer
