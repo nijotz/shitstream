@@ -60,7 +60,7 @@ test('adding song to queue will show up on queue page', function() {
     });
 });
 
-test('adding url to queue', function() {
+test('adding url to queue will show up on queue page, with tags', function() {
     visit("/add_url");
     andThen(function() {
         fillIn("#add-url-field", 'https://www.youtube.com/watch?v=OFbE3lHTcuo');
@@ -70,8 +70,9 @@ test('adding url to queue', function() {
     waiter = function () {
         var messages = $('#messages').html();
         if (messages) {
-            if (messages.trim().match(/Song queued$/)) {
+            if (messages.trim().match(/Done$/)) {
                 Ember.Test.unregisterWaiter(waiter);
+                console.log('Song queued. Continuing.');
                 return true;
             }
         }
@@ -91,9 +92,10 @@ test('adding url to queue', function() {
     })
 
     andThen(function() {
-        debugger;
         var artist = find(".playlist-song .song-artist:contains('Fuck Buttons')");
         equal(artist.length > 0, true);
+        var title = find(".playlist-song .song-title:contains('Surf Solar')");
+        equal(title.length > 0, true);
     })
 });
 
@@ -167,42 +169,3 @@ test('album queues in correct order', function() {
     // Has 1/7, 2/7, 3/7, etc tracks tags
     base_test('Atriarch', 'Ritual of Passing');
 });
-
-//test('adding url to queue will fetch metadata for song', function() {
-//    visit("/add_url");
-//    andThen(function() {
-//        fillIn("#add-url-field", 'https://www.youtube.com/watch?v=OFbE3lHTcuo');
-//    });
-//
-//    var waiter;
-//    waiter = function () {
-//        var messages = $('#messages').html();
-//        if (messages) {
-//            if (messages.trim().endsWith('Song queued')) {
-//                console.log('Song queued, continuing tests');
-//                Ember.Test.unregisterWaiter(waiter);
-//                return true;
-//            }
-//        }
-//        else {
-//            console.log('Song not queued, waiting');
-//            return false;
-//        }
-//    };
-//
-//    andThen(function() {
-//        click('#queue-btn');
-//        Ember.Test.registerWaiter(waiter);
-//        console.log('Waiting for song to queue');
-//    });
-//
-//    andThen(function() {
-//        console.log('Checking queue');
-//        visit('/playlists/current');
-//    });
-//
-//    andThen(function() {
-//        var artist = find('.playlist-song:first > td:first').html()
-//        equal(artist, 'Fuck Buttons');
-//    });
-//});

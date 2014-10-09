@@ -3,7 +3,7 @@
 from functools import wraps
 import glob
 import os
-import threading
+import subprocess
 import time
 
 from flask import Flask, jsonify, request, render_template
@@ -160,6 +160,15 @@ def add_url(url, output):
         mpdc.playid(songid)
     output('Song queued')
 
+    # Identify song
+    output('Identifying song')
+    print subprocess.call("beet import -qsC '{}'".format(filename), shell=True)
+
+    # Re-scan file
+    output('Updating song database')
+    update_mpd(uri, lambda: output('Music database still updating'))
+    output('Song info updated')
+
 @mpd
 @socketio.on('add_url', namespace = api_prefix + '/add_url/')
 def add_url_event(msg, mpdc=None):
@@ -185,6 +194,7 @@ def add_url_event(msg, mpdc=None):
 
     try:
         add_url(url, output)
+        output('Done')
     except Exception as exception:
         output(str(exception))
         emit('disconnect')
