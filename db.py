@@ -251,6 +251,7 @@ class SongMPDSyncer(MPDSyncer):
                 mpdc = mpd_connect()   #FIXME: proper timeout handling
                 mpdc.idle('database')
             except:
+                mpdc = mpd_connect()
                 print 'DB sync failed, trying again'
                 continue #FIXME: MPD connection problems..
 
@@ -293,5 +294,6 @@ class QueueMPDSyncer(MPDSyncer):
                 print 'Updated db (queue)'
                 mpdc.idle(['playlist', 'player'])
             except:
+                mpdc = mpd_connect()
                 print 'Queue sync failed, trying again'
                 continue #FIXME: MPD connection problems..

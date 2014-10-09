@@ -1,39 +1,40 @@
 import random
 import threading
 
-from mpd_util import mpd
+from mpd_util import mpd, mpd_connect
 import settings
 
 @mpd
 def bumper(mpdc=None):
     while True:
-        print 'Checking bumps'
-        prev_song_was_bump = True
-        bumped = False
-        for song in mpdc.playlistinfo():
-            if not song.get('file', '').startswith(settings.dj_bumps_dir):
-                if not prev_song_was_bump:
-                    print "Bumpin' it"
-                    pos = int(song.get('pos'))
-                    bumped = False
-                    try:
+        try:
+            print 'Checking bumps'
+            prev_song_was_bump = True
+            bumped = False
+            for song in mpdc.playlistinfo():
+                if not song.get('file', '').startswith(settings.dj_bumps_dir):
+                    if not prev_song_was_bump:
+                        print "Bumpin' it"
+                        pos = int(song.get('pos'))
+                        bumped = False
                         bumped = bump_it(pos, mpdc=mpdc)
-                    except:
-                        print "Couldn't bump it"
-                        pass #FIXME: Getting bad song id sometimes (pos gets outdated?)
-                    if bumped:
-                        print 'Bumped'
-                    break
+                        if bumped:
+                            print 'Bumped'
+                        break
+                    else:
+                        prev_song_was_bump = False
                 else:
-                    prev_song_was_bump = False
-            else:
-                prev_song_was_bump = True
+                    prev_song_was_bump = True
 
-        if bumped:
-            continue
+            if bumped:
+                continue
 
-        print 'Bumper waiting'
-        mpdc.idle('playlist')
+            print 'Bumper waiting'
+            mpdc.idle('playlist')
+        except:
+            print "Bumper failure, starting over"
+            mpdc = mpd_connect()
+            pass #FIXME: Getting bad song id sometimes (pos gets outdated?)
 
 @mpd
 def bump_it(pos, mpdc):
