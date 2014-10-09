@@ -27,7 +27,7 @@ def bumper(mpdc=None):
         if bumped:
             continue
 
-        print 'Waiting for playlist update to check bumps'
+        print 'Bumper waiting'
         mpdc.idle('playlist')
 
 @mpd
