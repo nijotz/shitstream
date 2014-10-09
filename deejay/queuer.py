@@ -17,13 +17,18 @@ pyechonest.config.ECHO_NEST_API_KEY = settings.dj_echonest_api_key
 @mpd
 def queuer(mpdc):
     while True:
-        if should_queue(mpdc=mpdc):
-            print 'Should queue, dewin it'
-            queue_shit(mpdc=mpdc)
-        else:
-            print 'Should not queue'
-        print 'Queuer waiting'
-        mpdc.idle(['playlist', 'player'])
+        try:
+            if should_queue(mpdc=mpdc):
+                print 'Should queue, dewin it'
+                queue_shit(mpdc=mpdc)
+            else:
+                print 'Should not queue'
+            print 'Queuer waiting'
+            mpdc.idle(['playlist', 'player'])
+        except Exception as e:
+            print 'Queuer failure, starting over:'
+            print str(e)
+            mpdc = mpd_connect() #FIXME: Getting bad song id sometimes (pos gets outdated?)
 
 @mpd
 def should_queue(mpdc):
