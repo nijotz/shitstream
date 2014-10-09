@@ -1,0 +1,5 @@
+plugins: chroma fetchart lyrics embedart info replaygain
+import:
+    move: no
+match:
+  strong_rec_thresh: 0.35
