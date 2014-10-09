@@ -168,7 +168,9 @@ def add_url(url, output):
         tag_song_from_filename(filename)
     except:
         pass
-    print subprocess.call("beet import -qsC '{}'".format(filename), shell=True)
+
+    beet_path = subprocess.check_output("which beet", shell=True).strip()
+    print subprocess.call([beet_path, 'import', '-qsC', filename]) # No escaping
 
     # Re-scan file
     output('Updating song database')
