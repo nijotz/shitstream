@@ -283,7 +283,10 @@ class QueueMPDSyncer(MPDSyncer):
     def sync(self, mpdc=None):
         while True:
             print 'Updating db (queue)'
-            self.clear_db_queue()
-            self.update_db_queue()
+            try:
+                self.clear_db_queue()
+                self.update_db_queue()
+            except:
+                continue #FIXME: MPD connection problems..
             print 'Updated db (queue)'
             mpdc.idle(['playlist', 'player'])
