@@ -109,13 +109,13 @@ def clear_db_songs():
     print 'Cleared songs'
 
 
-def update_song_from_mpd_data(song):
-    song = Song.query.filter(Song.uri == song.get('file'))
+def update_song_from_mpd_data(mpd_song):
+    song = Song.query.filter(Song.uri == mpd_song.get('file'))
 
-    song.last_updated = song.get('last-updated')
-    song.name = song.get('title')
-    song.track = song.get('track')
-    song.length = song.get('time')
+    song.last_updated = mpd_song.get('last-updated')
+    song.name = mpd_song.get('title')
+    song.track = mpd_song.get('track')
+    song.length = mpd_song.get('time')
 
     # FIXME: album and artist updates are hard, castinating like a pro
     #song.album.name = song.get('album')
