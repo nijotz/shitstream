@@ -66,8 +66,8 @@ def prev_songs(mpdc, num=5):
 def queue_shit(mpdc):
     prev = prev_songs(mpdc=mpdc)
     recs = get_recommendations(prev)
-    mpdc = mpd_connect(mpdc)  #FIXME:  mpd reconnect
     for song in recs:
+        mpdc = mpd_connect(mpdc)  #FIXME:  mpd reconnect
 
         mpd_songs = mpdc.search('artist', song.artist_name, 'title', song.title)
         if mpd_songs:
