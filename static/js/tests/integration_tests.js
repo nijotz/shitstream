@@ -96,6 +96,8 @@ test('adding url to queue will show up on queue page, with tags', function() {
         equal(artist.length > 0, true);
         var title = find(".playlist-song .song-name:contains('Surf Solar')");
         equal(title.length > 0, true);
+        var length = find(".playlist-song .song-length:contains('03:41')");
+        equal(length.length > 0, true);
     })
 });
 
