@@ -19,6 +19,7 @@ def bumper(mpdc=None):
                     try:
                         bumped = bump_it(pos, mpdc=mpdc)
                     except:
+                        print "Couldn't bump it"
                         pass #FIXME: Getting bad song id sometimes (pos gets outdated?)
                     if bumped:
                         print 'Bumped'
