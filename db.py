@@ -216,7 +216,7 @@ class SongMPDSyncer(MPDSyncer):
             mpd_song_update = mpd_song.get('last-modified')
             db_song = db_songs.get(mpd_song.get('file'))
             if db_song and mpd_song_update:
-                db_song_update = db_song.last_modified
+                db_song_update = db_song.last_modified.strftime('%Y-%m-%dT%H:%M:%SZ')
                 if db_song_update < mpd_song_update:
                     mpd_updated_song_files.append(mpd_song_file)
 
