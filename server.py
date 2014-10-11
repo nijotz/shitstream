@@ -63,15 +63,20 @@ class PEP3101Formatter(logging.Formatter):
 
 def create_app():
     app = Flask(__name__)
+    log_level = logging.INFO
     if settings.debug:
         app.debug = True
+        del(app.logger.handlers[0])  # DEBUG logger is fucking stupid, send it to hell
+        log_level = logging.DEBUG
     app.config['SECRET_KEY'] = 'secret!'
     app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
     app.config['USER_ENABLE_EMAIL'] = False
+
     handler = logging.StreamHandler()
     formatter = PEP3101Formatter('{asctime} [{module: ^10}] [{levelname: ^7}] {message}')
     handler.setFormatter(formatter)
-    app.logger.handlers[0] = handler
+    app.logger.addHandler(handler)
+    app.logger.setLevel(logging.INFO)
 
     return app
 
