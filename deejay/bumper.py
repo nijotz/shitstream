@@ -2,22 +2,25 @@ import random
 import threading
 
 from mpd_util import mpd, mpd_connect
+from server import app
 import settings
+
+logger = app.logger
+
 
 @mpd
 def bumper(mpdc=None):
     while True:
         try:
-            print 'Checking bumps'
+            logger.info('Checking bumps')
             if should_bump():
-                print "Bumpin' it"
+                logger.info("Should bump, Bumpin' it")
                 bumped = bump_it()
-                print 'Bumped'
-            print 'Bumper waiting'
+            logger.info('Bumper waiting')
             mpdc.idle(['playlist', 'player'])
         except Exception as e:
-            print "Bumper failure, starting over"
-            print str(e)
+            logger.exception(e)
+            logger.error('Bumper failure, starting over')
             mpdc = mpd_connect() #FIXME: Getting bad song id sometimes (pos gets outdated?)
             # ohh, queuer identifying song blocks everything.
 

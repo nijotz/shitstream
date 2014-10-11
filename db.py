@@ -16,7 +16,7 @@ import settings
 
 
 db = SQLAlchemy(app)
-
+logger = app.logger
 
 def get_or_create(session, model, defaults=None, **kwargs):
     instance = session.query(model).filter_by(**kwargs).first()
@@ -101,12 +101,12 @@ event.listen(Bump, 'after_insert', create_bump_mp3)
 
 
 def clear_db_songs():
-    print 'Clearing songs'
+    logger.info('Clearing songs')
     Song.query.filter().delete()
     Album.query.filter().delete()
     Artist.query.filter().delete()
     db.session.commit()
-    print 'Cleared songs'
+    logger.info('Cleared songs')
 
 
 def update_song_from_mpd_data(mpd_song):
@@ -193,8 +193,6 @@ class MPDSyncer(threading.Thread):
         raise NotImplemented
 
 
-#FIXME: proper logging instead of print
-
 class SongMPDSyncer(MPDSyncer):
 
     @mpd
@@ -227,7 +225,7 @@ class SongMPDSyncer(MPDSyncer):
         for song_file in mpd_only_song_files:
             new_song_from_mpd_data(mpd_songs[song_file])
             num += 1
-            print 'Added song {}/{}'.format(num, total)  #FIXME: proper logging
+            logger.info('Added song {}/{}'.format(num, total))
         db.session.commit()
 
         total = len(mpd_updated_song_files)
@@ -235,7 +233,7 @@ class SongMPDSyncer(MPDSyncer):
         for song_file in mpd_updated_song_files:
             update_song_from_mpd_data(mpd_songs[song_file])
             num += 1
-            print 'Updated song {}/{}'.format(num, total)  #FIXME: proper logging
+            logger.info('Updated song {}/{}'.format(num, total))
         db.session.commit()
 
         for song_file in db_only_song_files:
@@ -245,14 +243,15 @@ class SongMPDSyncer(MPDSyncer):
     def sync(self, mpdc=None):
         while True:
             try:
-                print 'Updating db (songs)'
+                logger.info('Updating songs')
                 self.update_db_songs(mpdc=mpdc)
-                print 'Updated db (songs)'
+                logger.info('Updated db (songs)')
                 mpdc = mpd_connect()   #FIXME: proper timeout handling
                 mpdc.idle('database')
-            except:
+            except Exception as e:
                 mpdc = mpd_connect()
-                print 'DB sync failed, trying again'
+                logger.exception(e)
+                logger.error('DB sync failed, trying again')
                 continue #FIXME: MPD connection problems..
 
 
@@ -287,13 +286,14 @@ class QueueMPDSyncer(MPDSyncer):
     @mpd
     def sync(self, mpdc=None):
         while True:
-            print 'Updating db (queue)'
+            logger.info('Updating db (queue)')
             try:
                 self.clear_db_queue()
                 self.update_db_queue()
-                print 'Updated db (queue)'
+                logger.info('Updated db (queue)')
                 mpdc.idle(['playlist', 'player'])
-            except:
+            except Exception as e:
                 mpdc = mpd_connect()
-                print 'Queue sync failed, trying again'
+                logger.exception(e)
+                logger.error('Queue sync failed, trying again')
                 continue #FIXME: MPD connection problems..

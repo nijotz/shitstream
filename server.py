@@ -2,7 +2,9 @@
 
 from functools import wraps
 import glob
+import logging
 import os
+import sys
 import subprocess
 import time
 
@@ -24,6 +26,41 @@ from mpd_util import mpd, mpd_connect
 import settings
 
 
+class PEP3101Formatter(logging.Formatter):
+
+    def usesTime(self):
+        """
+        Check if the format uses the creation time of the record.
+        """
+        return self._fmt.find("{asctime}") >= 0
+
+    def format(self, record):
+        record.message = record.getMessage()
+        if self.usesTime():
+            record.asctime = self.formatTime(record, self.datefmt)
+        s = self._fmt.format(**record.__dict__)
+        if record.exc_info:
+            # Cache the traceback text to avoid converting it multiple times
+            # (it's constant anyway)
+            if not record.exc_text:
+                record.exc_text = self.formatException(record.exc_info)
+        if record.exc_text:
+            if s[-1:] != "\n":
+                s = s + "\n"
+            try:
+                s = s + record.exc_text
+            except UnicodeError:
+                # Sometimes filenames have non-ASCII chars, which can lead
+                # to errors when s is Unicode and record.exc_text is str
+                # See issue 8924.
+                # We also use replace for when there are multiple
+                # encodings, e.g. UTF-8 for the filesystem and latin-1
+                # for a script. See issue 13232.
+                s = s + record.exc_text.decode(sys.getfilesystemencoding(),
+                                               'replace')
+        return s
+
+
 def create_app():
     app = Flask(__name__)
     if settings.debug:
@@ -31,6 +68,10 @@ def create_app():
     app.config['SECRET_KEY'] = 'secret!'
     app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
     app.config['USER_ENABLE_EMAIL'] = False
+    handler = logging.StreamHandler()
+    formatter = PEP3101Formatter('{asctime} [{module: ^10}] [{levelname: <7}] {message}')
+    handler.setFormatter(formatter)
+    app.logger.handlers[0] = handler
 
     return app
 
@@ -170,7 +211,7 @@ def add_url(url, output):
         pass
 
     beet_path = subprocess.check_output("which beet", shell=True).strip()
-    print subprocess.call([beet_path, 'import', '-qsC', filename]) # No escaping
+    subprocess.call([beet_path, 'import', '-qsC', filename]) # No escaping
 
     # Re-scan file
     output('Updating song database')

@@ -7,11 +7,14 @@ import pyechonest.playlist
 
 from downloaders.youtube import search as youtube_search
 from mpd_util import mpd, mpd_connect
+from server import app
 import settings
 
 
 pyechonest.config.CODEGEN_BINARY_OVERRIDE = settings.dj_codegen_binary
 pyechonest.config.ECHO_NEST_API_KEY = settings.dj_echonest_api_key
+
+logger = app.logger
 
 
 @mpd
@@ -19,15 +22,15 @@ def queuer(mpdc):
     while True:
         try:
             if should_queue(mpdc=mpdc):
-                print 'Should queue, dewin it'
+                logger.info('Should queue, dewin it')
                 queue_shit(mpdc=mpdc)
             else:
-                print 'Should not queue'
-            print 'Queuer waiting'
+                logger.info('Should not queue')
+            logger.info('Queuer waiting')
             mpdc.idle(['playlist', 'player'])
         except Exception as e:
-            print 'Queuer failure, starting over:'
-            print str(e)
+            logger.exception(e)
+            logger.error('Queuer failure, starting over')
             mpdc = mpd_connect() #FIXME: Getting bad song id sometimes (pos gets outdated?)
 
 @mpd
@@ -87,9 +90,9 @@ def queue_shit(mpdc):
         url = youtube_search('{} {}'.format(song.artist_name, song.title))
         if url:
             from server import add_url  #FIXME
-            def print_(x):
-                print x
-            add_url(url, print_)
+            def log(x):
+                logger.info(x)
+            add_url(url, log)
             
 
 def find_youtube_vide(song):
@@ -103,9 +106,9 @@ def get_recommendations(prev):
             songs.append(more_songs)
     song_ids = [song.id for song in songs]
     if not song_ids:
-        print 'No previous songs identified'
+        logger.info('No previous songs identified')
         return []
-    print 'Identified {} previous songs'.format(len(song_ids))
+    logger.info('Identified {} previous songs'.format(len(song_ids)))
     result = pyechonest.playlist.static(type='song-radio', song_id=song_ids, results=10)
     return result[5:]  # Does echonest return the five songs I gave it to seed?  Looks like..
     
@@ -120,7 +123,7 @@ def identify_song(song, mpdc):
     results = pyechonest.song.search(artist=artist, title=title)
     if results:
         return results[0]
-    print u'No results for: {} - {}'.format(artist,title)
+    logger.warn(u'No results for: {} - {}'.format(artist,title))
 
     # try stripping weird characters from the names
     artist = re.sub(r'([^\s\w]|_)+', '', artist)
@@ -129,6 +132,6 @@ def identify_song(song, mpdc):
     results = pyechonest.song.search(artist=artist, title=title)
     if results:
         return results[0]
-    print u'No results for: {} - {}'.format(artist,title)
+    logger.warn(u'No results for: {} - {}'.format(artist,title))
 
 personality = queuer
