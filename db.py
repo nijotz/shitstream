@@ -109,7 +109,8 @@ def clear_db_songs():
     logger.info('Cleared songs')
 
 
-def update_song_from_mpd_data(mpd_song):
+@mpd
+def update_song_from_mpd_data(mpd_song, mpdc=None):
     song = Song.query.filter(Song.uri == mpd_song.get('file')).one()
 
     song.last_modified = datetime.strptime(mpd_song.get('last-modified'), '%Y-%m-%dT%H:%M:%SZ')
@@ -122,7 +123,8 @@ def update_song_from_mpd_data(mpd_song):
 
     db.session.add(song)
 
-def new_song_from_mpd_data(song):
+@mpd
+def new_song_from_mpd_data(song, mpdc=None):
     # Get or create song
     uri = song.get('file')
     assert uri
