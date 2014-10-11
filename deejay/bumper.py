@@ -1,7 +1,6 @@
 import random
-import threading
 
-from mpd_util import mpd, mpd_connect
+from mpd_util import mpd
 from server import app
 import settings
 
@@ -15,13 +14,12 @@ def bumper(mpdc=None):
             logger.info('Checking bumps')
             if should_bump():
                 logger.info("Should bump, Bumpin' it")
-                bumped = bump_it()
+                bump_it()
             logger.info('Bumper waiting')
             mpdc.idle(['playlist', 'player'])
         except Exception as e:
             logger.exception(e)
             logger.error('Bumper failure, starting over')
-            mpdc = mpd_connect() #FIXME: Getting bad song id sometimes (pos gets outdated?)
             # ohh, queuer identifying song blocks everything.
 
 @mpd
@@ -34,14 +32,15 @@ def should_bump(songs=None, current=None, mpdc=None):
     song_dict = dict([ (int(song.get('pos')), song) for song in songs ])
 
     if not current:
-        current = int(mpdc.currentsong().get('pos'))
+        current = mpdc.currentsong()
     if not current:
         return
+    current_pos = mpdc.get_track_number(current)
 
     # If the next song is a bump, don't bump
     sorted_songs_pos = sorted(song_dict.keys())
     try:
-        next_song = song_dict[sorted_songs_pos[sorted_songs_pos.index(current) + 1]]
+        next_song = song_dict[sorted_songs_pos[sorted_songs_pos.index(current_pos) + 1]]
     except IndexError:
         # End of the queue
         next_song = {}
@@ -50,7 +49,7 @@ def should_bump(songs=None, current=None, mpdc=None):
         return False
 
     prev_songs_pos = sorted(sorted_songs_pos, reverse=True)
-    prev_songs_pos = prev_songs_pos[prev_songs_pos.index(current):]
+    prev_songs_pos = prev_songs_pos[prev_songs_pos.index(current_pos):]
 
     time = 0
     for pos in prev_songs_pos:
@@ -91,9 +90,14 @@ def get_random_bump(mpdc=None):
 
 def filter_bumps(songs):
     filtered = []
+
+    if not songs:
+        return filtered
+
     for song in songs:
         if not song.get('file', '').startswith(settings.dj_bumps_dir):
             filtered.append(song)
+
     return filtered
 
 personality = bumper

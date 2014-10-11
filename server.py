@@ -22,7 +22,7 @@ import requests
 from downloaders.youtube import regex as youtube_regex,\
     download as download_youtube_url
 from emberify import emberify
-from mpd_util import mpd, mpd_connect
+from mpd_util import mpd
 import settings
 
 
@@ -69,7 +69,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = settings.db_uri
     app.config['USER_ENABLE_EMAIL'] = False
     handler = logging.StreamHandler()
-    formatter = PEP3101Formatter('{asctime} [{module: ^10}] [{levelname: <7}] {message}')
+    formatter = PEP3101Formatter('{asctime} [{module: ^10}] [{levelname: ^7}] {message}')
     handler.setFormatter(formatter)
     app.logger.handlers[0] = handler
 
@@ -173,7 +173,8 @@ def update_mpd(uri=None, updating=None, mpdc=None):
         else:
             added = True
 
-def add_url(url, output):
+@mpd
+def add_url(url, output, mpdc=None):
     in_dir = settings.download_dir
     music_dir = settings.mpd_dir
 
@@ -181,7 +182,6 @@ def add_url(url, output):
 
     common = os.path.commonprefix([in_dir, music_dir])
     uri = filename.replace(common, '')
-    mpdc = mpd_connect()
     if uri[0] == '/':
         uri = uri[1:]
 

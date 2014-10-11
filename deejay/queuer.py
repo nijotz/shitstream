@@ -6,7 +6,7 @@ import pyechonest.song
 import pyechonest.playlist
 
 from downloaders.youtube import search as youtube_search
-from mpd_util import mpd, mpd_connect
+from mpd_util import mpd
 from server import app
 import settings
 
@@ -31,7 +31,6 @@ def queuer(mpdc):
         except Exception as e:
             logger.exception(e)
             logger.error('Queuer failure, starting over')
-            mpdc = mpd_connect() #FIXME: Getting bad song id sometimes (pos gets outdated?)
 
 @mpd
 def should_queue(mpdc):
@@ -75,8 +74,6 @@ def queue_shit(mpdc):
     prev = prev_songs(mpdc=mpdc)
     recs = get_recommendations(prev)
     for song in recs:
-        mpdc = mpd_connect(mpdc)  #FIXME:  mpd reconnect
-
         mpd_songs = mpdc.search('artist', song.artist_name, 'title', song.title)
         if mpd_songs:
             mpdc.add(mpd_songs[0].get('file'))

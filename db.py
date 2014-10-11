@@ -10,7 +10,7 @@ from sqlalchemy import event
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.sql.expression import ClauseElement
 
-from mpd_util import mpd, mpd_connect
+from mpd_util import mpd
 from server import app
 import settings
 
@@ -114,7 +114,7 @@ def update_song_from_mpd_data(mpd_song):
 
     song.last_modified = datetime.strptime(mpd_song.get('last-modified'), '%Y-%m-%dT%H:%M:%SZ')
     song.name = mpd_song.get('title')
-    song.track = mpd_song.get('track')
+    song.track = mpdc.get_track_number(mpd_song)
     song.length = mpd_song.get('time')
 
     # FIXME: album and artist updates are hard, castinating like a pro
@@ -127,19 +127,10 @@ def new_song_from_mpd_data(song):
     uri = song.get('file')
     assert uri
 
-    try:
-        track_str = song.get('track')
-        if track_str.find('/'):
-            track = int(track_str.split('/')[0])
-        else:
-            track = int(track_str)
-    except:
-        track = None
-
     song_data = {
         'uri': uri,
         'name': song.get('title'),
-        'track': track,
+        'track': mpdc.get_track_number(song),
         'length': song.get('time'),
         'last_modified': datetime.strptime(song.get('last-modified'), '%Y-%m-%dT%H:%M:%SZ')
     }
@@ -246,13 +237,10 @@ class SongMPDSyncer(MPDSyncer):
                 logger.info('Updating songs')
                 self.update_db_songs(mpdc=mpdc)
                 logger.info('Updated db (songs)')
-                mpdc = mpd_connect()   #FIXME: proper timeout handling
                 mpdc.idle('database')
             except Exception as e:
-                mpdc = mpd_connect()
                 logger.exception(e)
                 logger.error('DB sync failed, trying again')
-                continue #FIXME: MPD connection problems..
 
 
 class QueueMPDSyncer(MPDSyncer):
@@ -293,7 +281,5 @@ class QueueMPDSyncer(MPDSyncer):
                 logger.info('Updated db (queue)')
                 mpdc.idle(['playlist', 'player'])
             except Exception as e:
-                mpdc = mpd_connect()
                 logger.exception(e)
                 logger.error('Queue sync failed, trying again')
-                continue #FIXME: MPD connection problems..
