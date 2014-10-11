@@ -33,9 +33,10 @@ def should_bump(songs=None, current=None, mpdc=None):
 
     if not current:
         current = mpdc.currentsong()
+        if current:
+            current_pos = int(current.get('pos'))
     if not current:
         return
-    current_pos = mpdc.get_track_number(current)
 
     # If the next song is a bump, don't bump
     sorted_songs_pos = sorted(song_dict.keys())
