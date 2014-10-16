@@ -118,7 +118,7 @@ def add_song_to_queue(mpdc=None):
     song = db.Song.query.filter(db.Song.id == song_id).one()
     queue_id = int(mpdc.addid(song.uri))
     queue_data = mpdc.playlistid(queue_id)[0]
-    if mpdc.status().get('state') == 'stop':
+    if mpdc.status().get('state') != 'play':
         mpdc.playid(queue_id)
 
     return jsonify({'queue': {
@@ -155,7 +155,7 @@ def add_album_to_queue(mpdc=None):
             first = queue_id
 
     # If not currently playing, play the first song of the album
-    if mpdc.status().get('state') == 'stop':
+    if mpdc.status().get('state') != 'play':
         mpdc.playid(first)
 
     return jsonify({'queue': queue})
