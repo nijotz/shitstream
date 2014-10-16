@@ -38,7 +38,7 @@ class PEP3101Formatter(logging.Formatter):
         record.message = record.getMessage()
         if self.usesTime():
             record.asctime = self.formatTime(record, self.datefmt)
-        s = self._fmt.format(**record.__dict__)
+        s = unicode(self._fmt).format(**record.__dict__)
         if record.exc_info:
             # Cache the traceback text to avoid converting it multiple times
             # (it's constant anyway)
