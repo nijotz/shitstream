@@ -84,7 +84,7 @@ def queue_shit(mpdc):
             mpdc.add(mpd_songs[0].get('file'))
             continue
 
-        url = youtube_search('{} {}'.format(song.artist_name, song.title))
+        url = youtube_search(u'{} {}'.format(song.artist_name, song.title))
         if url:
             from server import add_url  #FIXME
             def log(x):
